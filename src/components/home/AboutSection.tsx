@@ -23,9 +23,8 @@ export default function AboutSection() {
           </div>
         </div>
         <div className="flex-1 text-center lg:text-left">
-          <h2 className="heading-xl !text-left max-md:!text-center">
-            About BHRI
-          </h2>
+          <h2 className="section-heading !text-left max-md:!text-center">About BHRI</h2>
+          <span className="section-heading-line !mx-0 max-md:!mx-auto" />
           <p className="text-textmain/80 text-base leading-relaxed mb-4 text-justify">
             <strong className="text-textmain">Buddha Hospital &amp; Research Institute</strong> is
             a multi-Specialty hospital in Gaya. We offer reasonable pricing health care plans,

@@ -6,6 +6,8 @@ import AboutSection from "@/components/home/AboutSection";
 import DepartmentsGrid from "@/components/home/DepartmentsGrid";
 import CtaBanner from "@/components/home/CtaBanner";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import GallerySection from "@/components/home/GallerySection";
+import ContactForm from "@/components/home/ContactForm";
 import Facilities from "@/components/home/Facilities";
 import CampusLife from "@/components/home/CampusLife";
 import MaternityCare from "@/components/home/MaternityCare";
@@ -26,6 +28,8 @@ export default function Home() {
       <DepartmentsGrid />
       <CtaBanner />
       <WhyChooseUs />
+      <GallerySection />
+      <ContactForm />
     </>
   );
 }
