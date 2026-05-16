@@ -85,6 +85,73 @@ body {
   line-height: 1.5;
 }
 
+/* ═══════════════════════════════════════
+   SECTION HEADING & SUBHEADING — Global
+═══════════════════════════════════════ */
+
+.section-heading {
+  text-align: center;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.section-heading-line {
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 0 auto 1.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #1a3a6b, #0072CE);
+}
+
+.section-subheading {
+  text-align: center;
+  color: #64748b;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  font-weight: 400;
+  width: 100%;
+}
+
+/* White variants for dark backgrounds */
+.section-heading-white {
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.section-heading-line-white {
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 0 auto 1.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #e6960a, #f5b731);
+}
+
+.section-subheading-white {
+  text-align: center;
+  color: rgba(255,255,255,0.55);
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  font-weight: 400;
+  width: 100%;
+}
+
 /* =========================================
    🎯 BUTTON FIXES (Grid-Safe & Overflow Free) 
 ========================================= */
@@ -154,6 +221,13 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes heroScan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 @keyframes marquee {

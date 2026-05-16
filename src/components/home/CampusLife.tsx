@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Play, ChevronRight, Sparkles, Calendar } from "lucide-react";
+import { Play, ChevronRight, Calendar } from "lucide-react";
 
 const galleryImages = [
   { src: "/images/facilities/classroom.png", alt: "Modern Classrooms" },
@@ -56,14 +56,10 @@ export default function CampusLife() {
     <section className="relative bg-bgLight py-12 md:py-16 overflow-hidden">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <p className="text-brandSaffron font-bold text-xs uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-1.5">
-            <Sparkles size={14} />
-          </p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-brandBlue leading-tight">
-            Welcome to Life at Our Campus
-          </h2>
-          <p className="text-textmain/50 text-sm mt-2 max-w-xl mx-auto">
+        <div className="mb-10">
+          <h2 className="section-heading">Welcome to Life at Our Campus</h2>
+          <span className="section-heading-line" />
+          <p className="section-subheading">
             World-class facilities and expertise dedicated to advancing medical science and patient care
           </p>
         </div>

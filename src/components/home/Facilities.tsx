@@ -20,13 +20,13 @@ const facilityTabs: Tab[] = [
     label: "Pathology",
     content: (
       <div className="flex gap-4 items-center">
-        <img src="/images/facilities/pathology.png" alt="Pathology Lab" className="rounded-lg w-40 h-28 object-cover shadow-lg hidden sm:block flex-shrink-0" />
+        <img src="/images/facilities/pathology.png" alt="Pathology Lab" className="rounded-xl w-52 h-40 object-cover shadow-lg hidden sm:block flex-shrink-0" />
         <div>
-          <div className="flex items-center gap-1.5 text-brandSaffron mb-1">
-            <FlaskConical size={16} />
-            <h3 className="text-base font-bold text-white">Pathology</h3>
+          <div className="flex items-center gap-2 text-brandSaffron mb-2">
+            <FlaskConical size={20} />
+            <h3 className="text-lg font-bold text-white">Pathology</h3>
           </div>
-          <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+          <p className="text-sm text-gray-300 leading-relaxed">
             Examination of tissues, organs, bodily fluids and autopsies to study and diagnose disease. We offer all types of Blood Tests.
           </p>
         </div>
@@ -38,13 +38,13 @@ const facilityTabs: Tab[] = [
     label: "X-Ray",
     content: (
       <div className="flex gap-4 items-center">
-        <img src="/images/facilities/xray.png" alt="X-Ray" className="rounded-lg w-40 h-28 object-cover shadow-lg hidden sm:block flex-shrink-0" />
+        <img src="/images/facilities/xray.png" alt="X-Ray" className="rounded-xl w-52 h-40 object-cover shadow-lg hidden sm:block flex-shrink-0" />
         <div>
-          <div className="flex items-center gap-1.5 text-brandSaffron mb-1">
-            <Scan size={16} />
-            <h3 className="text-base font-bold text-white">X-Ray</h3>
+          <div className="flex items-center gap-2 text-brandSaffron mb-2">
+            <Scan size={20} />
+            <h3 className="text-lg font-bold text-white">X-Ray</h3>
           </div>
-          <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+          <p className="text-sm text-gray-300 leading-relaxed">
             Digital X-Ray machines providing high-resolution imaging — chest, skeletal, abdominal, and portable bedside X-rays for critical patients.
           </p>
         </div>
@@ -56,13 +56,13 @@ const facilityTabs: Tab[] = [
     label: "CT-Scan",
     content: (
       <div className="flex gap-4 items-center">
-        <img src="/images/facilities/ctscan.png" alt="CT Scan" className="rounded-lg w-40 h-28 object-cover shadow-lg hidden sm:block flex-shrink-0" />
+        <img src="/images/facilities/ctscan.png" alt="CT Scan" className="rounded-xl w-52 h-40 object-cover shadow-lg hidden sm:block flex-shrink-0" />
         <div>
-          <div className="flex items-center gap-1.5 text-brandSaffron mb-1">
-            <BrainCircuit size={16} />
-            <h3 className="text-base font-bold text-white">CT-Scan</h3>
+          <div className="flex items-center gap-2 text-brandSaffron mb-2">
+            <BrainCircuit size={20} />
+            <h3 className="text-lg font-bold text-white">CT-Scan</h3>
           </div>
-          <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+          <p className="text-sm text-gray-300 leading-relaxed">
             Multi-slice CT scanner for rapid cross-sectional imaging of brain, chest, abdomen. Critical for emergency trauma and pre-surgical planning.
           </p>
         </div>
@@ -74,13 +74,13 @@ const facilityTabs: Tab[] = [
     label: "USG",
     content: (
       <div className="flex gap-4 items-center">
-        <img src="/images/facilities/ultrasonography.png" alt="Ultrasonography" className="rounded-lg w-40 h-28 object-cover shadow-lg hidden sm:block flex-shrink-0" />
+        <img src="/images/facilities/ultrasonography.png" alt="Ultrasonography" className="rounded-xl w-52 h-40 object-cover shadow-lg hidden sm:block flex-shrink-0" />
         <div>
-          <div className="flex items-center gap-1.5 text-brandSaffron mb-1">
-            <Radio size={16} />
-            <h3 className="text-base font-bold text-white">Ultrasonography</h3>
+          <div className="flex items-center gap-2 text-brandSaffron mb-2">
+            <Radio size={20} />
+            <h3 className="text-lg font-bold text-white">Ultrasonography</h3>
           </div>
-          <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+          <p className="text-sm text-gray-300 leading-relaxed">
             Non-invasive ultrasound for obstetric, abdominal, cardiac assessments. Color Doppler available for vascular studies.
           </p>
         </div>
@@ -108,15 +108,16 @@ export default function Facilities() {
       <div className="absolute inset-0 bg-brandBlueDark/90 backdrop-blur-[2px]" />
 
       <div className="container-custom relative z-10">
-        <h2 className="text-center text-2xl md:text-3xl font-extrabold text-white mb-1 uppercase tracking-tight">
-          Facilities
-        </h2>
-        <p className="text-center text-white/50 text-sm max-w-xl mx-auto mb-6">
+        <h2 className="section-heading-white">Facilities</h2>
+        <span className="section-heading-line-white" />
+        <p className="section-subheading-white">
           World-class diagnostic &amp; treatment infrastructure
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
-          <AnimatedTabs tabs={facilityTabs} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
+          <div className="flex flex-col">
+            <AnimatedTabs tabs={facilityTabs} className="flex-1" />
+          </div>
 
           <div className="grid grid-cols-2 gap-3">
             {showcaseSlides.map((slide, idx) => (

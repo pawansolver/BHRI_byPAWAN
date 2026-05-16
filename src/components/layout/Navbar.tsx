@@ -190,8 +190,19 @@ export default function Navbar() {
       </div>
 
       {/* ───── TIER 2: Logo strip ───── */}
-      <div className="bg-white border-b border-border">
-        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 flex items-center justify-between py-3">
+      <div className="relative border-b border-border bg-white overflow-hidden">
+        <div className="absolute right-0 top-0 bottom-0 w-[55%] z-[1]">
+          <Image
+            src="/images/navbar-art.png"
+            alt=""
+            fill
+            sizes="55vw"
+            className="object-cover object-right opacity-70"
+            aria-hidden="true"
+            priority
+          />
+        </div>
+        <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-4 md:px-6 flex items-center justify-between py-3">
           <Link href="/" className="flex items-center gap-4">
             <Image
               src="/logo.png"

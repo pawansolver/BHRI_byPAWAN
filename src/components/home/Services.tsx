@@ -1,92 +1,138 @@
-import {
-  Stethoscope,
-  Ambulance,
-  HeartPulse,
-  Baby,
-  ShieldPlus,
-  Building2,
-  TestTubeDiagonal,
-  BedDouble,
-} from "lucide-react";
-import SkewCards from "@/components/ui/gradient-card-showcase";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const services = [
   {
-    title: "OPD",
-    desc: "Outpatient consultations across all major specialities, Mon-Sat",
-    gradientFrom: "#1a3a6b",
-    gradientTo: "#3b82f6",
-    icon: Stethoscope,
+    title: "OPD Services",
+    image: "/images/services/opd.png",
   },
   {
     title: "24 X 7 Emergency",
-    desc: "Round-the-clock trauma & critical emergency care with ICU backup",
-    gradientFrom: "#dc2626",
-    gradientTo: "#ff6b6b",
-    icon: Ambulance,
+    image: "/images/services/emergency.png",
   },
   {
     title: "ICU (With Ventilator)",
-    desc: "Advanced intensive care unit with modern ventilator support systems",
-    gradientFrom: "#059669",
-    gradientTo: "#34d399",
-    icon: HeartPulse,
+    image: "/images/services/icu.png",
   },
   {
     title: "NICU (With Ventilator)",
-    desc: "Neonatal intensive care for critically ill newborns & premature babies",
-    gradientFrom: "#7c3aed",
-    gradientTo: "#c084fc",
-    icon: Baby,
+    image: "/images/services/nicu.png",
   },
   {
     title: "PICU (With Ventilator)",
-    desc: "Paediatric ICU with advanced life support & child-friendly care",
-    gradientFrom: "#d97706",
-    gradientTo: "#fbbf24",
-    icon: ShieldPlus,
+    image: "/images/services/picu.png",
   },
   {
     title: "Special Ward",
-    desc: "Premium private & semi-private wards with personalised nursing care",
-    gradientFrom: "#0d9488",
-    gradientTo: "#5eead4",
-    icon: Building2,
+    image: "/images/services/special-ward.png",
   },
   {
     title: "24 X 7 Pharmacy",
-    desc: "In-house pharmacy stocked with all essential & emergency medicines",
-    gradientFrom: "#ea580c",
-    gradientTo: "#fb923c",
-    icon: TestTubeDiagonal,
+    image: "/images/services/pharmacy.png",
   },
   {
     title: "General Ward",
-    desc: "Comfortable multi-bed general ward with round-the-clock nursing",
-    gradientFrom: "#475569",
-    gradientTo: "#94a3b8",
-    icon: BedDouble,
+    image: "/images/services/general-ward.png",
   },
 ];
 
 export default function Services() {
-  return (
-    <section className="relative bg-[#0a0a1a] py-16 md:py-24 overflow-hidden">
-      {/* Subtle bg pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(59,130,246,0.08),transparent_50%),radial-gradient(circle_at_80%_50%,rgba(139,92,246,0.08),transparent_50%)]" />
+  const [currentPage, setCurrentPage] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
 
-      <div className="container-custom relative z-10">
-        <div className="flex justify-center mb-5">
-          <div className="h-2 w-24 rounded-full bg-gradient-to-r from-brandSaffron to-brandSaffronLight opacity-70" />
-        </div>
-        <h2 className="text-center text-3xl md:text-4xl font-extrabold text-white mb-3 uppercase tracking-tight">
-          Services
-        </h2>
-        <p className="text-center text-white/50 text-base md:text-lg max-w-2xl mx-auto mb-8">
+  useEffect(() => {
+    const update = () => {
+      setVisibleCount(window.innerWidth < 768 ? 2 : 4);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const totalPages = Math.ceil(services.length / visibleCount);
+
+  const next = useCallback(() => {
+    setCurrentPage((p) => (p + 1) % totalPages);
+  }, [totalPages]);
+
+  const prev = useCallback(() => {
+    setCurrentPage((p) => (p - 1 + totalPages) % totalPages);
+  }, [totalPages]);
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  const startIdx = currentPage * visibleCount;
+  const visibleServices = services.slice(startIdx, startIdx + visibleCount);
+
+  return (
+    <section className="bg-white py-14 md:py-20">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6">
+        <h2 className="section-heading">Our Services</h2>
+        <span className="section-heading-line" />
+        <p className="section-subheading">
           Comprehensive healthcare facilities under one roof for complete patient care
         </p>
 
-        <SkewCards cards={services} />
+        <div className="relative">
+          {/* Left Arrow */}
+          <button
+            onClick={prev}
+            className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6 px-2 md:px-4">
+            {visibleServices.map((service) => (
+              <div key={service.title} className="group cursor-pointer">
+                <div className="relative aspect-[4/3] rounded-[6px] overflow-hidden mb-4 shadow-md border border-gray-200">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="text-[#0072CE] font-semibold text-[15px] md:text-[17px] leading-snug group-hover:underline transition-all px-1">
+                  {service.title}
+                </h3>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={next}
+            className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                i === currentPage
+                  ? "bg-[#0072CE] scale-110"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

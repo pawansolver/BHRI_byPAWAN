@@ -44,14 +44,15 @@ export default function MaternityCare() {
     <section className="py-12 md:py-16 bg-white">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-pink-50 text-pink-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
-            <Heart size={13} fill="currentColor" /> Department of Obstetrics &amp; Gynaecology
+        <div className="mb-10">
+          <div className="flex justify-center mb-3">
+            <div className="inline-flex items-center gap-2 bg-pink-50 text-pink-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+              <Heart size={13} fill="currentColor" /> Department of Obstetrics &amp; Gynaecology
+            </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-brandBlue uppercase tracking-tight">
-            Maternity Care
-          </h2>
-          <p className="text-textmain/50 text-sm mt-2 max-w-2xl mx-auto">
+          <h2 className="section-heading">Maternity Care</h2>
+          <span className="section-heading-line" />
+          <p className="section-subheading">
             We have a pool of best doctors from some of the best Medical colleges of India.
             Our Department of Obstetrics &amp; Gynaecology is probably the best for the city and surrounding areas.
           </p>

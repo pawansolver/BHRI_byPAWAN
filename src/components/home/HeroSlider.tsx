@@ -1,0 +1,121 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const slides = [
+  {
+    image: "/images/hero/hero-1.png",
+    title: "World-Class Healthcare",
+    subtitle: "State-of-the-art infrastructure with advanced medical technology",
+  },
+  {
+    image: "/images/hero/hero-2.png",
+    title: "Expert Medical Team",
+    subtitle: "250+ experienced doctors & faculty across 20+ departments",
+  },
+  {
+    image: "/images/hero/hero-3.png",
+    title: "Advanced Surgical Care",
+    subtitle: "Equipped with modern OT, ICU, NICU & PICU with ventilator support",
+  },
+  {
+    image: "/images/hero/hero-4.png",
+    title: "Patient-First Approach",
+    subtitle: "Compassionate care with the motto — सेवा परमो धर्म:",
+  },
+];
+
+export default function HeroSlider() {
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  return (
+    <section className="relative w-full h-[420px] md:h-[520px] lg:h-[560px] overflow-hidden">
+      {slides.map((slide, i) => (
+        <div
+          key={i}
+          className="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out"
+          style={{ opacity: i === current ? 1 : 0 }}
+        >
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority={i === 0}
+          />
+        </div>
+      ))}
+
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0f2557]/80 via-[#0f2557]/50 to-transparent z-[1]" />
+
+      <div className="relative z-[2] h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center">
+        <div className="max-w-xl">
+          <h2
+            className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.15] mb-3"
+            key={`t-${current}`}
+          >
+            {slides[current].title}
+          </h2>
+          <p
+            className="text-white/75 text-sm md:text-lg max-w-md mb-6 leading-relaxed"
+            key={`s-${current}`}
+          >
+            {slides[current].subtitle}
+          </p>
+        </div>
+      </div>
+
+      <button
+        onClick={prev}
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[3] w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[3] w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              i === current
+                ? "w-8 bg-brandSaffron"
+                : "w-3 bg-white/40 hover:bg-white/60"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      <div className="absolute bottom-5 right-6 md:right-10 z-[3] text-white/50 text-sm font-mono">
+        <span className="text-white font-bold text-lg">{String(current + 1).padStart(2, "0")}</span>
+        <span className="mx-1">/</span>
+        <span>{String(slides.length).padStart(2, "0")}</span>
+      </div>
+    </section>
+  );
+}

@@ -108,15 +108,16 @@ export default function WhyChooseUs() {
     <section className="relative py-14 md:py-20 overflow-hidden bg-bgLight">
       <div className="container-custom relative z-10">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-brandSaffron/10 text-brandSaffron text-xs font-bold uppercase tracking-[0.2em] px-5 py-2 rounded-full mb-4 border border-brandSaffron/20">
-            <Award size={14} />
-            Centre of Excellence
+        <div className="mb-10">
+          <div className="flex justify-center mb-3">
+            <div className="inline-flex items-center gap-2 bg-brandSaffron/10 text-brandSaffron text-xs font-bold uppercase tracking-[0.2em] px-5 py-2 rounded-full border border-brandSaffron/20">
+              <Award size={14} />
+              Centre of Excellence
+            </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-brandBlue leading-tight">
-            Why Choose <span className="text-brandSaffron">BHRI?</span>
-          </h2>
-          <p className="text-textmain/50 text-sm mt-2 max-w-xl mx-auto">
+          <h2 className="section-heading">Why Choose <span className="text-brandSaffron">BHRI?</span></h2>
+          <span className="section-heading-line" />
+          <p className="section-subheading">
             With a state of the art technology and infrastructure the institute is well equipped for every treatment and emergency
           </p>
         </div>

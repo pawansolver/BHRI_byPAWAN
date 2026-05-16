@@ -46,7 +46,7 @@ const AnimatedTabs = ({ tabs, defaultTab, className }: AnimatedTabsProps) => {
         ))}
       </div>
 
-      <div className="p-4 bg-[#11111198] shadow-[0_0_20px_rgba(0,0,0,0.2)] text-white backdrop-blur-sm rounded-xl border border-white/10 min-h-[160px]">
+      <div className="p-4 bg-[#11111198] shadow-[0_0_20px_rgba(0,0,0,0.2)] text-white backdrop-blur-sm rounded-xl border border-white/10 min-h-[160px] flex-1 flex flex-col justify-center">
         {tabs.map(
           (tab) =>
             activeTab === tab.id && (
