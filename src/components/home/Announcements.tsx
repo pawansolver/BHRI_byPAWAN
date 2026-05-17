@@ -36,6 +36,12 @@ export default function Announcements() {
   return (
     <section className="py-12 md:py-16 bg-bgLight">
       <div className="container-custom">
+        <h2 className="section-heading">Announcements &amp; Events</h2>
+        <span className="section-heading-line" />
+        <p className="section-subheading">
+          Stay updated with the latest announcements and upcoming events at BHRI
+        </p>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Important Announcement */}
           <div className="rounded-xl overflow-hidden shadow-lg border border-border">

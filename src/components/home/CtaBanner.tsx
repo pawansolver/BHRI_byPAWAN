@@ -4,10 +4,9 @@ export default function CtaBanner() {
   return (
     <section className="bg-gradient-to-r from-brandGreen to-brandGreenLight text-white py-14">
       <div className="container-custom text-center">
-        <h2 className="text-2xl md:text-4xl font-extrabold mb-4">
-          Need Medical Assistance?
-        </h2>
-        <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">
+        <h2 className="section-heading-white">Need Medical Assistance?</h2>
+        <span className="section-heading-line-white" />
+        <p className="section-subheading-white !mb-8">
           Our team of expert doctors and staff is available 24x7 for emergency care.
           Book your OPD appointment or reach us anytime.
         </p>

@@ -202,23 +202,15 @@ export default function Navbar() {
           />
         </div>
         <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-4 md:px-6 flex items-center justify-between py-3">
-          <Link href="/" className="flex items-center gap-4">
+          <Link href="/">
             <Image
               src="/logo.png"
               alt="Buddha Hospital & Research Institute"
-              width={150}
-              height={150}
+              width={200}
+              height={200}
               priority
               className="rounded-full flex-shrink-0"
             />
-            <div className="hidden sm:block">
-              <h1 className="text-2xl md:text-3xl font-extrabold text-brandBlue tracking-wide uppercase leading-none">
-                BUDDHA HOSPITAL
-              </h1>
-              <p className="text-sm md:text-base font-bold text-brandGreen tracking-widest mt-0.5">
-                &amp; RESEARCH INSTITUTE
-              </p>
-            </div>
           </Link>
 
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">

@@ -137,9 +137,6 @@ export default function Footer() {
               Buddha Hospital &amp; Research Institute is a multi-Specialty hospital in Gaya
               offering world-class healthcare with the motto &ldquo;सेवा परमो धर्म:&rdquo;
             </p>
-            <p className="text-[11px] text-white/50 mb-1">
-              Website: <a href="https://bhrimedicalcollege.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition">bhrimedicalcollege.com</a>
-            </p>
             <p className="text-[11px] text-white/50 mb-4">
               Reg. No.: CE/GAY/2025/NH-0504
             </p>
@@ -227,7 +224,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="relative z-10 border-t border-white/15">
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-white/50">
-          <span>BHRI Gaya &mdash; {new Date().getFullYear()}</span>
+          <span>Designed &amp; Developed by <a href="https://nighwantech.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white font-semibold underline underline-offset-2 transition">NighwanTech</a> &mdash; {new Date().getFullYear()}</span>
           <div className="flex items-center gap-4">
             <Link href="/terms" className="hover:text-white transition">Terms &amp; Conditions</Link>
             <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
