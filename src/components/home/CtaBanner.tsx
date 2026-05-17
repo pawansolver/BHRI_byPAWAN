@@ -2,7 +2,7 @@ import { SparkleButton } from "@/components/ui/button-8";
 
 export default function CtaBanner() {
   return (
-    <section className="bg-gradient-to-r from-brandGreen to-brandGreenLight text-white py-14">
+    <section className="bg-gradient-to-r from-[#0f2557] via-[#1a3a6b] to-[#14532d] text-white py-14">
       <div className="container-custom text-center">
         <h2 className="section-heading-white">Need Medical Assistance?</h2>
         <span className="section-heading-line-white" />

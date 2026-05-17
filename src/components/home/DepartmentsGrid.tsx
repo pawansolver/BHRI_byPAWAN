@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import {
   Stethoscope,
@@ -10,9 +13,19 @@ import {
   Syringe,
   ShieldPlus,
   Microscope,
+  FlaskConical,
+  Pill,
+  Scan,
+  Bug,
+  Scissors,
+  Activity,
+  type LucideIcon,
 } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-const departments = [
+type Dept = { icon: LucideIcon; name: string; href: string };
+
+const initialDepartments: Dept[] = [
   { icon: Stethoscope, name: "General Medicine", href: "/departments/general-medicine" },
   { icon: HeartPulse, name: "Obstetrics & Gynecology", href: "/departments/obstetrics-gynecology" },
   { icon: Syringe, name: "General Surgery", href: "/departments/general-surgery" },
@@ -25,7 +38,24 @@ const departments = [
   { icon: Microscope, name: "Pathology", href: "/departments/pathology" },
 ];
 
+const moreDepartments: Dept[] = [
+  { icon: Stethoscope, name: "Anatomy", href: "/departments/anatomy" },
+  { icon: FlaskConical, name: "Biochemistry", href: "/departments/biochemistry" },
+  { icon: Activity, name: "Physiology", href: "/departments/physiology" },
+  { icon: Pill, name: "Pharmacology", href: "/departments/pharmacology" },
+  { icon: Bug, name: "Microbiology", href: "/departments/microbiology" },
+  { icon: ShieldPlus, name: "Community Medicine", href: "/departments/community-medicine" },
+  { icon: Scan, name: "Forensic Medicine", href: "/departments/forensic-medicine" },
+  { icon: Scissors, name: "Anaesthesiology", href: "/departments/anaesthesiology" },
+  { icon: ShieldPlus, name: "Dermatology", href: "/departments/dermatology" },
+  { icon: Syringe, name: "Dentistry", href: "/departments/dentistry" },
+];
+
 export default function DepartmentsGrid() {
+  const [showMore, setShowMore] = useState(false);
+
+  const allDepts = showMore ? [...initialDepartments, ...moreDepartments] : initialDepartments;
+
   return (
     <section className="py-14 md:py-20 bg-gradient-to-br from-[#0d9488] via-[#0f766e] to-[#115e59]">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6">
@@ -36,7 +66,7 @@ export default function DepartmentsGrid() {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5">
-          {departments.map((dept) => (
+          {allDepts.map((dept) => (
             <Link
               key={dept.name}
               href={dept.href}
@@ -52,6 +82,19 @@ export default function DepartmentsGrid() {
               </span>
             </Link>
           ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="inline-flex items-center gap-2 px-7 py-3 bg-white text-[#0f766e] font-bold text-sm rounded-full hover:bg-white/90 transition-all shadow-lg"
+          >
+            {showMore ? (
+              <>Show Less <ChevronUp size={16} /></>
+            ) : (
+              <>View More Departments <ChevronDown size={16} /></>
+            )}
+          </button>
         </div>
       </div>
     </section>

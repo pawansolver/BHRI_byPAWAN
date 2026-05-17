@@ -135,7 +135,15 @@ export default function Navbar() {
   return (
     <header className="w-full sticky top-0 z-50">
       {/* ───── TIER 0: Helpline strip ───── */}
-      <div className="bg-red-700 text-white text-[11px]">
+      <div className="relative bg-[#0a1e42] text-white text-[11px] overflow-hidden">
+        <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-6 opacity-[0.08]" viewBox="0 0 300 24" fill="none">
+          <path d="M0 12 L60 12 L75 3 L90 21 L105 6 L120 18 L135 12 L200 12 L215 4 L230 20 L245 7 L260 17 L275 12 L300 12" stroke="white" strokeWidth="1.5" fill="none" />
+        </svg>
+        <svg className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-6 opacity-[0.08]" viewBox="0 0 300 24" fill="none">
+          <path d="M0 12 L60 12 L75 3 L90 21 L105 6 L120 18 L135 12 L200 12 L215 4 L230 20 L245 7 L260 17 L275 12 L300 12" stroke="white" strokeWidth="1.5" fill="none" />
+        </svg>
+        <div className="absolute left-[35%] top-1/2 -translate-y-1/2 text-white/[0.06] text-lg font-black select-none">+</div>
+        <div className="absolute right-[35%] top-1/2 -translate-y-1/2 text-white/[0.06] text-lg font-black select-none">+</div>
         <div className="container-custom flex flex-wrap items-center justify-between py-1.5 gap-x-6 gap-y-1">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
             <span className="flex items-center gap-1.5">
@@ -161,7 +169,11 @@ export default function Navbar() {
       </div>
 
       {/* ───── TIER 1: Top utility bar ───── */}
-      <div className="bg-brandBlueDark text-white text-xs">
+      <div className="relative bg-[#0f2557] text-white text-xs overflow-hidden">
+        <div className="absolute left-[10%] top-0 w-px h-full bg-white/[0.04]" />
+        <div className="absolute left-[25%] top-0 w-px h-full bg-white/[0.03]" />
+        <div className="absolute right-[10%] top-0 w-px h-full bg-white/[0.04]" />
+        <div className="absolute right-[25%] top-0 w-px h-full bg-white/[0.03]" />
         <div className="container-custom flex items-center justify-between py-1.5">
           <div className="hidden md:flex items-center gap-5">
             <span className="flex items-center gap-1.5">
@@ -239,7 +251,8 @@ export default function Navbar() {
       </div>
 
       {/* ───── TIER 3: Main navigation ───── */}
-      <nav className="bg-brandBlue">
+      <nav className="relative bg-[#1a3a6b] overflow-hidden">
+        <div className="absolute left-0 bottom-0 w-full h-px bg-gradient-to-r from-transparent via-brandSaffron/20 to-transparent" />
         <div className="container-custom hidden lg:flex items-center justify-center">
           {MENU.map((item) => (
             <div

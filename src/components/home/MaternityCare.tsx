@@ -6,11 +6,6 @@ import { Heart } from "lucide-react";
 
 const services = [
   {
-    title: "Infant Activities",
-    img: "/images/maternity/infant-activities.png",
-    color: "from-pink-500 to-rose-600",
-  },
-  {
     title: "Maternal Care",
     img: "/images/maternity/maternal-care.png",
     color: "from-violet-500 to-purple-700",
@@ -19,11 +14,6 @@ const services = [
     title: "High Risk Pregnancy Care",
     img: "/images/maternity/high-risk-pregnancy.png",
     color: "from-red-500 to-red-700",
-  },
-  {
-    title: "Gynecological Services",
-    img: "/images/maternity/gynecological-services.png",
-    color: "from-teal-500 to-emerald-700",
   },
   {
     title: "MR Guided Ultrasound",
@@ -59,7 +49,7 @@ export default function MaternityCare() {
         </div>
 
         {/* 3x2 Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {services.map((svc, idx) => (
             <div
               key={svc.title}

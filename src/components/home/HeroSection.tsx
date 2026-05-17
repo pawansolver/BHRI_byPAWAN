@@ -47,24 +47,38 @@ export default function HeroSection() {
   }, [next]);
 
   return (
-    <section className="relative w-full h-[500px] md:h-[580px] lg:h-[620px] overflow-hidden">
-      {/* ── Slide 0: Original static hero ── */}
+    <section className="relative w-full min-h-[500px] md:min-h-[560px] lg:min-h-[600px] overflow-hidden">
+
+      {/* ── Slide 0: Light theme static hero ── */}
       <div
-        className="absolute inset-0 transition-opacity duration-[900ms] ease-in-out bg-gradient-to-br from-brandBlue via-brandBlueDark to-brandBlue"
+        className="absolute inset-0 transition-opacity duration-[900ms] ease-in-out bg-[#eef4fb]"
         style={{ opacity: current === 0 ? 1 : 0, zIndex: current === 0 ? 2 : 1 }}
       >
-        <div className="absolute inset-0 bg-[url('/logo.png')] bg-no-repeat bg-center opacity-[0.04] bg-[length:500px]" />
-        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center justify-center gap-10">
-          <div className="flex-1 text-center lg:text-left text-white">
-            <p className="text-brandSaffron font-bold text-sm uppercase tracking-widest mb-3">
+        {/* Decorative bg shapes */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-[450px] h-[450px] rounded-full border-2 border-brandBlue/10" />
+          <div className="absolute -top-10 -right-10 w-[350px] h-[350px] rounded-full border border-brandBlue/[0.06]" />
+          <div className="absolute bottom-10 left-[5%] w-[200px] h-[200px] rounded-full bg-brandBlue/[0.04]" />
+          <div className="absolute top-[20%] left-[30%] w-3 h-3 rounded-full bg-brandBlue/10" />
+          <div className="absolute top-[60%] left-[15%] w-2 h-2 rounded-full bg-brandSaffron/15" />
+          <div className="absolute bottom-[30%] right-[40%] w-2.5 h-2.5 rounded-full bg-brandGreen/10" />
+          <svg className="absolute bottom-0 left-0 w-full h-16 opacity-[0.05]" viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none">
+            <path d="M0 32 L200 32 L220 8 L240 56 L260 16 L280 48 L300 32 L600 32 L620 10 L640 54 L660 18 L680 46 L700 32 L1440 32" stroke="#1a3a6b" strokeWidth="2.5" fill="none" />
+          </svg>
+        </div>
+
+        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center justify-center gap-10 py-12">
+          <div className="flex-1 text-center lg:text-left">
+            <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2 justify-center lg:justify-start">
+              <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
               सेवा परमो धर्म:
             </p>
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 text-[#1a1a2e]">
               Welcome to <br className="hidden md:block" />
-              <span className="text-brandSaffronLight">Buddha Hospital</span>{" "}
+              <span className="text-brandBlue">Buddha Hospital</span>{" "}
               &amp; Research Institute
             </h1>
-            <p className="text-white/80 text-lg max-w-xl mb-8 mx-auto lg:mx-0">
+            <p className="text-gray-500 text-base md:text-lg max-w-xl mb-8 mx-auto lg:mx-0 leading-relaxed">
               A premier healthcare and medical education institution in Gaya, Bihar —
               delivering compassionate care with modern infrastructure and expert faculty.
             </p>
@@ -73,20 +87,21 @@ export default function HeroSection() {
               <SparkleButton href="/contact">Contact Us</SparkleButton>
             </div>
           </div>
-          <div className="flex-shrink-0 hidden lg:block">
+          <div className="flex-shrink-0 hidden lg:block relative">
+            <div className="absolute -inset-4 rounded-full border-2 border-dashed border-brandBlue/10 animate-[spin_40s_linear_infinite]" />
             <Image
               src="/logo.png"
               alt="BHRI Logo"
-              width={260}
-              height={260}
+              width={280}
+              height={280}
               priority
-              className="drop-shadow-2xl"
+              className="drop-shadow-xl relative z-10"
             />
           </div>
         </div>
       </div>
 
-      {/* ── Slides 1-4: Full image slides ── */}
+      {/* ── Slides 1-4: Full image slides with light overlay ── */}
       {imageSlides.map((slide, i) => {
         const slideIdx = i + 1;
         return (
@@ -102,13 +117,21 @@ export default function HeroSection() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0f2557]/80 via-[#0f2557]/50 to-transparent" />
-            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent" />
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute -top-16 -right-16 w-[350px] h-[350px] rounded-full border-2 border-brandBlue/10" />
+              <div className="absolute bottom-8 left-[8%] w-[150px] h-[150px] rounded-full bg-brandBlue/[0.05]" />
+            </div>
+            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center py-12">
               <div className="max-w-xl">
-                <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-[1.1] mb-4">
+                <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
+                  Buddha Hospital &amp; Research Institute
+                </p>
+                <h2 className="text-3xl md:text-5xl font-extrabold text-[#1a1a2e] leading-[1.1] mb-4">
                   {slide.title}
                 </h2>
-                <p className="text-white/75 text-base md:text-xl max-w-md leading-relaxed">
+                <p className="text-gray-600 text-base md:text-lg max-w-md leading-relaxed">
                   {slide.subtitle}
                 </p>
               </div>
@@ -120,14 +143,14 @@ export default function HeroSection() {
       {/* ── Navigation arrows ── */}
       <button
         onClick={prev}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
         aria-label="Previous slide"
       >
         <ChevronLeft size={22} />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-all"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
         aria-label="Next slide"
       >
         <ChevronRight size={22} />
@@ -139,8 +162,8 @@ export default function HeroSection() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === current ? "w-8 bg-brandSaffron" : "w-3 bg-white/40 hover:bg-white/60"
+            className={`h-2 rounded-full transition-all duration-500 ${
+              i === current ? "w-8 bg-brandBlue" : "w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />
@@ -148,10 +171,34 @@ export default function HeroSection() {
       </div>
 
       {/* ── Slide counter ── */}
-      <div className="absolute bottom-5 right-6 md:right-10 z-10 text-white/50 text-sm font-mono">
-        <span className="text-white font-bold text-lg">{String(current + 1).padStart(2, "0")}</span>
+      <div className="absolute bottom-5 right-6 md:right-10 z-10 text-gray-400 text-sm font-mono">
+        <span className="text-brandBlue font-bold text-lg">{String(current + 1).padStart(2, "0")}</span>
         <span className="mx-1">/</span>
         <span>{String(TOTAL).padStart(2, "0")}</span>
+      </div>
+
+      {/* ── Bottom service strip ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="bg-gradient-to-r from-brandBlue to-brandBlueDark">
+          <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-3 flex flex-wrap items-center justify-center gap-6 md:gap-12 text-white text-[13px]">
+            <span className="flex items-center gap-2 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-green-400" />
+              24x7 Emergency
+            </span>
+            <span className="flex items-center gap-2 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-brandSaffron" />
+              Free OPD
+            </span>
+            <span className="flex items-center gap-2 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-blue-400" />
+              250+ Doctors
+            </span>
+            <span className="flex items-center gap-2 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-purple-400" />
+              800+ Beds
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

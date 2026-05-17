@@ -64,7 +64,7 @@ export default function GallerySection() {
         {activeTab === "gallery" && (
           <div>
             <div className="space-y-5">
-              <InfiniteSlider direction="horizontal" duration={20} durationOnHover={40} gap={16}>
+              <InfiniteSlider direction="horizontal" duration={35} durationOnHover={9999} gap={16}>
                 {galleryImages.map((img) => (
                   <div key={img.title} className="relative w-[220px] md:w-[280px] aspect-[4/3] rounded-lg overflow-hidden shadow-md group flex-shrink-0">
                     <Image src={img.src} alt={img.title} fill sizes="280px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -73,7 +73,7 @@ export default function GallerySection() {
                   </div>
                 ))}
               </InfiniteSlider>
-              <InfiniteSlider direction="horizontal" reverse duration={22} durationOnHover={44} gap={16}>
+              <InfiniteSlider direction="horizontal" reverse duration={38} durationOnHover={9999} gap={16}>
                 {galleryImages.map((img) => (
                   <div key={`r-${img.title}`} className="relative w-[220px] md:w-[280px] aspect-[4/3] rounded-lg overflow-hidden shadow-md group flex-shrink-0">
                     <Image src={img.src} alt={img.title} fill sizes="280px" className="object-cover transition-transform duration-500 group-hover:scale-110" />

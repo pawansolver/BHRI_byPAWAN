@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -17,110 +17,95 @@ export default function ContactForm() {
   };
 
   return (
-    <section>
-      {/* Top banner */}
-      <div className="relative py-10 md:py-14 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/hero/hero-2.png')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d9488]/85 to-[#0f766e]/80" />
-        <h2 className="relative z-10 section-heading-white">Contact Us</h2>
+    <section className="relative py-10 md:py-14 bg-gradient-to-br from-[#0f2557] via-[#1a3a6b] to-[#14532d] overflow-hidden">
+      {/* Medical background art */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-8 left-[5%] text-white/[0.06] text-[120px] font-black leading-none select-none">+</div>
+        <div className="absolute bottom-12 right-[8%] text-white/[0.05] text-[100px] font-black leading-none select-none">+</div>
+        <div className="absolute top-[40%] right-[3%] text-white/[0.04] text-[80px] font-black leading-none select-none">+</div>
+        <svg className="absolute bottom-0 left-0 w-full h-20 opacity-[0.08]" viewBox="0 0 1440 80" fill="none" preserveAspectRatio="none">
+          <path d="M0 40 L200 40 L230 10 L260 70 L290 20 L320 60 L350 40 L600 40 L630 15 L660 65 L690 25 L720 55 L750 40 L1000 40 L1030 10 L1060 70 L1090 20 L1120 60 L1150 40 L1440 40" stroke="#ffffff" strokeWidth="3" fill="none" />
+        </svg>
+        <div className="absolute top-[15%] left-[40%] w-[300px] h-[300px] rounded-full border border-white/[0.06]" />
+        <div className="absolute bottom-[10%] left-[20%] w-[200px] h-[200px] rounded-full border border-white/[0.05]" />
+        <div className="absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-white/10" />
+        <div className="absolute top-[60%] right-[20%] w-2.5 h-2.5 rounded-full bg-white/10" />
+        <div className="absolute top-[45%] left-[55%] w-1.5 h-1.5 rounded-full bg-white/10" />
       </div>
 
-      {/* Form section */}
-      <div className="bg-white py-10 md:py-14">
-        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left — Contact info */}
-            <div>
-              <p className="text-[#0d9488] font-bold text-sm uppercase tracking-widest mb-2">
-                Need Help
-              </p>
-              <h3 className="section-heading !text-left !mb-3">Get In Touch</h3>
-              <span className="section-heading-line !mx-0" />
-              <p className="text-gray-500 text-[15px] leading-relaxed mb-6 max-w-md">
-                Buddha Hospital &amp; Research Institute is always here to help you.
-                Reach out to us for appointments, enquiries, or any assistance.
-              </p>
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10">
+        <h2 className="section-heading-white">Contact Us</h2>
+        <span className="section-heading-line-white" />
 
-              <div className="space-y-5">
-                <div className="flex items-start gap-3">
-                  <Phone size={20} className="text-[#0d9488] mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-[#1a1a2e] font-bold text-[15px]">Emergency Contact</h4>
-                    <p className="text-gray-500 text-[15px]">+91 8603048174 / 9060646592</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail size={20} className="text-[#0d9488] mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-[#1a1a2e] font-bold text-[15px]">Mail Us</h4>
-                    <a href="mailto:bhribodhgaya@gmail.com" className="text-gray-500 text-[15px] hover:text-[#0d9488] transition">
-                      bhribodhgaya@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <MapPin size={20} className="text-[#0d9488] mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-[#1a1a2e] font-bold text-[15px]">Location</h4>
-                    <p className="text-gray-500 text-[15px]">
-                      Gaya-Dobhi Road, NH-22, Kharanti More, Tikuna Farm, Gaya (Bihar)-823004
-                    </p>
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-8">
+          {/* Left — Contact cards (2 cols) */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3.5 border border-white/10">
+              <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                <Phone size={16} className="text-brandSaffron" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-[13px]">Emergency</h4>
+                <p className="text-white/60 text-[13px]">+91 8603048174 / 9060646592</p>
               </div>
             </div>
 
-            {/* Right — Form */}
-            <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-6 md:p-8">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#0d9488] focus:ring-1 focus:ring-[#0d9488] transition"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#0d9488] focus:ring-1 focus:ring-[#0d9488] transition"
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#0d9488] focus:ring-1 focus:ring-[#0d9488] transition"
-                />
-                <textarea
-                  name="message"
-                  placeholder="Write Your Message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={5}
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#0d9488] focus:ring-1 focus:ring-[#0d9488] transition resize-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3.5 bg-[#0d9488] text-white font-bold text-sm uppercase tracking-wider rounded-md hover:bg-[#0f766e] transition-colors shadow-md"
-                >
-                  Send Now
-                </button>
-              </form>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3.5 border border-white/10">
+              <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                <Mail size={16} className="text-brandSaffron" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-[13px]">Email</h4>
+                <a href="mailto:bhribodhgaya@gmail.com" className="text-white/60 text-[13px] hover:text-white transition">bhribodhgaya@gmail.com</a>
+              </div>
             </div>
+
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3.5 border border-white/10">
+              <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                <MapPin size={16} className="text-brandSaffron" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-[13px]">Location</h4>
+                <p className="text-white/60 text-[13px]">Gaya-Dobhi Road, NH-22, Kharanti More, Gaya-823004</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3.5 border border-white/10">
+              <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                <Clock size={16} className="text-brandSaffron" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-[13px]">OPD Timing</h4>
+                <p className="text-white/60 text-[13px]">Mon - Sat: 9:00 AM - 3:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right — Form (3 cols) */}
+          <div className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 p-5 md:p-6">
+            <form onSubmit={handleSubmit} className="space-y-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Full Name</label>
+                  <input type="text" name="name" placeholder="Your name" value={form.name} onChange={handleChange} required className="w-full px-3.5 py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Email</label>
+                  <input type="email" name="email" placeholder="Your email" value={form.email} onChange={handleChange} required className="w-full px-3.5 py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Phone</label>
+                <input type="tel" name="phone" placeholder="Your phone number" value={form.phone} onChange={handleChange} className="w-full px-3.5 py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Message</label>
+                <textarea name="message" placeholder="How can we help you?" value={form.message} onChange={handleChange} rows={3} required className="w-full px-3.5 py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition resize-none" />
+              </div>
+              <button type="submit" className="w-full py-3 bg-gradient-to-r from-brandBlue to-brandBlueDark text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                <Send size={15} /> Send Message
+              </button>
+            </form>
           </div>
         </div>
       </div>

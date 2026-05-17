@@ -124,40 +124,7 @@ export default function Footer() {
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 py-10 md:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10">
-          {/* Column 1 — About + Contact */}
-          <div>
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <Image src="/logo.png" alt="BHRI" width={100} height={100} className="rounded-full bg-white p-0.5" />
-              <div>
-                <p className="font-extrabold text-base leading-tight text-white">BUDDHA HOSPITAL</p>
-                <p className="text-[10px] text-white/70 font-bold">&amp; Research Institute</p>
-              </div>
-            </Link>
-            <p className="text-xs text-white/60 leading-relaxed mb-2">
-              Buddha Hospital &amp; Research Institute is a multi-Specialty hospital in Gaya
-              offering world-class healthcare with the motto &ldquo;सेवा परमो धर्म:&rdquo;
-            </p>
-            <p className="text-[11px] text-white/50 mb-4">
-              Reg. No.: CE/GAY/2025/NH-0504
-            </p>
-
-            <ul className="space-y-2.5 mb-4">
-              <li className="flex items-start gap-2 text-xs text-white/60">
-                <MapPin size={14} className="mt-0.5 flex-shrink-0 text-white/80" />
-                <span>Gaya-Dobhi Road, NH-22, Kharanti More, Tikuna Farm, Gaya (Bihar)-823004</span>
-              </li>
-              <li className="flex items-center gap-2 text-xs text-white/60">
-                <Mail size={14} className="flex-shrink-0 text-white/80" />
-                <a href="mailto:bhribodhgaya@gmail.com" className="hover:text-white transition">bhribodhgaya@gmail.com</a>
-              </li>
-              <li className="flex items-center gap-2 text-xs text-white/60">
-                <Phone size={14} className="flex-shrink-0 text-white/80" />
-                <span>8603048174 / 9060646592</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 2, 3, 4 — Menu Items with arrow toggle */}
+          {/* Column 1, 2, 3 — Menu Items with arrow toggle */}
           {[
             MENU.slice(0, 4),
             MENU.slice(4, 8),
@@ -218,17 +185,46 @@ export default function Footer() {
               ))}
             </div>
           ))}
+
+          {/* Column 4 — About + Contact (moved to right) */}
+          <div>
+            <Link href="/" className="inline-block mb-4">
+              <Image src="/logo.png" alt="BHRI" width={140} height={140} className="rounded-full bg-white p-0.5" />
+            </Link>
+            <p className="text-xs text-white/60 leading-relaxed mb-2">
+              Buddha Hospital &amp; Research Institute is a multi-Specialty hospital in Gaya
+              offering world-class healthcare with the motto &ldquo;सेवा परमो धर्म:&rdquo;
+            </p>
+            <p className="text-[11px] text-white/50 mb-4">
+              Reg. No.: CE/GAY/2025/NH-0504
+            </p>
+
+            <ul className="space-y-2.5 mb-4">
+              <li className="flex items-start gap-2 text-xs text-white/60">
+                <MapPin size={14} className="mt-0.5 flex-shrink-0 text-white/80" />
+                <span>Gaya-Dobhi Road, NH-22, Kharanti More, Tikuna Farm, Gaya (Bihar)-823004</span>
+              </li>
+              <li className="flex items-center gap-2 text-xs text-white/60">
+                <Mail size={14} className="flex-shrink-0 text-white/80" />
+                <a href="mailto:bhribodhgaya@gmail.com" className="hover:text-white transition">bhribodhgaya@gmail.com</a>
+              </li>
+              <li className="flex items-center gap-2 text-xs text-white/60">
+                <Phone size={14} className="flex-shrink-0 text-white/80" />
+                <span>8603048174 / 9060646592</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="relative z-10 border-t border-white/15">
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-white/50">
-          <span>Designed &amp; Developed by <a href="https://nighwantech.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white font-semibold underline underline-offset-2 transition">NighwanTech</a> &mdash; {new Date().getFullYear()}</span>
           <div className="flex items-center gap-4">
             <Link href="/terms" className="hover:text-white transition">Terms &amp; Conditions</Link>
             <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
           </div>
+          <span>Designed &amp; Developed by <a href="https://nighwantech.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white font-semibold underline underline-offset-2 transition">NighwanTech</a> &mdash; {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>
