@@ -44,19 +44,18 @@ const MENU: MenuItem[] = [
   { label: "HOME", href: "/" },
   {
     label: "ABOUT US",
-    href: "/about",
+    href: "/about/overview",
     children: [
-      { label: "Overview", href: "/about" },
-      { label: "Vision & Mission", href: "/about/vision" },
+      { label: "Overview", href: "/about/overview" },
       { label: "Chairman Message", href: "/about/chairman" },
       { label: "Managing Director Message", href: "/about/md" },
     ],
   },
   {
     label: "HOSPITAL",
-    href: "/hospital",
+    href: "/hospital/the-hospital",
     children: [
-      { label: "The Hospital", href: "/hospital" },
+      { label: "The Hospital", href: "/hospital/the-hospital" },
       { label: "OPD Services", href: "/hospital/opd" },
       { label: "In-Wards Services", href: "/hospital/in-wards" },
       { label: "Diagnostic Services", href: "/hospital/diagnostics" },
@@ -65,7 +64,7 @@ const MENU: MenuItem[] = [
   },
   {
     label: "DEPARTMENTS",
-    href: "/departments",
+    href: "#",
     children: [
       { label: "Anatomy", href: "/departments/anatomy" },
       { label: "Forensic Medicine & Toxicology", href: "/departments/forensic-medicine" },
