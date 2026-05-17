@@ -251,8 +251,8 @@ export default function Navbar() {
       </div>
 
       {/* ───── TIER 3: Main navigation ───── */}
-      <nav className="relative bg-[#1a3a6b] overflow-hidden">
-        <div className="absolute left-0 bottom-0 w-full h-px bg-gradient-to-r from-transparent via-brandSaffron/20 to-transparent" />
+      <nav className="relative bg-[#1a3a6b] overflow-visible">
+        <div className="absolute left-0 bottom-0 w-full h-px bg-gradient-to-r from-transparent via-brandSaffron/20 to-transparent pointer-events-none" />
         <div className="container-custom hidden lg:flex items-center justify-center">
           {MENU.map((item) => (
             <div
