@@ -47,7 +47,7 @@ export default function HeroSection() {
   }, [next]);
 
   return (
-    <section className="relative w-full min-h-[500px] md:min-h-[560px] lg:min-h-[600px] overflow-hidden">
+    <section className="relative w-full min-h-[400px] md:min-h-[440px] lg:min-h-[460px] h-[460px] overflow-hidden">
 
       {/* ── Slide 0: Light theme static hero ── */}
       <div
@@ -67,7 +67,7 @@ export default function HeroSection() {
           </svg>
         </div>
 
-        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center justify-center gap-10 py-12">
+        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center justify-center gap-10 py-6">
           <div className="flex-1 text-center lg:text-left">
             <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2 justify-center lg:justify-start">
               <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
@@ -92,8 +92,8 @@ export default function HeroSection() {
             <Image
               src="/logo.png"
               alt="BHRI Logo"
-              width={280}
-              height={280}
+              width={220}
+              height={220}
               priority
               className="drop-shadow-xl relative z-10"
             />
@@ -122,7 +122,7 @@ export default function HeroSection() {
               <div className="absolute -top-16 -right-16 w-[350px] h-[350px] rounded-full border-2 border-brandBlue/10" />
               <div className="absolute bottom-8 left-[8%] w-[150px] h-[150px] rounded-full bg-brandBlue/[0.05]" />
             </div>
-            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center py-12">
+            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center py-6">
               <div className="max-w-xl">
                 <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
@@ -162,9 +162,8 @@ export default function HeroSection() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all duration-500 ${
-              i === current ? "w-8 bg-brandBlue" : "w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
-            }`}
+            className={`h-2 rounded-full transition-all duration-500 ${i === current ? "w-8 bg-brandBlue" : "w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
+              }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

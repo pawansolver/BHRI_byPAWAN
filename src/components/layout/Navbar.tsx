@@ -48,7 +48,7 @@ const MENU: MenuItem[] = [
     children: [
       { label: "Overview", href: "/about/overview" },
       { label: "Chairman Message", href: "/about/chairman" },
-      { label: "Managing Director Message", href: "/about/md" },
+
     ],
   },
   {
@@ -214,15 +214,23 @@ export default function Navbar() {
           />
         </div>
         <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-4 md:px-6 flex items-center justify-between py-3">
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <Image
               src="/logo.png"
-              alt="Buddha Hospital & Research Institute"
-              width={200}
-              height={200}
+              alt="Bihar Hospital And Research Institute"
+              width={64}
+              height={64}
               priority
               className="rounded-full flex-shrink-0"
             />
+            <div className="flex flex-col justify-center select-none">
+              <span className="font-extrabold text-[13px] sm:text-[16px] md:text-[18px] leading-tight text-[#1a3a6b] uppercase tracking-wide">
+                Bihar Hospital And Research Institute
+              </span>
+              <span className="text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">
+                Gaya-Dobhi Road, NH-22, Kharanti More, Gaya-823004
+              </span>
+            </div>
           </Link>
 
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
@@ -271,21 +279,19 @@ export default function Navbar() {
 
               {item.children && openDropdown === item.label && (
                 <div
-                  className={`absolute top-full bg-white shadow-xl border-t-[3px] border-brandSaffron z-50 ${
-                    item.children.length > 8
-                      ? "left-1/2 -translate-x-1/2 w-[680px] grid grid-cols-3 gap-0 p-2"
-                      : "left-0 min-w-[220px]"
-                  }`}
+                  className={`absolute top-full bg-white shadow-xl border-t-[3px] border-brandSaffron z-50 ${item.children.length > 8
+                    ? "left-1/2 -translate-x-1/2 w-[680px] grid grid-cols-3 gap-0 p-2"
+                    : "left-0 min-w-[220px]"
+                    }`}
                 >
                   {item.children.map((child) => (
                     <Link
                       key={child.label}
                       href={child.href}
-                      className={`block text-sm text-textmain hover:bg-brandBlue hover:text-white transition-colors ${
-                        item.children!.length > 8
-                          ? "px-4 py-2.5 rounded-md"
-                          : "px-4 py-2.5 border-b border-border/50 last:border-0"
-                      }`}
+                      className={`block text-sm text-textmain hover:bg-brandBlue hover:text-white transition-colors ${item.children!.length > 8
+                        ? "px-4 py-2.5 rounded-md"
+                        : "px-4 py-2.5 border-b border-border/50 last:border-0"
+                        }`}
                     >
                       {child.label}
                     </Link>

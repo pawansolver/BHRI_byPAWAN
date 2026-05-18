@@ -31,29 +31,21 @@ export default function PhysiologyPage() {
         return () => clearInterval(timer);
     }, [slides.length]);
 
+    const scrollToOverview = () => {
+        const overviewSec = document.getElementById("overview-section") || document.getElementsByTagName("section")[1];
+        if (overviewSec) {
+            overviewSec.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+
     return (
         <div className="bg-white min-h-screen" style={{ fontFamily: sansFont }}>
             
             {/* ===== HERO SECTION ===== */}
-            <section className="relative h-[75vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+            <section className="relative h-[75vh] min-h-[500px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-blue-950/90 to-slate-900 mix-blend-multiply opacity-95 z-10" />
-                    
-                    {/* Animated Heartbeat SVG Background */}
-                    <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-                        <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-                            <motion.path
-                                d="M 0 500 L 200 500 L 250 400 L 300 600 L 350 500 L 500 500 L 550 200 L 600 800 L 650 500 L 800 500 L 850 450 L 900 550 L 1000 500"
-                                fill="transparent"
-                                stroke="rgba(59, 130, 246, 0.5)"
-                                strokeWidth="4"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                            />
-                        </svg>
-                    </div>
-
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent z-10" />
                     <Image 
                         src="/carousel-2.png"
                         alt="Department of Physiology"
@@ -63,45 +55,32 @@ export default function PhysiologyPage() {
                     />
                 </div>
                 
-                <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -mt-12">
+                <div className="relative z-20 container mx-auto px-6 lg:px-12 text-left max-w-6xl">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className="flex justify-center mb-6">
-                            <span className="inline-flex items-center gap-2 py-1.5 px-4 bg-blue-500/10 backdrop-blur-md rounded-full text-blue-400 font-bold tracking-widest text-[10px] border border-blue-500/20 uppercase">
-                                <motion.div 
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ repeat: Infinity, duration: 1 }}
-                                >
-                                    <HeartPulse size={14} />
-                                </motion.div>
-                                Science of Function
-                            </span>
-                        </div>
+                        <span className="inline-block py-1.5 px-4 bg-white/10 backdrop-blur-md rounded-full text-white font-semibold tracking-[0.2em] text-xs mb-6 border border-white/20 uppercase">
+                            Science of Function
+                        </span>
                         <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl" style={{ fontFamily: serifFont }}>
                             Department of <br/> Physiology
                         </h1>
-                        <p className="text-xl lg:text-2xl text-blue-100 font-medium mb-10 leading-relaxed drop-shadow-md max-w-2xl mx-auto">
+                        <p className="text-xl lg:text-2xl text-slate-300 font-medium max-w-2xl mb-10 leading-relaxed drop-shadow-md">
                             Understanding the Functions of Life. Exploring how the human body works through scientific learning and practical training.
                         </p>
                         
-                        <motion.button 
-                            whileHover={{ scale: 1.05 }}
-                            className="px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all shadow-[0_10px_40px_rgba(37,99,235,0.4)]"
-                        >
-                            Explore Department
-                        </motion.button>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <motion.button 
+                                whileHover={{ scale: 1.05 }}
+                                onClick={scrollToOverview}
+                                className="px-10 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-2 max-w-xs"
+                            >
+                                Explore Department
+                            </motion.button>
+                        </div>
                     </motion.div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-                    <svg className="relative block w-[calc(100%+1.3px)] h-[50px] lg:h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-1.42,1200,52.47V0Z" fill="#ffffff" opacity=".25"></path>
-                        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="#ffffff" opacity=".5"></path>
-                        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#ffffff"></path>
-                    </svg>
                 </div>
             </section>
 
@@ -147,7 +126,7 @@ export default function PhysiologyPage() {
             </section>
 
             {/* ===== CORE AREAS OF STUDY (Icon Grid) ===== */}
-            <section className="py-20 lg:py-32 bg-slate-50 relative overflow-hidden">
+            <section id="overview-section" className="py-20 lg:py-32 bg-slate-50 relative overflow-hidden">
                 {/* Subtle Background Waves */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
                     <svg className="w-full h-full" viewBox="0 0 1000 1000">

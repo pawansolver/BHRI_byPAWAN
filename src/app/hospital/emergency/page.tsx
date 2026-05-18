@@ -32,6 +32,14 @@ export default function EmergencyPage() {
         return () => clearInterval(timer);
     }, [slides.length]);
 
+    const scrollToOverview = () => {
+        const overviewSec = document.getElementById("overview-section") || document.getElementsByTagName("section")[1];
+        if (overviewSec) {
+            overviewSec.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+
     return (
         <div className="bg-slate-50 relative" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             
@@ -61,65 +69,45 @@ export default function EmergencyPage() {
             </div>
 
             {/* ===== HERO SECTION ===== */}
-            <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+            <section className="relative h-[75vh] min-h-[500px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-red-950 via-slate-900 to-red-900 mix-blend-multiply opacity-90 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent z-10" />
                     <Image 
-                        src="/carousel-4.png"
+                        src="/pharmacology_hero.png"
                         alt="Emergency Services"
                         fill
                         className="object-cover"
-                        onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                        }}
+                        priority
                     />
                 </div>
                 
-                <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -mt-12">
+                <div className="relative z-20 container mx-auto px-6 lg:px-12 text-left max-w-6xl">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className="flex justify-center mb-6">
-                            <span className="inline-flex items-center gap-2 py-1.5 px-4 bg-red-600/20 backdrop-blur-md rounded-full text-red-100 font-bold tracking-widest text-xs border border-red-500/30 font-montserrat">
-                                <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
+                        <span className="inline-block py-1.5 px-4 bg-white/10 backdrop-blur-md rounded-full text-white font-semibold tracking-[0.2em] text-xs mb-6 border border-white/20 uppercase font-montserrat">
+                            <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
                                 EMERGENCY STATUS: ACTIVE 24/7
-                            </span>
-                        </div>
-                        <h1 className="text-4xl lg:text-7xl font-extrabold text-white mb-6 leading-tight font-montserrat drop-shadow-2xl">
+                        </span>
+                        <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl font-montserrat" style={{ fontFamily: "'Playfair Display', serif" }}>
                             Emergency Services
                         </h1>
-                        <p className="text-xl lg:text-2xl text-red-100 font-medium font-montserrat drop-shadow-md mb-10 max-w-2xl mx-auto">
+                        <p className="text-xl lg:text-2xl text-slate-300 font-medium max-w-2xl mb-10 leading-relaxed drop-shadow-md font-montserrat">
                             24/7 Immediate Care When Every Second Matters
                         </p>
                         
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <motion.a 
-                                href="tel:+91XXXXXXXXXX"
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <motion.button 
                                 whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-10 py-5 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition-all shadow-[0_10px_30px_rgba(220,38,38,0.4)] flex items-center justify-center gap-3 font-montserrat text-lg"
+                                onClick={scrollToOverview}
+                                className="px-10 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-2 max-w-xs font-montserrat"
                             >
-                                <PhoneCall size={24} />
-                                Call Emergency Now
-                            </motion.a>
-                            <motion.a 
-                                href="#ambulance"
-                                whileHover={{ scale: 1.05 }}
-                                className="px-10 py-5 bg-white/10 backdrop-blur-md text-white font-bold rounded-full hover:bg-white/20 transition-all border border-white/30 flex items-center justify-center gap-3 font-montserrat text-lg"
-                            >
-                                <Truck size={24} className="animate-bounce" />
-                                Request Ambulance
-                            </motion.a>
+                                Explore Services
+                            </motion.button>
                         </div>
                     </motion.div>
-                </div>
-                
-                <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-                    <svg className="relative block w-[calc(100%+1.3px)] h-[50px] lg:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,112.5,187.5,89.57,232.07,71.55,278.4,64.88,321.39,56.44Z" fill="#f8fafc"></path>
-                    </svg>
                 </div>
             </section>
 
@@ -179,7 +167,7 @@ export default function EmergencyPage() {
             </section>
 
             {/* ===== HIGHLIGHTS (Stats Section) ===== */}
-            <section className="py-12 lg:py-16 bg-white border-y border-slate-100 relative">
+            <section id="overview-section" className="py-12 lg:py-16 bg-white border-y border-slate-100 relative">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 text-center">
                         {[
