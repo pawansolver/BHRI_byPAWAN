@@ -91,7 +91,7 @@ const MENU: MenuItem[] = [
   { label: "FACULTY & DOCTORS", href: "/doctors" },
   {
     label: "INFRASTRUCTURE",
-    href: "/infrastructure",
+    href: "/#",
     children: [
       { label: "Academic Complex", href: "/infrastructure/academic-complex" },
       { label: "Residential Block", href: "/infrastructure/residential-block" },
@@ -217,7 +217,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <Image
               src="/logo.png"
-              alt="Bihar Hospital And Research Institute"
+              alt="Buddha Hospital And Research Institute"
               width={64}
               height={64}
               priority
@@ -225,7 +225,7 @@ export default function Navbar() {
             />
             <div className="flex flex-col justify-center select-none">
               <span className="font-extrabold text-[13px] sm:text-[16px] md:text-[18px] leading-tight text-[#1a3a6b] uppercase tracking-wide">
-                Bihar Hospital And Research Institute
+                Buddha Hospital And Research Institute
               </span>
               <span className="text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">
                 Gaya-Dobhi Road, NH-22, Kharanti More, Gaya-823004
