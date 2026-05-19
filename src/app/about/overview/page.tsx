@@ -583,7 +583,7 @@ const AboutOverview = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {[
-                            { title: "Trusted in Gaya", icon: Award, desc: "Reliable healthcare provider for the region." },
+                            { title: "Trusted in Bihar & More States", icon: Award, desc: "Reliable healthcare provider for the region." },
                             { title: "Affordable Care", icon: ShieldCheck, desc: "Quality treatment that is accessible to all." },
                             { title: "Expert Doctors", icon: UserCheck, desc: "Highly experienced medical professionals." },
                             { title: "Modern Facilities", icon: Zap, desc: "Latest medical equipment and infrastructure." },

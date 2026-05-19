@@ -249,5 +249,4 @@ npx tsc --noEmit
 *   **Academic Time Table:** Open `src/app/academics/time-table/page.tsx`. Modify the structured `schedules` JSON object under the respective Phase (`phase1`, `phase2`, `phase3`) and Day (`Mon` - `Sat`).
 *   **Holidays almanac:** Open `src/app/academics/holidays/page.tsx` and append the new holiday objects to `holidaysList` array in exact `{ date: "Month Day", day: "Weekday", occasion: "Name", type: "Gazetted/Restricted/Academic Vacation" }` format.
 
----
-*End of Documentation. Prepared by Antigravity AI Pair Programmer.*
+

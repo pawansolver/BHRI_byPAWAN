@@ -33,7 +33,7 @@ export default function PhotoGalleryPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent z-10" />
           <Image 
-            src="/carousel-1.png"
+            src="/images/gallery/gallery-1.png"
             alt="BHRI Photo Gallery"
             fill
             className="object-cover"

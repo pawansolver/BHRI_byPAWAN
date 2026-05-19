@@ -27,7 +27,7 @@ export default function VideoGalleryPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent z-10" />
           <Image 
-            src="/carousel-2.png"
+            src="/images/gallery/gallery-3.png"
             alt="BHRI Video Gallery"
             fill
             className="object-cover"

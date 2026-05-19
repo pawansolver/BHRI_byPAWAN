@@ -92,7 +92,7 @@ body {
 .section-heading {
   text-align: center;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #e6960a;
   letter-spacing: -0.02em;
   font-size: clamp(1.5rem, 4vw, 2.1rem);
   line-height: 1.2;
@@ -106,7 +106,7 @@ body {
   height: 4px;
   margin: 0 auto 1.5rem;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #1a3a6b, #0072CE);
+  background: linear-gradient(90deg, #e6960a, #f5b731);
 }
 
 .section-subheading {
@@ -557,4 +557,64 @@ body {
     width: 100% !important;
     height: 280px !important;
   }
+}
+
+/* ==============================================================
+   ☸️ BUDDHA THEME GOLDEN ACCENTS (Global Headings & Bold Text)
+   ============================================================== */
+
+/* Target headings globally with exclusion of navigation, header actions, footers and buttons */
+h1:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+h2:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+h3:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+h4:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+h5:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+h6:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+.section-heading:not(footer *),
+.heading-xl {
+  color: #e6960a !important; /* Buddha Golden Saffron */
+}
+
+/* For section headings on dark backgrounds, make them a bright gold/yellow for readability */
+.section-heading-white {
+  color: #f5b731 !important; /* Buddha Bright Saffron */
+}
+
+/* Make section lines use the golden gradient */
+.section-heading-line {
+  background: linear-gradient(90deg, #e6960a, #f5b731) !important;
+}
+
+/* Ensure strong, b, and bold text in body/content regions are golden yellow */
+strong:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+b:not(nav *, header *, footer *, button *, .btn-primary *, .btn-inverse *, .nav-action-btn *, .nav-action-btn-mobile *),
+p strong,
+li strong,
+span strong {
+  color: #e6960a !important; /* Buddha Golden Saffron for bold text */
+}
+
+/* ==============================================================
+   ☸️ BUDDHA THEME HERO OVERLAYS (Faded Yellow / Saffron Theme)
+   ============================================================== */
+
+/* Apply premium faded yellow/saffron Buddha gradient to all inner page hero section overlays */
+[class*="h-[60vh]"] div[class*="bg-gradient-to-r"],
+[class*="h-[75vh]"] div[class*="bg-gradient-to-r"],
+[class*="h-[50vh]"] div[class*="bg-gradient-to-r"],
+section.relative:first-of-type div[class*="bg-gradient-to-r"] {
+  background: linear-gradient(135deg, rgba(24, 15, 2, 0.95) 0%, rgba(138, 92, 10, 0.6) 55%, rgba(245, 183, 49, 0.2) 80%, rgba(245, 183, 49, 0.05) 100%) !important;
+  opacity: 0.95 !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Home Page static hero background override - faded yellow/saffron background */
+div[class*="bg-[#eef4fb]"] {
+  background-color: #fefbeb !important;
+  background: linear-gradient(135deg, #fffbeb 0%, #fefcbf 100%) !important;
+}
+
+/* Home Page image slide overlays override - faded yellow gradient overlay */
+div.absolute.inset-0.bg-gradient-to-r[class*="from-white/"] {
+  background: linear-gradient(90deg, rgba(255, 253, 235, 0.8) 0%, rgba(254, 252, 191, 0.45) 50%, transparent 100%) !important;
 }

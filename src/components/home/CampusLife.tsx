@@ -104,11 +104,10 @@ export default function CampusLife() {
                 <button
                   key={idx}
                   onClick={() => setActiveImg(idx)}
-                  className={`relative rounded-lg overflow-hidden flex-1 h-[60px] md:h-[72px] transition-all duration-300 ${
-                    activeImg === idx
+                  className={`relative rounded-lg overflow-hidden flex-1 h-[60px] md:h-[72px] transition-all duration-300 ${activeImg === idx
                       ? "ring-2 ring-brandSaffron scale-[1.03]"
                       : "opacity-50 hover:opacity-80"
-                  }`}
+                    }`}
                 >
                   <Image
                     src={img.src}

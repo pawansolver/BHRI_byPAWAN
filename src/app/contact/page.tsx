@@ -94,7 +94,7 @@ export default function ContactPage() {
                             {/* Google Map Iframe */}
                             <div className="w-full flex-grow rounded-2xl overflow-hidden shadow-inner border border-slate-200 min-h-[320px] relative bg-slate-200">
                                 <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.38575024345!2d84.9786439!3d24.6934898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f32c32cf8e7807%3A0xe54fb725838ccf10!2sBuddha%20Hospital%20%26%20Research%20Institute!5e0!3m2!1sen!2sin!4v1716035293215!5m2!1sen!2sin" 
+                                    src="https://maps.google.com/maps?q=Buddha+Hospital+%26+Research+Institute,+Kharanti+More,+Tekuna+Farm,+Gaya-Dobhi+Road,+Gaya,+Bihar+823004&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                                     width="100%" 
                                     height="100%" 
                                     style={{ border: 0 }} 

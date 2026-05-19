@@ -133,73 +133,7 @@ export default function Navbar() {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
 
   return (
-    <header className="w-full sticky top-0 z-50">
-      {/* ───── TIER 0: Helpline strip ───── */}
-      <div className="relative bg-[#0a1e42] text-white text-[11px] overflow-hidden">
-        <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-6 opacity-[0.08]" viewBox="0 0 300 24" fill="none">
-          <path d="M0 12 L60 12 L75 3 L90 21 L105 6 L120 18 L135 12 L200 12 L215 4 L230 20 L245 7 L260 17 L275 12 L300 12" stroke="white" strokeWidth="1.5" fill="none" />
-        </svg>
-        <svg className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-6 opacity-[0.08]" viewBox="0 0 300 24" fill="none">
-          <path d="M0 12 L60 12 L75 3 L90 21 L105 6 L120 18 L135 12 L200 12 L215 4 L230 20 L245 7 L260 17 L275 12 L300 12" stroke="white" strokeWidth="1.5" fill="none" />
-        </svg>
-        <div className="absolute left-[35%] top-1/2 -translate-y-1/2 text-white/[0.06] text-lg font-black select-none">+</div>
-        <div className="absolute right-[35%] top-1/2 -translate-y-1/2 text-white/[0.06] text-lg font-black select-none">+</div>
-        <div className="container-custom flex flex-wrap items-center justify-between py-1.5 gap-x-6 gap-y-1">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-            <span className="flex items-center gap-1.5">
-              <Phone size={11} className="text-white/80" />
-              OPD / Appointment Enquiry :- +91-8603048174 / 9060646592
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Phone size={11} className="text-white/80" />
-              Emergency Helpline :- +91-8603048174
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-            <span className="flex items-center gap-1.5">
-              <Phone size={11} className="text-white/80" />
-              Admission Enquiry :- +91-8603048174 / 9060646592
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Phone size={11} className="text-white/80" />
-              Anti-Ragging Helpline :- +91-9060646592
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* ───── TIER 1: Top utility bar ───── */}
-      <div className="relative bg-[#0f2557] text-white text-xs overflow-hidden">
-        <div className="absolute left-[10%] top-0 w-px h-full bg-white/[0.04]" />
-        <div className="absolute left-[25%] top-0 w-px h-full bg-white/[0.03]" />
-        <div className="absolute right-[10%] top-0 w-px h-full bg-white/[0.04]" />
-        <div className="absolute right-[25%] top-0 w-px h-full bg-white/[0.03]" />
-        <div className="container-custom flex items-center justify-between py-1.5">
-          <div className="hidden md:flex items-center gap-5">
-            <span className="flex items-center gap-1.5">
-              <Phone size={12} /> +91-8603048174 / 9060646592
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Mail size={12} /> bhribodhgaya@gmail.com
-            </span>
-          </div>
-          <div className="flex items-center gap-3 ml-auto">
-            <a href="#" aria-label="Facebook" className="hover:text-brandSaffron transition">
-              <FacebookIcon />
-            </a>
-            <a href="#" aria-label="Twitter" className="hover:text-brandSaffron transition">
-              <TwitterIcon />
-            </a>
-            <a href="#" aria-label="Instagram" className="hover:text-brandSaffron transition">
-              <InstagramIcon />
-            </a>
-            <a href="#" aria-label="YouTube" className="hover:text-brandSaffron transition">
-              <YoutubeIcon />
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <header className="w-full sticky top-0 z-50 shadow-md">
       {/* ───── TIER 2: Logo strip ───── */}
       <div className="relative border-b border-border bg-white overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-[55%] z-[1]">

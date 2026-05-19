@@ -3,7 +3,7 @@ import { SparkleButton } from "@/components/ui/button-8";
 
 export default function AboutSection() {
   return (
-    <section className="section bg-bgLight">
+    <section id="about-section" className="section bg-bgLight">
       <div className="container-custom flex flex-col lg:flex-row items-center gap-10">
         <div className="flex-shrink-0 relative">
           {/* Outer decorative ring */}
