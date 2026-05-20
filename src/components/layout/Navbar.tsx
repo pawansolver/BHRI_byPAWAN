@@ -48,7 +48,6 @@ const MENU: MenuItem[] = [
     children: [
       { label: "Overview", href: "/about/overview" },
       { label: "Chairman Message", href: "/about/chairman" },
-
     ],
   },
   {
@@ -115,7 +114,7 @@ const MENU: MenuItem[] = [
   { label: "ADMISSIONS", href: "/admissions" },
   {
     label: "GALLERY",
-    href: "/gallery",
+    href: "#",
     children: [
       { label: "Photo Gallery", href: "/gallery/photos" },
       { label: "Video Gallery", href: "/gallery/videos" },
@@ -147,26 +146,32 @@ export default function Navbar() {
             priority
           />
         </div>
-        <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-4 md:px-6 flex items-center justify-between py-3">
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Buddha Hospital And Research Institute"
-              width={64}
-              height={64}
-              priority
-              className="rounded-full flex-shrink-0"
-            />
+        
+        {/* Adjusted padding and layout so button always fits on mobile */}
+        <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-3 sm:px-4 md:px-6 flex items-center justify-between py-2 sm:py-3">
+          
+          <Link href="/" className="flex items-center gap-2 md:gap-3 flex-shrink max-w-[80%] lg:max-w-none">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 relative flex-shrink-0 rounded-full overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Buddha Hospital And Research Institute"
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+            
             <div className="flex flex-col justify-center select-none">
-              <span className="font-extrabold text-[13px] sm:text-[16px] md:text-[18px] leading-tight text-[#1a3a6b] uppercase tracking-wide">
+              <span className="font-extrabold text-[12px] sm:text-[14px] md:text-[18px] leading-tight text-[#1a3a6b] uppercase tracking-wide line-clamp-2">
                 Buddha Hospital And Research Institute
               </span>
-              <span className="text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">
+              <span className="hidden sm:block text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">
                 Gaya-Dobhi Road, NH-22, Kharanti More, Gaya-823004
               </span>
             </div>
           </Link>
 
+          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             <a href="/hospital/opd" className="nav-action-btn nav-btn-green">
               <Clock size={14} />
@@ -182,19 +187,22 @@ export default function Navbar() {
             </a>
           </div>
 
+          {/* Fully Visible Hamburger Button */}
           <button
-            className="lg:hidden text-brandBlue p-1"
+            className="lg:hidden flex items-center justify-center p-2 rounded-md bg-[#1a3a6b] text-white flex-shrink-0 ml-auto z-50 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* ───── TIER 3: Main navigation ───── */}
-      <nav className="relative bg-[#1a3a6b] overflow-visible">
+      <nav className="relative bg-[#1a3a6b]">
         <div className="absolute left-0 bottom-0 w-full h-px bg-gradient-to-r from-transparent via-brandSaffron/20 to-transparent pointer-events-none" />
+        
+        {/* Desktop Menu */}
         <div className="container-custom hidden lg:flex items-center justify-center">
           {MENU.map((item) => (
             <div
@@ -213,19 +221,21 @@ export default function Navbar() {
 
               {item.children && openDropdown === item.label && (
                 <div
-                  className={`absolute top-full bg-white shadow-xl border-t-[3px] border-brandSaffron z-50 ${item.children.length > 8
-                    ? "left-1/2 -translate-x-1/2 w-[680px] grid grid-cols-3 gap-0 p-2"
-                    : "left-0 min-w-[220px]"
-                    }`}
+                  className={`absolute top-full bg-white shadow-xl border-t-[3px] border-brandSaffron z-50 ${
+                    item.children.length > 8
+                      ? "left-1/2 -translate-x-1/2 w-[680px] grid grid-cols-3 gap-0 p-2"
+                      : "left-0 min-w-[220px]"
+                  }`}
                 >
                   {item.children.map((child) => (
                     <Link
                       key={child.label}
                       href={child.href}
-                      className={`block text-sm text-textmain hover:bg-brandBlue hover:text-white transition-colors ${item.children!.length > 8
-                        ? "px-4 py-2.5 rounded-md"
-                        : "px-4 py-2.5 border-b border-border/50 last:border-0"
-                        }`}
+                      className={`block text-sm text-textmain hover:bg-[#1a3a6b] hover:text-white transition-colors ${
+                        item.children!.length > 8
+                          ? "px-4 py-2.5 rounded-md"
+                          : "px-4 py-2.5 border-b border-border/50 last:border-0"
+                      }`}
                     >
                       {child.label}
                     </Link>
@@ -237,65 +247,83 @@ export default function Navbar() {
         </div>
 
         {/* ───── Mobile menu ───── */}
-        {mobileOpen && (
-          <div className="lg:hidden bg-brandBlueDark max-h-[80vh] overflow-y-auto">
-            {MENU.map((item) => (
-              <div key={item.label} className="border-b border-white/10">
-                <div className="flex items-center justify-between">
-                  <Link
-                    href={item.href}
-                    className="flex-1 px-5 py-3 text-sm font-semibold text-white"
-                    onClick={() => setMobileOpen(false)}
+        {/* Changed from absolute to block logic inside nav to push content down properly instead of overlapping */}
+        <div className={`lg:hidden w-full bg-[#1a3a6b] transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-[80vh] overflow-y-auto border-t border-white/10" : "max-h-0 overflow-hidden"
+        }`}>
+          {MENU.map((item) => (
+            <div key={item.label} className="border-b border-white/10">
+              {item.children ? (
+                <>
+                  <button
+                    className="w-full flex items-center justify-between px-5 py-3.5 text-[14px] font-semibold text-white text-left focus:outline-none"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileSubmenu(mobileSubmenu === item.label ? null : item.label);
+                    }}
                   >
                     {item.label}
-                  </Link>
-                  {item.children && (
-                    <button
-                      className="px-4 py-3 text-white/70"
-                      onClick={() =>
-                        setMobileSubmenu(mobileSubmenu === item.label ? null : item.label)
-                      }
-                    >
-                      <ChevronDown
-                        size={16}
-                        className={`transition-transform ${mobileSubmenu === item.label ? "rotate-180" : ""}`}
-                      />
-                    </button>
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform duration-300 ${
+                        mobileSubmenu === item.label ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {mobileSubmenu === item.label && (
+                    <div className="bg-black/20">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          className="block px-8 py-3 text-[13px] text-white/80 hover:text-white border-b border-white/5 last:border-0"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                </div>
-                {item.children && mobileSubmenu === item.label && (
-                  <div className="bg-brandBlue/60">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        className="block px-8 py-2.5 text-xs text-white/80 hover:text-white border-b border-white/5 last:border-0"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            <div className="flex flex-col gap-3 p-4">
-              <a href="/hospital/opd" className="nav-action-btn-mobile nav-btn-green">
-                <Clock size={15} />
-                OPD Schedule
-              </a>
-              <a href="/hospital/emergency" className="nav-action-btn-mobile nav-btn-red">
-                <ShieldAlert size={15} />
-                Emergency
-              </a>
-              <a href="/admissions" className="nav-action-btn-mobile nav-btn-saffron">
-                <FileEdit size={15} />
-                Online Registration
-              </a>
+                </>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="block px-5 py-3.5 text-[14px] font-semibold text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
             </div>
+          ))}
+
+          <div className="flex flex-col gap-3 p-5 bg-black/10">
+            <a 
+              href="/hospital/opd" 
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-green-600 hover:bg-green-700"
+              onClick={() => setMobileOpen(false)}
+            >
+              <Clock size={16} />
+              OPD Schedule
+            </a>
+            <a 
+              href="/hospital/emergency" 
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-red-600 hover:bg-red-700"
+              onClick={() => setMobileOpen(false)}
+            >
+              <ShieldAlert size={16} />
+              Emergency
+            </a>
+            <a 
+              href="/admissions" 
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600"
+              onClick={() => setMobileOpen(false)}
+            >
+              <FileEdit size={16} />
+              Online Registration
+            </a>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
