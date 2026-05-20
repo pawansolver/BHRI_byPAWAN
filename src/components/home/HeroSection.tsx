@@ -47,30 +47,30 @@ export default function HeroSection() {
   }, [next]);
 
   return (
-    <section className="relative w-full min-h-[400px] md:min-h-[440px] lg:min-h-[460px] h-[460px] overflow-hidden">
+    <section className="relative w-full h-[620px] sm:h-[550px] md:h-[500px] lg:h-[460px] overflow-hidden">
       {/* Live Hospital Stats Top-Center Overlay */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-5 bg-white/95 backdrop-blur-md border border-slate-200/60 rounded-2xl px-6 py-2.5 shadow-xl select-none min-w-[260px] justify-center transition-all duration-300">
+      <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 sm:gap-5 bg-white/95 backdrop-blur-md border border-slate-200/60 rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 shadow-xl select-none min-w-[240px] sm:min-w-[260px] justify-center transition-all duration-300">
         <div className="text-center flex-1">
-          <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Total OPD</span>
+          <span className="block text-[7px] sm:text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Total OPD</span>
           <div className="flex items-center justify-center gap-1.5 leading-none">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span className="text-[14px] font-black text-[#1a3a6b] tracking-wide">1,739</span>
+            <span className="text-[12px] sm:text-[14px] font-black text-[#1a3a6b] tracking-wide">1,739</span>
           </div>
         </div>
         
-        <div className="w-px h-8 bg-slate-200" />
+        <div className="w-px h-6 sm:h-8 bg-slate-200" />
         
         <div className="text-center flex-1">
-          <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Total IPD</span>
+          <span className="block text-[7px] sm:text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Total IPD</span>
           <div className="flex items-center justify-center gap-1.5 leading-none">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e6960a]" />
             </span>
-            <span className="text-[14px] font-black text-[#e6960a] tracking-wide">173</span>
+            <span className="text-[12px] sm:text-[14px] font-black text-[#e6960a] tracking-wide">173</span>
           </div>
         </div>
       </div>
@@ -93,36 +93,40 @@ export default function HeroSection() {
           </svg>
         </div>
 
-        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center justify-center gap-10 py-6">
-          <div className="flex-1 text-center lg:text-left">
-            <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2 justify-center lg:justify-start">
-              <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
-              सेवा परमो धर्म:
-            </p>
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 text-[#1a1a2e]">
-              Welcome to <br className="hidden md:block" />
-              <span className="text-brandBlue">Buddha Hospital</span>{" "}
-              &amp; Research Institute
-            </h1>
-            <p className="text-gray-500 text-base md:text-lg max-w-xl mb-8 mx-auto lg:mx-0 leading-relaxed">
-              A premier healthcare and medical education institution in Gaya, Bihar —
-              delivering compassionate care with modern infrastructure and expert faculty.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <SparkleButton href="#about-section">Explore More</SparkleButton>
-              <SparkleButton href="/contact">Contact Us</SparkleButton>
-            </div>
-          </div>
-          <div className="flex-shrink-0 hidden lg:block relative">
-            <div className="absolute -inset-4 rounded-full border-2 border-dashed border-brandBlue/10 animate-[spin_40s_linear_infinite]" />
+        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-10 sm:px-14 md:px-16 lg:px-10 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-10 pt-24 pb-20 sm:pt-20 lg:py-6">
+          
+          {/* Logo is now visible on mobile, positioned neatly */}
+          <div className="flex-shrink-0 relative order-first lg:order-last mb-2 lg:mb-0">
+            <div className="absolute -inset-2 lg:-inset-4 rounded-full border-2 border-dashed border-brandBlue/10 animate-[spin_40s_linear_infinite]" />
             <Image
               src="/logo.png"
               alt="BHRI Logo"
               width={220}
               height={220}
               priority
-              className="drop-shadow-xl relative z-10"
+              className="drop-shadow-xl relative z-10 w-24 h-24 sm:w-28 sm:h-28 lg:w-[220px] lg:h-[220px] object-contain"
             />
+          </div>
+
+          <div className="flex-1 text-center lg:text-left mt-2 lg:mt-0">
+            <p className="text-brandBlue font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] mb-2 md:mb-3 flex items-center gap-2 justify-center lg:justify-start">
+              <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
+              सेवा परमो धर्म:
+            </p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 md:mb-5 text-[#1a1a2e]">
+              Welcome to <br className="hidden lg:block" />
+              <span className="text-brandBlue">Buddha Hospital</span>{" "}
+              <br className="block lg:hidden" />
+              &amp; Research Institute
+            </h1>
+            <p className="text-gray-500 text-sm sm:text-base md:text-lg max-w-xl mb-6 mx-auto lg:mx-0 leading-relaxed">
+              A premier healthcare and medical education institution in Gaya, Bihar —
+              delivering compassionate care with modern infrastructure and expert faculty.
+            </p>
+            <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
+              <SparkleButton href="#about-section">Explore More</SparkleButton>
+              <SparkleButton href="/contact">Contact Us</SparkleButton>
+            </div>
           </div>
         </div>
       </div>
@@ -143,21 +147,22 @@ export default function HeroSection() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent" />
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white/90 via-white/70 md:via-white/40 to-transparent" />
+            <div className="absolute inset-0 pointer-events-none hidden md:block">
               <div className="absolute -top-16 -right-16 w-[350px] h-[350px] rounded-full border-2 border-brandBlue/10" />
               <div className="absolute bottom-8 left-[8%] w-[150px] h-[150px] rounded-full bg-brandBlue/[0.05]" />
             </div>
-            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col justify-center py-6">
+            
+            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-10 sm:px-14 md:px-16 lg:px-10 flex flex-col justify-center text-center md:text-left items-center md:items-start pt-16 md:pt-0">
               <div className="max-w-xl">
-                <p className="text-brandBlue font-bold text-xs uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+                <p className="text-brandBlue font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] mb-2 md:mb-3 flex items-center gap-2 justify-center md:justify-start">
                   <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
                   Buddha Hospital &amp; Research Institute
                 </p>
-                <h2 className="text-3xl md:text-5xl font-extrabold text-[#1a1a2e] leading-[1.1] mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1a1a2e] leading-[1.2] md:leading-[1.1] mb-3 md:mb-4">
                   {slide.title}
                 </h2>
-                <p className="text-gray-600 text-base md:text-lg max-w-md leading-relaxed">
+                <p className="text-gray-700 md:text-gray-600 text-sm sm:text-base md:text-lg max-w-md mx-auto md:mx-0 leading-relaxed">
                   {slide.subtitle}
                 </p>
               </div>
@@ -169,35 +174,38 @@ export default function HeroSection() {
       {/* ── Navigation arrows ── */}
       <button
         onClick={prev}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
+        className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
         aria-label="Previous slide"
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={20} className="sm:w-[22px] sm:h-[22px]" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
+        className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full bg-brandBlue/10 backdrop-blur-sm border border-brandBlue/20 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all"
         aria-label="Next slide"
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={20} className="sm:w-[22px] sm:h-[22px]" />
       </button>
 
       {/* ── Dot indicators ── */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+      {/* Shifted up to avoid bottom strip on mobile */}
+      <div className="absolute bottom-[80px] sm:bottom-[70px] lg:bottom-16 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2">
         {Array.from({ length: TOTAL }).map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all duration-500 ${i === current ? "w-8 bg-brandBlue" : "w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
-              }`}
+            className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
+              i === current ? "w-6 sm:w-8 bg-brandBlue" : "w-2 sm:w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
+            }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>
 
       {/* ── Slide counter ── */}
-      <div className="absolute bottom-5 right-6 md:right-10 z-10 text-gray-400 text-sm font-mono">
-        <span className="text-brandBlue font-bold text-lg">{String(current + 1).padStart(2, "0")}</span>
+      {/* Shifted up as well */}
+      <div className="absolute bottom-[76px] sm:bottom-[66px] lg:bottom-[60px] right-4 lg:right-10 z-10 text-gray-500 text-xs sm:text-sm font-mono">
+        <span className="text-brandBlue font-bold text-base sm:text-lg">{String(current + 1).padStart(2, "0")}</span>
         <span className="mx-1">/</span>
         <span>{String(TOTAL).padStart(2, "0")}</span>
       </div>
@@ -205,21 +213,21 @@ export default function HeroSection() {
       {/* ── Bottom service strip ── */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="bg-gradient-to-r from-brandBlue to-brandBlueDark">
-          <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-3 flex flex-wrap items-center justify-center gap-6 md:gap-12 text-white text-[13px]">
-            <span className="flex items-center gap-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-green-400" />
+          <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-10 py-3 flex flex-wrap items-center justify-center gap-y-2 gap-x-4 sm:gap-6 lg:gap-12 text-white text-[11px] sm:text-[12px] lg:text-[13px]">
+            <span className="flex items-center gap-1.5 sm:gap-2 font-semibold">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400" />
               24x7 Emergency
             </span>
-            <span className="flex items-center gap-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-brandSaffron" />
+            <span className="flex items-center gap-1.5 sm:gap-2 font-semibold">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandSaffron" />
               Free OPD
             </span>
-            <span className="flex items-center gap-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-blue-400" />
+            <span className="flex items-center gap-1.5 sm:gap-2 font-semibold">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-blue-400" />
               250+ Doctors
             </span>
-            <span className="flex items-center gap-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-purple-400" />
+            <span className="flex items-center gap-1.5 sm:gap-2 font-semibold">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400" />
               800+ Beds
             </span>
           </div>
