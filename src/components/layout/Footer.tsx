@@ -140,7 +140,7 @@ export default function Footer() {
                 <div key={item.label} className="border-b border-white/10 last:border-0">
                   <div className="flex items-center justify-between">
                     <Link
-                      href={item.href}
+                      href="#"
                       className="flex-1 py-2 text-[13px] font-medium text-white/70 hover:text-white transition"
                     >
                       <span className="mr-1.5 text-amber-400 font-bold">&gt;</span>
@@ -172,8 +172,8 @@ export default function Footer() {
                     >
                       {item.children.map((child) => (
                         <Link
-                          key={child.href}
-                          href={child.href}
+                          key={child.label}
+                          href="#"
                           className="flex items-center gap-1.5 text-[11px] text-white/50 hover:text-white transition py-0.5"
                         >
                           <span className="w-1 h-1 rounded-full bg-amber-400/80 flex-shrink-0" />
@@ -189,7 +189,7 @@ export default function Footer() {
 
           {/* Column 4 — About + Contact (moved to right) */}
           <div>
-            <Link href="/" className="inline-block mb-4">
+            <Link href="#" className="inline-block mb-4">
               <Image src="/logo.png" alt="BHRI" width={140} height={140} className="rounded-full bg-white p-0.5" />
             </Link>
 
@@ -223,8 +223,8 @@ export default function Footer() {
       <div className="relative z-10 border-t border-amber-500/20">
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-white/50">
           <div className="flex items-center gap-4">
-            <Link href="/terms" className="hover:text-amber-400 transition">Terms &amp; Conditions</Link>
-            <Link href="/privacy" className="hover:text-amber-400 transition">Privacy Policy</Link>
+            <Link href="#" className="hover:text-amber-400 transition">Terms &amp; Conditions</Link>
+            <Link href="#" className="hover:text-amber-400 transition">Privacy Policy</Link>
           </div>
           <span>Designed &amp; Developed by <a href="https://nighwantech.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 transition">Nighwan Technology</a> &mdash; {new Date().getFullYear()}</span>
         </div>

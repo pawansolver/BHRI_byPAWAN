@@ -593,28 +593,4 @@ li strong,
 span strong {
   color: #e6960a !important; /* Buddha Golden Saffron for bold text */
 }
-
-/* ==============================================================
-   ☸️ BUDDHA THEME HERO OVERLAYS (Faded Yellow / Saffron Theme)
-   ============================================================== */
-
-/* Apply premium faded yellow/saffron Buddha gradient to all inner page hero section overlays */
-[class*="h-[60vh]"] div[class*="bg-gradient-to-r"],
-[class*="h-[75vh]"] div[class*="bg-gradient-to-r"],
-[class*="h-[50vh]"] div[class*="bg-gradient-to-r"],
-section.relative:first-of-type div[class*="bg-gradient-to-r"] {
-  background: linear-gradient(135deg, rgba(24, 15, 2, 0.95) 0%, rgba(138, 92, 10, 0.6) 55%, rgba(245, 183, 49, 0.2) 80%, rgba(245, 183, 49, 0.05) 100%) !important;
-  opacity: 0.95 !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Home Page static hero background override - faded yellow/saffron background */
-div[class*="bg-[#eef4fb]"] {
-  background-color: #fefbeb !important;
-  background: linear-gradient(135deg, #fffbeb 0%, #fefcbf 100%) !important;
-}
-
-/* Home Page image slide overlays override - faded yellow gradient overlay */
-div.absolute.inset-0.bg-gradient-to-r[class*="from-white/"] {
-  background: linear-gradient(90deg, rgba(255, 253, 235, 0.8) 0%, rgba(254, 252, 191, 0.45) 50%, transparent 100%) !important;
-}
+
