@@ -14,6 +14,7 @@ interface Doctor {
   opdEndTime: string;
   consultationFee: number;
   availableDays: string;
+  photo?: string;
   department?: { id: number; name: string; nameHi?: string };
 }
 
@@ -132,8 +133,16 @@ export default function OPDTimetable() {
                     <tr key={doc.id} className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-blue-50 transition`}>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#1a3a6b] to-[#2d5ba0] flex items-center justify-center flex-shrink-0">
-                            <User size={16} className="text-white" />
+                          <div className="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#1a3a6b] to-[#2d5ba0] flex items-center justify-center flex-shrink-0">
+                            {doc.photo ? (
+                              <img 
+                                src={`${API_BASE.replace("/api", "")}${doc.photo}`} 
+                                alt={doc.name} 
+                                className="w-full h-full object-cover" 
+                              />
+                            ) : (
+                              <User size={16} className="text-white" />
+                            )}
                           </div>
                           <div>
                             <p className="text-sm font-bold text-gray-800">{doc.name}</p>

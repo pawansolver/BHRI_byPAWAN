@@ -279,8 +279,16 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                           : "border-gray-200 hover:border-[#1a3a6b]/30 bg-white"
                       }`}
                     >
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1a3a6b] to-[#2d5ba0] flex items-center justify-center flex-shrink-0">
-                        <User size={28} className="text-white" />
+                      <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#1a3a6b] to-[#2d5ba0] flex items-center justify-center flex-shrink-0">
+                        {doc.photo ? (
+                          <img 
+                            src={`${API_BASE.replace("/api", "")}${doc.photo}`} 
+                            alt={doc.name} 
+                            className="w-full h-full object-cover" 
+                          />
+                        ) : (
+                          <User size={28} className="text-white" />
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-bold text-gray-800 text-base !text-gray-800">{doc.name}</h4>
