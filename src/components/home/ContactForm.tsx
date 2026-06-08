@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -14,25 +14,19 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/contacts`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       let data;
       const responseText = await response.text();
       try {
         data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("Non-JSON response from server:", responseText);
+      } catch {
         throw new Error("Invalid response from server. Please check your API connection.");
       }
-
       if (response.ok) {
         alert("Thank you! Your message has been sent. We will contact you shortly.");
         setForm({ name: "", email: "", phone: "", message: "" });
@@ -48,99 +42,96 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="relative py-10 md:py-14 bg-gradient-to-br from-[#0f2557] via-[#1a3a6b] to-[#14532d] overflow-hidden">
-      {/* Medical background art */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-8 left-[5%] text-white/[0.06] text-[120px] font-black leading-none select-none">+</div>
-        <div className="absolute bottom-12 right-[8%] text-white/[0.05] text-[100px] font-black leading-none select-none">+</div>
-        <div className="absolute top-[40%] right-[3%] text-white/[0.04] text-[80px] font-black leading-none select-none">+</div>
-        <svg className="absolute bottom-0 left-0 w-full h-20 opacity-[0.08]" viewBox="0 0 1440 80" fill="none" preserveAspectRatio="none">
-          <path d="M0 40 L200 40 L230 10 L260 70 L290 20 L320 60 L350 40 L600 40 L630 15 L660 65 L690 25 L720 55 L750 40 L1000 40 L1030 10 L1060 70 L1090 20 L1120 60 L1150 40 L1440 40" stroke="#ffffff" strokeWidth="3" fill="none" />
-        </svg>
-        <div className="absolute top-[15%] left-[40%] w-[300px] h-[300px] rounded-full border border-white/[0.06]" />
-        <div className="absolute bottom-[10%] left-[20%] w-[200px] h-[200px] rounded-full border border-white/[0.05]" />
-        <div className="absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-white/10" />
-        <div className="absolute top-[60%] right-[20%] w-2.5 h-2.5 rounded-full bg-white/10" />
-        <div className="absolute top-[45%] left-[55%] w-1.5 h-1.5 rounded-full bg-white/10" />
-      </div>
+    <section id="contact-form" className="py-14 md:py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
-        <h2 className="section-heading-white">Contact Us</h2>
-        <span className="section-heading-line-white" />
+          {/* ── LEFT — Teal gradient form card ── */}
+          <div
+            className="rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-6"
+            style={{ background: "linear-gradient(145deg, #3ecfb8 0%, #1ab4a0 40%, #0e9d8c 100%)" }}
+          >
+            <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+              {/* Full name */}
+              <input
+                type="text"
+                name="name"
+                placeholder="Full name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
+              />
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 mt-6 sm:mt-8">
-          {/* Left — Contact cards (2 cols) */}
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3">
-            <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3.5 border border-white/10">
-              <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
-                <Phone size={14} className="text-brandSaffron" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-white font-bold text-[11px] sm:text-[13px]">Emergency</h4>
-                <p className="text-white/60 text-[11px] sm:text-[13px] truncate">+91 8603048174</p>
-              </div>
-            </div>
+              {/* Email */}
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
+              />
 
-            <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3.5 border border-white/10">
-              <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
-                <Mail size={14} className="text-brandSaffron" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-white font-bold text-[11px] sm:text-[13px]">Email</h4>
-                <a href="mailto:bhribodhgaya@gmail.com" className="text-white/60 text-[11px] sm:text-[13px] hover:text-white transition truncate block">BHRI@gmail.com</a>
-              </div>
-            </div>
+              {/* Phone */}
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone number"
+                value={form.phone}
+                onChange={handleChange}
+                className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
+              />
 
-            <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3.5 border border-white/10">
-              <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
-                <MapPin size={14} className="text-brandSaffron" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-white font-bold text-[11px] sm:text-[13px]">Location</h4>
-                <p className="text-white/60 text-[11px] sm:text-[13px] line-clamp-2">Gaya-Dobhi Road, Gaya</p>
-              </div>
-            </div>
-
-            <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3.5 border border-white/10">
-              <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
-                <Clock size={14} className="text-brandSaffron" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-white font-bold text-[11px] sm:text-[13px]">OPD Timing</h4>
-                <p className="text-white/60 text-[11px] sm:text-[13px] truncate">9:00 AM - 3:00 PM</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right — Form (3 cols) */}
-          <div className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6">
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-                <div>
-                  <label className="block text-[10px] sm:text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Full Name</label>
-                  <input type="text" name="name" placeholder="Your name" value={form.name} onChange={handleChange} required className="w-full px-3 sm:px-3.5 py-2 sm:py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
-                </div>
-                <div>
-                  <label className="block text-[10px] sm:text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Email</label>
-                  <input type="email" name="email" placeholder="Your email" value={form.email} onChange={handleChange} required className="w-full px-3 sm:px-3.5 py-2 sm:py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Phone</label>
-                <input type="tel" name="phone" placeholder="Your phone number" value={form.phone} onChange={handleChange} className="w-full px-3 sm:px-3.5 py-2 sm:py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition" />
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Message</label>
-                <textarea name="message" placeholder="How can we help you?" value={form.message} onChange={handleChange} rows={3} required className="w-full px-3 sm:px-3.5 py-2 sm:py-2.5 bg-[#f8fafc] border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-brandBlue focus:ring-1 focus:ring-brandBlue/30 transition resize-none" />
-              </div>
-              <button type="submit" disabled={loading} className="w-full py-2.5 sm:py-3 bg-gradient-to-r from-brandBlue to-brandBlueDark text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
-                <Send size={13} /> <span className="hidden sm:inline">{loading ? "Sending..." : "Send Message"}</span><span className="sm:hidden">{loading ? "Sending..." : "Send"}</span>
-              </button>
+              {/* Message */}
+              <input
+                type="text"
+                name="message"
+                placeholder="Your message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
+              />
             </form>
+
+            {/* Button */}
+            <button
+              type="submit"
+              form="contact-form"
+              disabled={loading}
+              className="self-start inline-flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white text-sm font-bold px-6 py-3 rounded-full transition disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
+            >
+              {loading ? "Sending..." : "Contact Us"}
+              <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                <ArrowRight size={14} className="text-gray-900" />
+              </span>
+            </button>
           </div>
+
+          {/* ── RIGHT — Doctor image ── */}
+          <div className="relative rounded-3xl overflow-hidden min-h-[380px] lg:min-h-0 shadow-md group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/contact_doctor.png"
+              alt="Doctor at BHRI"
+              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            />
+
+            {/* Play button overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-[#0ea895] hover:bg-[#0d9585] flex items-center justify-center shadow-xl cursor-pointer transition-transform hover:scale-110">
+                {/* Triangle play icon */}
+                <svg width="18" height="20" viewBox="0 0 18 20" fill="white" className="ml-1">
+                  <path d="M0 0L18 10L0 20V0Z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
   );
 }
-// Trigger HMR

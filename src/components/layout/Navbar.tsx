@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ChevronDown, Menu, X, Phone, Mail, Clock, ShieldAlert, FileEdit, Calendar } from "lucide-react";
-import AppointmentModal from "@/components/booking/AppointmentModal";
+import { ChevronDown, Menu, X, Clock, ShieldAlert, FileEdit, Calendar } from "lucide-react";
+import { useBooking } from "@/context/BookingContext";
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
   return (
@@ -120,6 +120,8 @@ const MENU: MenuItem[] = [
       { label: "Photo Gallery", href: "/gallery/photos" },
       { label: "Video Gallery", href: "/gallery/videos" },
       { label: "Events", href: "/gallery/events" },
+      { label: "Announcements", href: "/announcements" },
+      { label: "Notices", href: "/notices" },
     ],
   },
   { label: "LIBRARY", href: "/library" },
@@ -131,7 +133,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
-  const [showBooking, setShowBooking] = useState(false);
+  const { openBooking } = useBooking();
 
   return (
     <header className="w-full sticky top-0 z-50 shadow-md">
@@ -175,7 +177,7 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            <button onClick={() => setShowBooking(true)} className="nav-action-btn nav-btn-green">
+            <button onClick={openBooking} className="nav-action-btn nav-btn-green">
               <Clock size={14} />
               Appointment Booking
             </button>
@@ -222,27 +224,59 @@ export default function Navbar() {
               </Link>
 
               {item.children && openDropdown === item.label && (
-                <div
-                  className={`absolute top-full bg-white shadow-xl border-t-[3px] border-brandSaffron z-50 ${
-                    item.children.length > 8
-                      ? "left-1/2 -translate-x-1/2 w-[680px] grid grid-cols-3 gap-0 p-2"
-                      : "left-0 min-w-[220px]"
-                  }`}
-                >
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      className={`block text-sm text-textmain hover:bg-[#1a3a6b] hover:text-white transition-colors ${
-                        item.children!.length > 8
-                          ? "px-4 py-2.5 rounded-md"
-                          : "px-4 py-2.5 border-b border-border/50 last:border-0"
-                      }`}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
+                item.children.length > 8 ? (
+                  /* ── MEGA MENU (Departments) ── */
+                  <div className="fixed left-0 right-0 top-auto bg-[#0a0a0a] border-t border-white/8 shadow-2xl z-50">
+                    <div className="max-w-7xl mx-auto px-8 py-8">
+                      <div className="flex items-start gap-10">
+                        {/* Left panel */}
+                        <div className="flex-shrink-0 w-52">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/30 mb-3">Browse</p>
+                          <h3 className="text-2xl font-extrabold text-white leading-tight mb-4">{item.label}</h3>
+                          <p className="text-white/40 text-xs leading-relaxed">
+                            20 specialised departments delivering expert-led clinical care and academic excellence.
+                          </p>
+                          <div className="mt-6 h-px bg-gradient-to-r from-teal-500/50 to-transparent" />
+                          <Link href="/departments" className="mt-5 inline-flex items-center gap-2 text-teal-400 text-xs font-bold hover:text-teal-300 transition">
+                            View All <ChevronDown size={12} className="-rotate-90" />
+                          </Link>
+                        </div>
+
+                        {/* Departments grid */}
+                        <div className="flex-1 grid grid-cols-4 gap-x-4 gap-y-1">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              className="group flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-white/6 transition-all"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-teal-500/60 group-hover:bg-teal-400 flex-shrink-0 transition-colors" />
+                              <span className="text-white/60 group-hover:text-white text-[13px] font-medium transition-colors leading-snug">
+                                {child.label}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* ── STANDARD DROPDOWN ── */
+                  <div className="absolute top-full left-0 min-w-[230px] bg-[#0a0a0a] border border-white/8 shadow-2xl z-50 rounded-b-xl overflow-hidden">
+                    <div className="py-2">
+                      {item.children.map((child, idx) => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          className="flex items-center gap-3 px-5 py-3 text-white/60 hover:text-white hover:bg-white/5 transition-all text-[13px] font-medium border-b border-white/5 last:border-0"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-teal-500/50 flex-shrink-0" />
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )
               )}
             </div>
           ))}
@@ -302,7 +336,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-3 p-5 bg-black/10">
             <button 
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-green-600 hover:bg-green-700"
-              onClick={() => { setMobileOpen(false); setShowBooking(true); }}
+              onClick={() => { setMobileOpen(false); openBooking(); }}
             >
               <Clock size={16} />
               Book Appointment
@@ -330,7 +364,7 @@ export default function Navbar() {
       {/* Floating Book OPD Button - Right Side */}
       <div className="fixed right-4 bottom-6 z-[999] flex flex-col gap-2">
         <button
-          onClick={() => setShowBooking(true)}
+          onClick={openBooking}
           className="group flex items-center gap-2 px-5 py-3 bg-green-600 text-white font-bold rounded-full shadow-xl hover:bg-green-700 hover:scale-105 transition-all duration-200 animate-bounce"
           style={{ animationDuration: "2s" }}
         >
@@ -339,8 +373,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Appointment Booking Modal */}
-      <AppointmentModal isOpen={showBooking} onClose={() => setShowBooking(false)} />
     </header>
   );
 }

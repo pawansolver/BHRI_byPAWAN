@@ -1,182 +1,291 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-    Heart, Target, Eye, ShieldCheck, Users, Zap,
-    Award, CheckCircle, Star, Quote, Globe, Microscope, UserCheck
-} from "lucide-react";
-import ElectricBorder from "@/components/ui/electric-border";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Heart, ShieldCheck, Users, Zap, Award, ChevronRight, ArrowRight, Quote } from "lucide-react";
+import { useBooking } from "@/context/BookingContext";
 
-const ChairmanPage = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const slides = [
-        { title: "A Vision for Better Healthcare", desc: "Making quality healthcare accessible to all.", icon: Eye, image: "/carousel-1.png" },
-        { title: "Compassion Meets Excellence", desc: "Care that goes beyond treatment.", icon: Heart, image: "/carousel-2.png" },
-        { title: "Driven by Trust & Integrity", desc: "Building confidence in every patient.", icon: ShieldCheck, image: "/carousel-3.png" },
-        { title: "Committed to Community", desc: "Serving beyond hospital walls.", icon: Users, image: "/carousel-4.png" },
-    ];
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
-        return () => clearInterval(timer);
-    }, [slides.length]);
-
+function FloatOrb({ className }: { className?: string }) {
     return (
-        <div className="bg-white" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            {/* ===== HERO SECTION ===== */}
-            <section className="relative bg-slate-50 pt-8 pb-12 overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/40 -skew-x-12 translate-x-20" />
-                    <div className="absolute bottom-0 left-0 w-1/2 h-full bg-green-50/40 skew-x-12 -translate-x-20" />
+        <motion.div
+            className={`absolute rounded-full pointer-events-none ${className}`}
+            animate={{ y: [0, -20, 0], scale: [1, 1.07, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+    );
+}
+
+const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6, delay },
+});
+
+const highlights = [
+    { icon: Heart, title: "Patient-First", desc: "Every decision starts and ends with patient wellbeing at its core." },
+    { icon: ShieldCheck, title: "Ethical Care", desc: "Transparent, honest, and principled medical practices at all times." },
+    { icon: Zap, title: "Modern Technology", desc: "Continuous investment in the best medical equipment and systems." },
+    { icon: Users, title: "Community Focus", desc: "Health camps, rural outreach, and preventive care for all." },
+    { icon: Award, title: "Building Trust", desc: "Earning patient confidence through excellence and compassion." },
+];
+
+export default function ChairmanPage() {
+    const { openBooking } = useBooking();
+    return (
+        <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
+
+            {/* ═══════ HERO — Full bleed cinematic ═══════════════════ */}
+            <section className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+                {/* bg image */}
+                <div className="absolute inset-0">
+                    <Image src="/images/about-hospital.png" alt="Buddha Hospital & Research Institute" fill priority className="object-cover object-center" />
+                    {/* Dark cinematic overlay — keeps BHRI branding visible but creates premium dark feel */}
+                    <div className="absolute inset-0 bg-[#0a0a0a]/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-stretch">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="lg:col-span-7 flex flex-col justify-center py-4"
-                        >
-                            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight font-montserrat">
-                                Message from the <span className="text-green-600">Chairman</span>
-                            </h1>
-                            <div className="space-y-4 text-gray-700 text-sm lg:text-base leading-relaxed font-montserrat">
-                                <p>
-                                    At Buddha Hospital & Research Institute, our journey began with a simple yet powerful vision — to make quality healthcare accessible, affordable, and trustworthy for every individual.
-                                </p>
-                                <p>
-                                    Healthcare is not just about treatment; it is about care, compassion, and commitment. At BHRI, we strive to create an environment where patients feel safe, respected, and confident in the care they receive. Our team of dedicated doctors, nurses, and staff work tirelessly to uphold the highest standards of medical excellence.
-                                </p>
-                                <p>
-                                    We believe that modern healthcare must combine advanced technology with a human touch. That is why we continuously invest in infrastructure, innovation, and skilled professionals to deliver the best possible outcomes.
-                                </p>
-                                <p>
-                                    Our mission goes beyond hospital walls. We are deeply committed to serving the community through health awareness programs, rural outreach, and preventive care initiatives. Every step we take is aimed at building a healthier and stronger society.
-                                </p>
-                                <p>
-                                    As we move forward, BHRI will continue to grow as a center of excellence in healthcare and medical education. We are dedicated to earning your trust every day through transparency, integrity, and compassionate service.
-                                </p>
-                                <p className="font-medium text-green-700 mt-2">
-                                    Your health is our responsibility, and your trust is our greatest strength.
-                                </p>
-                            </div>
-                            <div className="mt-8 pt-6 border-t border-gray-200/60 flex flex-col">
-                                <span className="font-bold text-gray-900 font-montserrat">Warm regards,</span>
-                                <span className="text-green-600 font-semibold font-montserrat text-lg mt-1">Chairman</span>
-                                <span className="text-sm text-gray-500 font-montserrat">Buddha Hospital & Research Institute</span>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="lg:col-span-5 relative w-full min-h-[400px]"
-                        >
-                            <div className="w-full h-full rounded-[2rem] overflow-hidden shadow-xl border-4 border-white relative bg-gray-100">
-                                {/* Placeholder for Chairman Image */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 p-6 text-center">
-                                    <UserCheck size={48} className="mb-3 opacity-50 text-green-600" />
-                                    <p className="font-montserrat font-semibold text-sm text-gray-600">Chairman Image</p>
-                                    <p className="text-xs mt-1">Upload to /chairman.jpg</p>
-                                </div>
-                                <Image 
-                                    src="/chairman.jpg" 
-                                    alt="Chairman" 
-                                    fill 
-                                    className="object-cover object-top relative z-10" 
-                                    onError={(e) => e.currentTarget.style.opacity = '0'} 
-                                    priority
-                                />
-                            </div>
-                        </motion.div>
+                <FloatOrb className="w-96 h-96 bg-amber-500/10 blur-3xl top-1/4 right-[10%]" />
+                <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/3 right-[30%]" />
+
+                {/* Breadcrumb */}
+                <div className="absolute top-24 left-6 lg:left-12 z-20 flex items-center gap-2 text-white/40 text-xs">
+                    <Link href="/" className="hover:text-white/70 transition">Home</Link>
+                    <span>/</span>
+                    <Link href="/about/overview" className="hover:text-white/70 transition">About</Link>
+                    <span>/</span>
+                    <span className="text-amber-400">Chairman</span>
+                </div>
+
+                {/* Hero text */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9 }}
+                    className="absolute top-36 left-6 lg:left-12 z-20 max-w-2xl"
+                >
+                    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
+                        <span className="w-5 h-px bg-amber-400 inline-block" /> Message from the Chairman
+                    </p>
+                    <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight">
+                        Leading<br />with Purpose.
+                    </h1>
+                </motion.div>
+
+                {/* Bottom right quote */}
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.5 }}
+                    className="absolute bottom-16 right-6 lg:right-12 z-20 max-w-sm text-right"
+                >
+                    <p className="text-white/60 text-sm italic leading-relaxed">
+                        &ldquo;Your health is our responsibility, and your trust is our greatest strength.&rdquo;
+                    </p>
+                    <p className="text-amber-400 font-bold text-sm mt-3">— Chairman, BHRI</p>
+                </motion.div>
+            </section>
+
+            {/* ═══════ CHAIRMAN INTRO — Beige split ═══════════════════ */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh]">
+
+                {/* Left — Chairman photo */}
+                <div className="relative min-h-[500px] lg:min-h-0 overflow-hidden bg-[#111] group">
+                    <Image
+                        src="/chairman.jpg"
+                        alt="Chairman – BHRI"
+                        fill
+                        className="object-cover object-center group-hover:scale-105 transition duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/70 to-transparent" />
+                    {/* Floating name card */}
+                    <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute bottom-8 left-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4"
+                    >
+                        <p className="text-white font-extrabold text-base">Chairman</p>
+                        <p className="text-white/50 text-xs mt-0.5">Buddha Hospital &amp; Research Institute</p>
+                        <p className="text-white/35 text-[10px] mt-0.5">Bodhgaya, Bihar</p>
+                    </motion.div>
+                </div>
+
+                {/* Right — Message */}
+                <div className="bg-[#e9e6df] text-[#1a1a1a] flex items-center px-10 lg:px-16 py-20 relative overflow-hidden">
+                    <FloatOrb className="w-80 h-80 bg-amber-200/30 blur-3xl -bottom-10 -right-10" />
+                    <div className="relative z-10 max-w-lg">
+                        <div className="flex items-start gap-3 mb-8">
+                            <span className="text-2xl select-none">✻</span>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1a1a1a]/50 leading-relaxed">
+                                Buddha Hospital &amp; Research Institute<br />A Message of Vision &amp; Purpose
+                            </p>
+                        </div>
+
+                        <h2 className="text-4xl lg:text-5xl font-extrabold leading-[1.05] tracking-tight mb-8 text-[#1a1a1a]">
+                            Message from<br />the Chairman
+                        </h2>
+
+                        <div className="space-y-5 text-[#1a1a1a]/70 text-[15px] leading-relaxed">
+                            <p>
+                                At <strong className="text-[#1a1a1a]">Buddha Hospital &amp; Research Institute</strong>, our journey began with a simple yet powerful vision — to make quality healthcare accessible, affordable, and trustworthy for every individual.
+                            </p>
+                            <p>
+                                Healthcare is not just about treatment; it is about care, compassion, and commitment. Our team of dedicated doctors, nurses, and staff work tirelessly to uphold the highest standards of medical excellence.
+                            </p>
+                            <p>
+                                We believe that modern healthcare must combine advanced technology with a human touch — which is why we continuously invest in infrastructure, innovation, and skilled professionals to deliver the best possible outcomes for every patient who walks through our doors.
+                            </p>
+                            <p>
+                                Our mission goes beyond hospital walls. We are deeply committed to serving the community through health awareness programs, rural outreach, and preventive care initiatives. Every step we take is aimed at building a healthier and stronger society.
+                            </p>
+                        </div>
+
+                        {/* Signature */}
+                        <div className="mt-10 pt-8 border-t border-[#1a1a1a]/15">
+                            <p className="text-[#1a1a1a]/50 text-xs uppercase tracking-widest mb-2">Warm regards,</p>
+                            <p className="text-2xl font-extrabold text-[#1a1a1a]">Chairman</p>
+                            <p className="text-[#1a1a1a]/55 text-sm mt-1">Buddha Hospital &amp; Research Institute</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* ===== HIGHLIGHT SECTION (Short Version) ===== */}
-            <section className="py-10 lg:py-16 bg-white">
-                <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <Star className="text-green-600 mx-auto mb-4" size={32} />
-                        <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 leading-relaxed font-montserrat">
-                            At BHRI, we are committed to delivering compassionate, affordable, and high-quality healthcare.
+            {/* ═══════ QUOTE BANNER — Cinematic dark ════════════════ */}
+            <section className="relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden">
+                <FloatOrb className="w-[600px] h-[600px] bg-amber-500/7 blur-3xl -top-20 -left-20" />
+                <FloatOrb className="w-96 h-96 bg-blue-400/6 blur-3xl bottom-0 right-0" />
+
+                <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
+                    <motion.div {...fadeUp()}>
+                        <Quote size={52} className="mx-auto mb-8 text-amber-400/30 rotate-180" />
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.1] mb-8">
+                            &ldquo;Healthcare is not just a service — it is a responsibility towards humanity. At BHRI, we honor that responsibility every day.&rdquo;
                         </h2>
-                        <p className="text-base text-gray-600 font-montserrat leading-relaxed max-w-2xl mx-auto">
-                            Our focus is on patient well-being, advanced medical practices, and community service.
-                        </p>
+                        <div className="flex items-center justify-center gap-4 mt-8">
+                            <div className="w-12 h-px bg-amber-400/50" />
+                            <p className="text-amber-400 font-bold text-sm uppercase tracking-widest">Chairman, BHRI</p>
+                            <div className="w-12 h-px bg-amber-400/50" />
+                        </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* ===== KEY MESSAGE POINTS (UI Cards) ===== */}
-            <section className="py-10 lg:py-16 bg-gray-50 border-y border-gray-100">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-10">
-                        <span className="text-green-600 font-bold text-xs uppercase tracking-wider font-montserrat">Our Core Focus</span>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-2 font-montserrat">Key Highlights</h2>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                        {[
-                            { icon: Heart, title: "Patient-first", desc: "approach in every service" },
-                            { icon: ShieldCheck, title: "Ethical Care", desc: "Commitment to transparent healthcare" },
-                            { icon: Zap, title: "Modern Tech", desc: "Continuous investment in technology" },
-                            { icon: Users, title: "Community Focus", desc: "Health and outreach initiatives" },
-                            { icon: Award, title: "Building Trust", desc: "Through care and excellence" }
-                        ].map((value, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="text-center bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-green-200 transition-all duration-300 group"
+            {/* ═══════ HIGHLIGHTS — Dark cards ═══════════════════════ */}
+            <section className="bg-[#0a0a0a] py-20 lg:py-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                    <motion.div {...fadeUp()} className="mb-14">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Core Focus
+                        </p>
+                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white">Key Highlights</h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                        {highlights.map((h, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.07)}
+                                className="group bg-white/[0.04] border border-white/8 rounded-2xl p-7 hover:bg-white/[0.08] hover:border-amber-500/30 transition-all duration-300 cursor-default"
                             >
-                                <div className="w-12 h-12 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                                    <value.icon size={24} />
+                                <div className="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-5 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300">
+                                    <h.icon size={22} />
                                 </div>
-                                <h4 className="text-base font-bold text-gray-900 mb-2 font-montserrat">{value.title}</h4>
-                                <p className="text-gray-600 text-xs font-montserrat leading-relaxed">{value.desc}</p>
+                                <h4 className="font-extrabold text-white text-sm mb-2">{h.title}</h4>
+                                <p className="text-white/45 text-xs leading-relaxed">{h.desc}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ===== QUOTE SECTION (Highlight Banner) ===== */}
-            <section className="py-16 lg:py-24 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] -translate-x-1/3 translate-y-1/3" />
-                </div>
-                <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            {/* ═══════ SPLIT — Vision image + commitment text ════════ */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
+                {/* Image */}
+                <div className="relative min-h-[380px] lg:min-h-0 overflow-hidden group">
+                    <Image src="/hospital_hero_hd.png" alt="BHRI Care" fill className="object-cover object-center group-hover:scale-105 transition duration-700" />
+                    <div className="absolute inset-0 bg-[#0a0a0a]/20" />
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative"
+                        animate={{ y: [0, -8, 0] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 max-w-[200px]"
                     >
-                        <Quote size={80} className="mx-auto mb-8 text-green-500/20 rotate-180" />
-                        <h2 className="text-2xl lg:text-4xl font-medium mb-10 font-montserrat leading-relaxed mx-auto text-slate-100">
-                            "Healthcare is not just a service, it is a responsibility towards humanity. At BHRI, we honor that responsibility every day."
+                        <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">Our Commitment</p>
+                        <p className="text-white font-bold text-sm leading-tight">Serving Bihar with Excellence</p>
+                    </motion.div>
+                </div>
+
+                {/* Text */}
+                <div className="bg-[#111] flex items-center px-10 lg:px-16 py-20 relative overflow-hidden">
+                    <FloatOrb className="w-72 h-72 bg-amber-500/8 blur-3xl -bottom-10 -left-10" />
+                    <div className="relative z-10 max-w-lg">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Our Commitment
+                        </p>
+                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-[0.95] mb-7">
+                            Building a<br />Healthier Bihar.
                         </h2>
-                        <div className="w-24 h-1.5 bg-gradient-to-r from-green-500 to-emerald-400 mx-auto rounded-full" />
+                        <p className="text-white/50 text-base leading-relaxed mb-8">
+                            As BHRI continues to grow, we remain focused on building a center of excellence in healthcare and medical education — earning the trust of every patient and family through transparency, integrity, and compassionate service.
+                        </p>
+
+                        <div className="space-y-3 mb-10">
+                            {[
+                                "Advanced medical education & research",
+                                "Free community health camps",
+                                "Preventive care for rural populations",
+                                "24×7 emergency & critical care",
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-3 text-white/60 text-sm">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+
+                        <Link href="/contact"
+                            className="inline-flex items-center gap-3 bg-white text-black font-extrabold px-7 py-3.5 rounded-full text-sm hover:bg-amber-300 transition-all"
+                        >
+                            Contact Us <ArrowRight size={15} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══════ CTA ═══════════════════════════════════════════ */}
+            <section className="relative bg-[#0a0a0a] py-20 overflow-hidden">
+                <Image src="/images/about-hospital.png" alt="" fill className="object-cover object-center opacity-40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/95 via-[#0a0a0a]/80 to-[#0a0a0a]/60" />
+                <FloatOrb className="w-[500px] h-[500px] bg-amber-500/10 blur-3xl -top-20 right-0" />
+
+                <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+                    <motion.div {...fadeUp()} className="max-w-2xl">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Visit BHRI
+                        </p>
+                        <h2 className="text-4xl lg:text-6xl font-extrabold text-white leading-[0.95] mb-6">
+                            Experience care<br />built on trust.
+                        </h2>
+                        <p className="text-white/45 text-base leading-relaxed mb-10">
+                            Come visit Buddha Hospital &amp; Research Institute — a place where every patient is treated with the dignity, compassion, and clinical excellence they deserve.
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <button
+                                onClick={openBooking}
+                                className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-amber-300 transition-all"
+                            >
+                                Book Appointment <ChevronRight size={16} />
+                            </button>
+                            <Link href="/contact#contact-form"
+                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
             </section>
+
         </div>
     );
-};
-
-export default ChairmanPage;
+}

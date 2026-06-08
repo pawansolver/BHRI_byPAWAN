@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Heart, Sparkles } from "lucide-react";
 import ContactForm from "@/components/home/ContactForm";
 
 const serifFont = "'Playfair Display', serif";
@@ -14,21 +13,18 @@ export default function ContactPage() {
         <div className="bg-white min-h-screen relative overflow-hidden" style={{ fontFamily: sansFont }}>
             
             {/* HERO */}
-            <section className="relative h-[55vh] min-h-[450px] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+            <section className="relative h-[48vh] min-h-[380px] flex items-center justify-center overflow-hidden text-white">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-[#0a1b2e] to-[#041a16] mix-blend-multiply opacity-95 z-10" />
-                    <Image src="/contact_hero.png" alt="Contact Us" fill className="object-cover" priority />
+                    {/* Teal gradient overlay matching screenshot */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#006b5e]/90 via-[#00a896]/85 to-[#004d43]/92 z-10" />
+                    <Image src="/contact_bg_hospital.png" alt="Contact Us" fill className="object-cover object-center" priority />
                 </div>
-                
-                <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -mt-6">
-                    <span className="inline-flex items-center gap-2 py-1.5 px-4 bg-blue-500/10 backdrop-blur-md rounded-full font-bold tracking-widest text-[10px] uppercase border border-blue-500/30 text-blue-300 mb-6">
-                        <Heart size={12} className="text-emerald-400" /> 24/7 Clinical &amp; Academic Helpline
-                    </span>
-                    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 font-montserrat leading-tight" style={{ fontFamily: serifFont }}>
+                <div className="relative z-20 text-center px-6 max-w-3xl mx-auto">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight tracking-tight">
                         Contact Us
                     </h1>
-                    <p className="text-lg lg:text-xl text-blue-100 font-medium mb-10 leading-relaxed max-w-2xl mx-auto opacity-95">
-                        We are here to support your clinical enquiries, emergency healthcare admissions, and medical student academic applications.
+                    <p className="text-base sm:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
+                        We are here 24/7 for clinical enquiries, emergency healthcare, and academic admissions.
                     </p>
                 </div>
             </section>
@@ -110,7 +106,7 @@ export default function ContactPage() {
             </section>
 
             {/* INTEGRATED CONTACT FORM COMPONENT */}
-            <section className="border-t border-slate-100">
+            <section id="contact-form" className="border-t border-slate-100">
                 <ContactForm />
             </section>
         </div>

@@ -5,10 +5,20 @@ import { X, ChevronRight, ChevronLeft, Clock, User, Calendar, CheckCircle, Phone
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000/api";
 
-interface DeptType { id: number; name: string; nameHi: string; icon: string }
+interface DeptType { id: number; name: string; nameHi: string; icon: string; consultationFee: number }
 interface DocType { id: number; name: string; qualification: string; experience: number; opdStartTime: string; opdEndTime: string; consultationFee: number; photo: string; maxDailyPatients: number }
 interface SlotType { id: number; startTime: string; endTime: string }
-interface BookingResult { appointmentId: string; tokenNumber: number; patientName: string; date: string; time: string; status: string }
+interface BookingResult {
+  appointmentId: string;
+  tokenNumber: number;
+  patientName: string;
+  date: string;
+  time: string;
+  status: string;
+  slipUrl: string;          // PDF download URL
+  whatsappLink: string;     // wa.me pre-filled link
+  qrCodeDataUrl: string;    // base64 PNG QR code
+}
 
 function formatTime(time24: string) {
   const [h, m] = time24.split(":").map(Number);
@@ -47,9 +57,19 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
   // Date strip
   const [dateStripStart, setDateStripStart] = useState(new Date().toISOString().split("T")[0]);
 
+  // Fetch departments
+  async function fetchDepartments() {
+    try {
+      const res = await fetch(`${API_BASE}/departments`);
+      const data = await res.json();
+      if (data.success) setDepartments(data.data);
+    } catch { /* API not reachable */ }
+  }
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchDepartments();
     } else {
       document.body.style.overflow = "";
@@ -57,55 +77,59 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Fetch departments
-  const fetchDepartments = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/departments`);
-      const data = await res.json();
-      if (data.success) setDepartments(data.data);
-    } catch { /* API not reachable */ }
-  };
+  /*
+   * FUTURE DOCTOR FLOW (currently disabled as per requirement)
+   * ---------------------------------------------------------
+   * Earlier flow was:
+   * Department -> Doctor/Time -> Date/Slot -> Patient Details -> Confirmation
+   *
+   * To enable it later:
+   * 1. Restore doctor fetching by department.
+   * 2. Restore the Select Doctor UI block.
+   * 3. Fetch slots with doctorId instead of departmentId.
+   * 4. Send doctorId in appointment booking payload.
+   */
+  // useEffect(() => {
+  //   if (selectedDept) {
+  //     setDoctors([]);
+  //     setSelectedDoctor(null);
+  //     setLoading(true);
+  //     fetch(`${API_BASE}/doctors?departmentId=${selectedDept}`)
+  //       .then(r => r.json())
+  //       .then(data => { if (data.success) setDoctors(data.data); })
+  //       .catch(() => {})
+  //       .finally(() => setLoading(false));
+  //   }
+  // }, [selectedDept]);
 
-  // Fetch doctors when department selected
+  // Fetch department-level slots when department + date selected
   useEffect(() => {
-    if (selectedDept) {
-      setDoctors([]);
-      setSelectedDoctor(null);
-      setLoading(true);
-      fetch(`${API_BASE}/doctors?departmentId=${selectedDept}`)
-        .then(r => r.json())
-        .then(data => { if (data.success) setDoctors(data.data); })
-        .catch(() => {})
-        .finally(() => setLoading(false));
-    }
-  }, [selectedDept]);
-
-  // Fetch slots when doctor + date selected
-  useEffect(() => {
-    if (selectedDoctor && selectedDate) {
+    if (selectedDept && selectedDate) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSlots([]);
       setSelectedSlot(null);
       setSelectedSlotTime("");
       setLoading(true);
-      fetch(`${API_BASE}/slots?doctorId=${selectedDoctor}&date=${selectedDate}`)
+      fetch(`${API_BASE}/slots?departmentId=${selectedDept}&date=${selectedDate}`)
         .then(r => r.json())
         .then(data => { if (data.success) setSlots(data.data); })
         .catch(() => {})
         .finally(() => setLoading(false));
     }
-  }, [selectedDoctor, selectedDate]);
+  }, [selectedDept, selectedDate]);
 
   if (!isOpen) return null;
 
   const steps = [
     { num: 1, label: "Select Department" },
-    { num: 2, label: "Select Doctor/Time" },
-    { num: 3, label: "Select Date & Slot" },
-    { num: 4, label: "Patient Details" },
-    { num: 5, label: "Confirmation" },
+    { num: 2, label: "Select Date & Slot" },
+    { num: 3, label: "Patient Details" },
+    { num: 4, label: "Confirmation" },
   ];
 
   const selectedDeptData = departments.find(d => d.id === selectedDept);
+  // Future doctor flow uses this value when the disabled doctor step is restored.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selectedDoctorData = doctors.find(d => d.id === selectedDoctor);
 
   const getNext7DaysFrom = (startDate: string) => {
@@ -126,7 +150,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
   };
 
   const handleSubmitForm = async () => {
-    if (!selectedDoctor || !selectedSlot || !selectedDate) return;
+    if (!selectedDept || !selectedSlot || !selectedDate) return;
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/appointments/book`, {
@@ -142,7 +166,6 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
           aadhaar: formData.aadhaar || null,
           email: formData.email || null,
           departmentId: selectedDept,
-          doctorId: selectedDoctor,
           slotId: selectedSlot,
           date: selectedDate,
           time: selectedSlotTime,
@@ -151,7 +174,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
       const data = await res.json();
       if (data.success) {
         setBookingResult(data.data);
-        setStep(5);
+        setStep(4);
       } else {
         alert(data.message || "Booking failed. Please try again.");
       }
@@ -245,6 +268,9 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                       <span className="text-2xl block mb-2">{dept.icon}</span>
                       <span className="text-sm font-semibold text-gray-800 block leading-tight">{dept.name}</span>
                       <span className="text-[11px] text-gray-400 block mt-0.5">{dept.nameHi}</span>
+                      <span className="inline-flex mt-2 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                        ₹{Number(dept.consultationFee || 0)}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -252,8 +278,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
             </div>
           )}
 
-          {/* STEP 2: Select Doctor */}
-          {step === 2 && (
+          {/* STEP 2: Select Doctor (future flow preserved, currently disabled) */}
+          {false && step === 2 && (
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-1 !text-gray-800">
                 Select Doctor — {selectedDeptData?.name}
@@ -313,13 +339,15 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
             </div>
           )}
 
-          {/* STEP 3: Select Date & Slot */}
-          {step === 3 && (
+          {/* STEP 2: Select Date & Slot */}
+          {step === 2 && (
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 !text-gray-800">{selectedDoctorData?.name}</h3>
-                  <p className="text-sm text-gray-500">Consultation Timings</p>
+                  <h3 className="text-lg font-bold text-gray-800 !text-gray-800">{selectedDeptData?.name}</h3>
+                  <p className="text-sm text-gray-500">
+                    Consultation Fee: <span className="font-bold text-green-700">₹{Number(selectedDeptData?.consultationFee || 0)}</span>
+                  </p>
                 </div>
                 <div className="flex items-center gap-1 border border-gray-300 rounded-lg overflow-hidden">
                   <button onClick={() => {
@@ -381,7 +409,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
               ) : slots.length === 0 ? (
                 <div className="text-center py-10">
                   <p className="text-gray-500 font-medium">No slots available for selected date.</p>
-                  <p className="text-xs text-gray-400 mt-1">कोई स्लॉट उपलब्ध नहीं। Admin से slots generate करवाएं।</p>
+                  <p className="text-xs text-gray-400 mt-1">कोई स्लॉट उपलब्ध नहीं। Admin se department slots add karwayein.</p>
                 </div>
               ) : (
                 <div>
@@ -416,8 +444,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
             </div>
           )}
 
-          {/* STEP 4: Patient Details */}
-          {step === 4 && (
+          {/* STEP 3: Patient Details */}
+          {step === 3 && (
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-1 !text-gray-800">Patient Details</h3>
               <p className="text-sm text-gray-500 mb-4">मरीज की जानकारी भरें</p>
@@ -458,66 +486,110 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm resize-none" rows={3} placeholder="समस्या / लक्षण बताएं" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-400 block mb-1">Aadhaar Number (Optional)</label>
+                  <label className="text-sm font-medium text-gray-400 block mb-1">Aadhaar Number</label>
                   <input type="text" value={formData.aadhaar} onChange={(e) => setFormData({ ...formData, aadhaar: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" placeholder="आधार नंबर" />
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-400 block mb-1">Email (Optional)</label>
+                  <label className="text-sm font-medium text-gray-400 block mb-1">Email</label>
                   <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" placeholder="ईमेल" />
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" />
                 </div>
               </div>
             </div>
           )}
 
-          {/* STEP 5: Confirmation */}
-          {step === 5 && bookingResult && (
-            <div className="flex flex-col items-center justify-center py-6">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 animate-bounce">
-                <CheckCircle size={40} className="text-green-600" />
+          {/* STEP 4: Confirmation */}
+          {step === 4 && bookingResult && (
+            <div className="flex flex-col items-center justify-center py-2 sm:py-4">
+              <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-2 animate-bounce shadow-sm">
+                <CheckCircle size={32} className="text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-green-700 mb-1 !text-green-700">Appointment Confirmed!</h3>
-              <p className="text-sm text-gray-500 mb-6">अपॉइंटमेंट कन्फर्म हो गई</p>
+              <h3 className="text-xl font-bold text-green-700 mb-0.5 !text-green-700">Appointment Confirmed!</h3>
+              <p className="text-xs text-gray-500 mb-4">अपॉइंटमेंट कन्फर्म हो गई</p>
 
-              <div className="w-full max-w-sm bg-gray-50 rounded-xl border border-gray-200 p-5 space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Appointment ID</span>
-                  <span className="text-sm font-bold text-gray-800">{bookingResult.appointmentId}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Token No.</span>
-                  <span className="text-sm font-bold text-green-700">#{String(bookingResult.tokenNumber).padStart(2, "0")}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Department</span>
-                  <span className="text-sm font-semibold text-gray-800">{selectedDeptData?.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Doctor</span>
-                  <span className="text-sm font-semibold text-gray-800">{selectedDoctorData?.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Date & Time</span>
-                  <span className="text-sm font-semibold text-gray-800">{bookingResult.date} | {formatTime(bookingResult.time)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Patient</span>
-                  <span className="text-sm font-semibold text-gray-800">{bookingResult.patientName}</span>
-                </div>
-                <hr className="border-gray-200" />
-                <div className="flex justify-center">
-                  <div className="w-28 h-28 bg-white border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-[10px] text-gray-400 text-center">QR Code<br/>Will appear here</span>
+              {/* Compact Ticket Layout */}
+              <div className="w-full max-w-md bg-gray-50 rounded-xl border border-gray-200 p-3 sm:p-4 flex items-center gap-4 shadow-sm">
+                
+                {/* Details Section */}
+                <div className="flex-1 space-y-1.5 sm:space-y-2">
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Appointment ID</span>
+                    <span className="text-[13px] font-bold text-gray-800">{bookingResult.appointmentId}</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Token No.</span>
+                    <span className="text-[13px] font-bold text-green-700">#{String(bookingResult.tokenNumber).padStart(2, "0")}</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Department</span>
+                    <span className="text-[13px] font-semibold text-gray-800 text-right">{selectedDeptData?.name}</span>
+                  </div>
+                  {/* Doctor flow is disabled currently. Restore this row when doctor selection is enabled again. */}
+                  {/* <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Doctor</span>
+                    <span className="text-[13px] font-semibold text-gray-800 text-right">{selectedDoctorData?.name}</span>
+                  </div> */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Date & Time</span>
+                    <span className="text-[13px] font-semibold text-gray-800 text-right">{bookingResult.date} | {formatTime(bookingResult.time)}</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <span className="text-xs text-gray-500">Patient</span>
+                    <span className="text-[13px] font-semibold text-gray-800 text-right">{bookingResult.patientName}</span>
                   </div>
                 </div>
+
+                {/* Vertical Divider */}
+                <div className="w-px h-32 bg-gray-200 hidden sm:block"></div>
+
+                {/* QR Code Section */}
+                <div className="flex flex-col items-center justify-center flex-shrink-0">
+                  {bookingResult.qrCodeDataUrl ? (
+                    <div className="p-1.5 bg-white border border-gray-200 rounded-lg shadow-sm">
+                      <img
+                        src={bookingResult.qrCodeDataUrl}
+                        alt="QR Code"
+                        width={80}
+                        height={80}
+                        className="rounded"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 bg-white border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+                      <span className="text-[9px] text-gray-400 text-center">QR Code<br/>Loading...</span>
+                    </div>
+                  )}
+                  <span className="text-[9px] text-gray-400 mt-1.5 font-medium">Scan to Verify</span>
+                </div>
               </div>
 
-              <div className="flex gap-3 mt-6">
-                <button className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition flex items-center gap-2">
+              <div className="flex gap-3 mt-5">
+                {/* WhatsApp button */}
+                <button
+                  onClick={() => {
+                    if (bookingResult.whatsappLink) {
+                      window.open(bookingResult.whatsappLink, "_blank", "noopener,noreferrer");
+                    } else {
+                      alert("WhatsApp link not available. Please check your mobile number.");
+                    }
+                  }}
+                  className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 active:scale-95 transition-all flex items-center gap-2 shadow-md"
+                >
                   <Phone size={14} /> WhatsApp
                 </button>
-                <button className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition">
+
+                {/* Download Slip button */}
+                <button
+                  onClick={() => {
+                    if (bookingResult.slipUrl) {
+                      window.open(bookingResult.slipUrl, "_blank", "noopener,noreferrer");
+                    } else {
+                      alert("Slip URL not available.");
+                    }
+                  }}
+                  className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 active:scale-95 transition-all shadow-md"
+                >
                   Download Slip
                 </button>
               </div>
@@ -526,7 +598,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
         </div>
 
         {/* Footer Navigation */}
-        {step < 5 && (
+        {step < 4 && (
           <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between bg-gray-50 flex-shrink-0">
             <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step === 1}
               className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition disabled:opacity-40 disabled:cursor-not-allowed">
@@ -534,21 +606,20 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
             </button>
 
             <button
-              onClick={() => { if (step === 4) handleSubmitForm(); else setStep(step + 1); }}
+              onClick={() => { if (step === 3) handleSubmitForm(); else setStep(step + 1); }}
               disabled={
                 loading ||
                 (step === 1 && !selectedDept) ||
-                (step === 2 && !selectedDoctor) ||
-                (step === 3 && (!selectedDate || !selectedSlot)) ||
-                (step === 4 && (!formData.fullName || !formData.gender || !formData.age || !formData.mobile || !formData.address || !formData.symptoms))
+                (step === 2 && (!selectedDate || !selectedSlot)) ||
+                (step === 3 && (!formData.fullName || !formData.gender || !formData.age || !formData.mobile || !formData.address || !formData.symptoms))
               }
               className="flex items-center gap-1 px-6 py-2.5 text-sm font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-md">
-              {loading ? "Please wait..." : step === 4 ? "Confirm Booking" : "Next"} <ChevronRight size={16} />
+              {loading ? "Please wait..." : step === 3 ? "Confirm Booking" : "Next"} <ChevronRight size={16} />
             </button>
           </div>
         )}
 
-        {step === 5 && (
+        {step === 4 && (
           <div className="border-t border-gray-100 px-6 py-4 flex justify-center bg-gray-50 flex-shrink-0">
             <button onClick={resetAndClose} className="px-8 py-2.5 text-sm font-bold text-white bg-[#1a3a6b] rounded-lg hover:bg-[#0f2557] transition">
               Done — Close

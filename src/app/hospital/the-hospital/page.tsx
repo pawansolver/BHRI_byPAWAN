@@ -1,423 +1,370 @@
-"use client";
+﻿"use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Activity, ShieldCheck, HeartPulse, Stethoscope, Microscope, 
-    Pill, Bed, Clock, Award, Users, CheckCircle, ChevronRight,
-    Hospital, Target, PhoneCall, Globe,
-    Check
+    Activity, ShieldCheck, HeartPulse, Stethoscope, Microscope,
+    Bed, Clock, Users, ArrowRight, Plus, Minus, Phone,
+    CalendarCheck, ChevronRight, Globe, Award
 } from "lucide-react";
+import { useBooking } from "@/context/BookingContext";
+
+/* â”€â”€ Floating Orb Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+function FloatOrb({ className }: { className?: string }) {
+    return (
+        <motion.div
+            className={`absolute rounded-full pointer-events-none ${className}`}
+            animate={{ y: [0, -22, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+    );
+}
+
+/* â”€â”€ FAQ Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+function FaqItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boolean; toggle: () => void }) {
+    return (
+        <div className="border-b border-white/10 last:border-0">
+            <button className="w-full flex items-center justify-between py-5 text-left gap-4" onClick={toggle}>
+                <span className="text-base font-semibold text-white/90">{q}</span>
+                <span className="flex-shrink-0 w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-white/50">
+                    {isOpen ? <Minus size={14} /> : <Plus size={14} />}
+                </span>
+            </button>
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.p
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden text-white/50 text-sm leading-relaxed pb-5"
+                    >
+                        {a}
+                    </motion.p>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
 
 export default function HospitalPage() {
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const { openBooking } = useBooking();
 
-    const slides = [
-        { title: "Comprehensive Healthcare Services", desc: "All your medical needs under one roof.", image: "/carousel-1.png", icon: Hospital },
-        { title: "Advanced Infrastructure", desc: "Modern facilities designed for better care.", image: "/carousel-2.png", icon: Activity },
-        { title: "Expert Medical Team", desc: "Experienced professionals you can trust.", image: "/carousel-3.png", icon: Stethoscope },
-        { title: "24/7 Patient Support", desc: "Always here when you need us.", image: "/carousel-4.png", icon: Clock },
+    const fadeUp = (delay = 0) => ({
+        initial: { opacity: 0, y: 24 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6, delay },
+    });
+
+    const heroFeatures = [
+        { icon: Activity, title: "Real-Time Care", desc: "Round-the-clock acute care without delays." },
+        { icon: HeartPulse, title: "Patient-First Approach", desc: "Personalised treatment for every individual." },
+        { icon: ShieldCheck, title: "Holistic Health Monitoring", desc: "Combining medical, diagnostic, and wellness data." },
     ];
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
-        return () => clearInterval(timer);
-    }, [slides.length]);
+    const stats = [
+        { value: "300+", label: "Operational Beds" },
+        { value: "50+", label: "Specialist Doctors" },
+        { value: "24Ã—7", label: "Emergency Cover" },
+        { value: "20+", label: "Departments" },
+    ];
 
-    const scrollToOverview = () => {
-        const overviewSec = document.getElementById("overview-section") || document.getElementsByTagName("section")[1];
-        if (overviewSec) {
-            overviewSec.scrollIntoView({ behavior: "smooth" });
-        }
-    };
+    const services = [
+        { num: "01", title: "Outpatient Care", desc: "Comprehensive consultation across all specialities." },
+        { num: "02", title: "Inpatient Wards", desc: "Spacious wards with dedicated nursing care." },
+        { num: "03", title: "Critical Care", desc: "Modern ICU, NICU, and PICU facilities." },
+        { num: "04", title: "Surgical Suites", desc: "Modular operation theatres for all surgeries." },
+        { num: "05", title: "Diagnostics", desc: "Advanced labs and imaging under one roof." },
+        { num: "06", title: "Pharmacy & Support", desc: "24/7 in-house pharmacy and patient services." },
+    ];
 
+    const facilities = [
+        "Spacious Patient Wards", "Advanced ICU/NICU/PICU", "Modular Operation Theatres",
+        "Digital Imaging Suite", "24/7 Pharmacy", "Cafeteria & Mess",
+        "Ambulance Service", "Wheelchair Access",
+    ];
+
+    const faqs = [
+        { q: "What kind of hospital is BHRI?", a: "BHRI is a modern multi-speciality hospital and research institute providing comprehensive healthcare services from outpatient consultation to advanced critical care, surgery, and diagnostics â€” all under one roof in Bodhgaya, Bihar." },
+        { q: "Does BHRI offer 24/7 emergency services?", a: "Yes. Our emergency department operates 24Ã—7 with dedicated trauma care, ambulance support, and rapid response teams to handle critical medical situations at any hour." },
+        { q: "What specialities are available?", a: "BHRI covers 20+ medical specialities including General Medicine, Surgery, Cardiology, Orthopaedics, Paediatrics, Obstetrics & Gynaecology, ENT, Ophthalmology, Psychiatry, Radiology, and many more." },
+        { q: "Can patients book appointments online?", a: "Yes. Patients can book OPD appointments through our website, by phone, or directly at the hospital reception. Our online system shows available doctors and time slots in real time." },
+        { q: "Are the facilities accessible to all patients?", a: "Yes. The hospital is fully wheelchair accessible with ramps, elevators, dedicated washrooms, and patient-assist services for elderly and differently-abled patients." },
+        { q: "Does BHRI have insurance cashless tie-ups?", a: "Yes. We have cashless tie-ups with major insurance providers and TPAs. Patients can avail cashless treatment after pre-authorisation through our insurance desk." },
+    ];
 
     return (
-        <div className="bg-slate-50" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            
-            {/* ===== HERO SECTION ===== */}
-            <section className="relative h-[75vh] min-h-[500px] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent z-10" />
-                    <Image 
-                        src="/hospital_main_hero.png"
-                        alt="The Hospital"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
+        <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
+
+            {/* â•â•â•â•â•â•â• HERO â€” Full bleed cinematic â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="relative min-h-screen flex items-end pb-16 overflow-hidden">
+                <div className="absolute inset-0">
+                    <Image src="/hospital_hero_hd.png" alt="The Hospital" fill priority className="object-cover object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/55 to-[#0a0a0a]/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-transparent to-transparent" />
                 </div>
-                
-                <div className="relative z-20 container mx-auto px-6 lg:px-12 text-left max-w-6xl">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-block py-1.5 px-4 bg-white/10 backdrop-blur-md rounded-full text-white font-semibold tracking-[0.2em] text-xs mb-6 border border-white/20 uppercase font-montserrat">
-                            BHRI HOSPITAL
-                        </span>
-                        <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl font-montserrat" style={{ fontFamily: "'Playfair Display', serif" }}>
-                            The Hospital
-                        </h1>
-                        <p className="text-xl lg:text-2xl text-slate-300 font-medium max-w-2xl mb-10 leading-relaxed drop-shadow-md font-montserrat">
-                            Delivering Compassionate Care with Excellence and Trust
-                        </p>
-                        
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <motion.button 
-                                whileHover={{ scale: 1.05 }}
-                                onClick={scrollToOverview}
-                                className="px-10 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-2 max-w-xs font-montserrat"
-                            >
-                                Explore Hospital
-                            </motion.button>
+
+                <FloatOrb className="w-80 h-80 bg-amber-500/10 blur-3xl top-[30%] right-[15%]" />
+                <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/4 right-[35%]" />
+
+                {/* Top heading */}
+                <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9 }}
+                    className="absolute top-32 left-6 lg:left-12 text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight max-w-3xl z-20"
+                >
+                    Care You<br />Can Trust.
+                </motion.h1>
+
+                {/* Bottom-left feature cards */}
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9, delay: 0.4 }}
+                    className="relative z-20 flex flex-col gap-5 px-6 lg:px-12 max-w-md"
+                >
+                    {heroFeatures.map((f, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                            <div className="w-10 h-10 rounded-full bg-white/8 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <f.icon size={16} className="text-white" />
+                            </div>
+                            <div>
+                                <p className="text-white font-bold text-sm">{f.title}</p>
+                                <p className="text-white/45 text-xs leading-relaxed mt-0.5">{f.desc}</p>
+                            </div>
                         </div>
+                    ))}
+                </motion.div>
+
+                {/* Bottom-right CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.5 }}
+                    className="absolute bottom-12 right-6 lg:right-12 text-right z-20 max-w-md"
+                >
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-5 leading-tight">
+                        Modern medicine,<br />delivered with care.
+                    </h2>
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+                    >
+                        Book Appointment
+                        <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
+                            <ArrowRight size={13} />
+                        </span>
+                    </Link>
+                </motion.div>
+            </section>
+
+            {/* â•â•â•â•â•â•â• INTRO â€” Light Bold Headline â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="relative bg-[#e9e6df] text-[#1a1a1a] py-20 lg:py-28 overflow-hidden">
+                <FloatOrb className="w-72 h-72 bg-amber-100/40 blur-3xl top-0 right-1/4" />
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                    <motion.div {...fadeUp()} className="flex items-start gap-3 mb-10">
+                        <span className="text-2xl">âœ»</span>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1a1a1a]/60 max-w-xs leading-relaxed">
+                            Buddha Hospital &amp; Research Institute<br />Where care begins, healing follows.
+                        </p>
+                    </motion.div>
+
+                    <motion.h2 {...fadeUp(0.1)} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.02] tracking-tight max-w-5xl mb-12">
+                        A Modern, Compassionate Hospital â€” for People and Practitioners.
+                    </motion.h2>
+
+                    {/* 4 image cards row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
+                        {[
+                            { img: "/hospital_interior_hd.png", value: "20+", unit: "specs", title: "Departments", desc: "Multi-speciality care under one roof â€” internal medicine to surgery, paediatrics to psychiatry." },
+                            { img: "/hospital_icu_hd.png", value: "300", unit: "beds", title: "Inpatient", desc: "Spacious wards, advanced ICU/NICU/PICU and recovery suites for round-the-clock care." },
+                            { img: "/hospital_ot_hd.png", value: "12", unit: "OT", title: "Surgical Suites", desc: "Modular operation theatres with high-end equipment for complex and routine surgeries." },
+                            { img: "/hospital_hero_hd.png", value: "24Ã—7", unit: "ER", title: "Emergency", desc: "Always-on trauma and critical care, ambulance support, and rapid response teams." },
+                        ].map((card, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.08)}
+                                className="group relative aspect-[3/4] rounded-3xl overflow-hidden bg-[#1a1a1a] shadow-md cursor-default"
+                            >
+                                <Image src={card.img} alt={card.title} fill className="object-cover object-center group-hover:scale-105 transition duration-700" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/95 via-[#0a0a0a]/30 to-transparent" />
+
+                                {/* Top overlay */}
+                                <div className="absolute top-0 left-0 right-0 p-4 flex items-start justify-between">
+                                    <div>
+                                        <span className="text-white text-2xl font-extrabold">{card.value}</span>
+                                        <span className="text-white/60 text-[10px] ml-1 uppercase tracking-wider">{card.unit}</span>
+                                        <p className="text-white text-xs font-semibold mt-1">{card.title}</p>
+                                    </div>
+                                    <span className="text-white/50 text-[10px] tracking-wider">â—â—â—â—</span>
+                                </div>
+
+                                {/* Bottom desc */}
+                                <p className="absolute bottom-0 left-0 right-0 p-4 text-white/85 text-xs leading-relaxed">
+                                    {card.desc}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* â•â•â•â•â•â•â• STATS â€” Anyone Anywhere style â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="relative bg-[#e9e6df] py-16 border-t border-[#1a1a1a]/8 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                    <motion.h2 {...fadeUp()} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1a1a1a] leading-tight mb-12">
+                        Anyone. Anywhere.<br />
+                        <span className="text-[#1a1a1a]/60">300+ beds, 20+ specialities.</span>
+                    </motion.h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-[#1a1a1a]/15 pt-10">
+                        {[
+                            { icon: Activity, title: "No Long Wait Times", desc: "Streamlined admissions and triage â€” get seen faster, treated faster." },
+                            { icon: Microscope, title: "Smarter Diagnostics", desc: "Advanced labs, imaging and pathology â€” accurate results, every time." },
+                            { icon: HeartPulse, title: "Tailored to You", desc: "Personalised treatment plans built around your medical history and lifestyle." },
+                            { icon: Globe, title: "Always-On Awareness", desc: "Our team monitors patients continuously â€” proactive, not reactive." },
+                        ].map((s, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.08)} className="border-l border-[#1a1a1a]/10 pl-6 first:border-l-0 first:pl-0">
+                                <div className="w-10 h-10 mb-5 text-[#1a1a1a]/80">
+                                    <s.icon size={32} />
+                                </div>
+                                <p className="font-extrabold text-[#1a1a1a] mb-2">{s.title}</p>
+                                <p className="text-[#1a1a1a]/55 text-sm leading-relaxed">{s.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* â•â•â•â•â•â•â• DARK SERVICES â€” Compact pro grid â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
+                <FloatOrb className="w-[600px] h-[600px] bg-amber-500/8 blur-3xl -top-20 -right-20" />
+
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                    <motion.div {...fadeUp()} className="mb-14">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> What We Do
+                        </p>
+                        <h2 className="text-4xl lg:text-6xl font-extrabold leading-tight max-w-3xl">
+                            Complete care,<br />from arrival to recovery.
+                        </h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {services.map((svc, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.07)}
+                                className="group relative bg-white/[0.04] border border-white/8 rounded-2xl p-7 hover:bg-white/[0.08] hover:border-amber-500/30 transition-all duration-300 overflow-hidden cursor-default"
+                            >
+                                <FloatOrb className="w-24 h-24 bg-amber-400/8 blur-xl -top-4 -right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <p className="text-amber-400/80 text-xs font-bold uppercase tracking-widest mb-5">{svc.num}</p>
+                                <h3 className="text-xl font-extrabold text-white mb-3 leading-snug">{svc.title}</h3>
+                                <p className="text-white/45 text-sm leading-relaxed">{svc.desc}</p>
+                                <ArrowRight size={16} className="absolute bottom-7 right-7 text-white/30 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* â•â•â•â•â•â•â• SPLIT â€” Beige large image + text â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[640px]">
+                {/* Left image */}
+                <div className="relative min-h-[400px] lg:min-h-0 overflow-hidden">
+                    <Image src="/hospital_icu_hd.png" alt="ICU Care" fill className="object-cover object-center" />
+                    <div className="absolute inset-0 bg-[#0a0a0a]/15" />
+                    <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute bottom-8 left-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3"
+                    >
+                        <p className="text-white font-extrabold text-sm">Critical Care Unit</p>
+                        <p className="text-white/50 text-xs mt-0.5">Modern ICU, NICU & PICU</p>
                     </motion.div>
                 </div>
-            </section>
 
-            {/* ===== OVERVIEW (2 Column Layout) ===== */}
-            <section id="overview-section" className="pt-8 pb-16 lg:pt-10 lg:pb-20 bg-slate-50 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                {/* Right text */}
+                <div className="bg-[#d6cdb8] flex items-center px-10 lg:px-16 py-20 relative overflow-hidden">
+                    <FloatOrb className="w-96 h-96 bg-amber-200/30 blur-3xl -bottom-20 -right-10" />
+                    <div className="relative z-10 max-w-lg">
+                        <h2 className="text-5xl lg:text-7xl font-extrabold text-[#1a1a1a] leading-[0.95] mb-6">
+                            Everyone.<br />Everywhere.
+                        </h2>
+                        <p className="text-[#1a1a1a]/65 text-base leading-relaxed mb-10 max-w-md">
+                            Healthcare shouldn&apos;t be limited by income, location, or time. BHRI exists to bring world-class clinical care into the hands of every family in Bihar.
+                        </p>
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center gap-3 bg-[#1a1a1a] hover:bg-[#000] text-white font-bold px-5 py-3 rounded-full text-sm transition-all"
                         >
-                            <span className="text-green-600 font-bold text-sm uppercase tracking-wider font-montserrat">Overview</span>
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2 mb-6 font-montserrat leading-tight">
-                                A Legacy of <span className="text-green-600">Care</span>
-                            </h2>
-                            <div className="space-y-4 text-slate-600 leading-relaxed font-montserrat text-[15px]">
-                                <p>
-                                    <strong className="text-slate-800">Buddha Hospital & Research Institute (BHRI)</strong> is a modern multi-speciality healthcare institution committed to providing high-quality, affordable, and patient-centered medical services. Located in Gaya, BHRI is designed to meet the growing healthcare needs of the region by combining advanced medical technology with a compassionate approach to care.
-                                </p>
-                                <p>
-                                    Our hospital serves as a trusted destination for patients seeking reliable diagnosis, effective treatment, and continuous support throughout their healthcare journey.
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <div className="bg-white p-8 lg:p-10 rounded-[2rem] border border-slate-100 shadow-xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 p-6 opacity-5 text-green-600 transform group-hover:scale-110 transition-transform duration-500">
-                                    <Hospital size={120} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-6 font-montserrat relative z-10 flex items-center gap-3">
-                                    <ShieldCheck className="text-green-500" />
-                                    About the Hospital
-                                </h3>
-                                <div className="space-y-4 text-slate-600 leading-relaxed font-montserrat text-[15px] relative z-10">
-                                    <p>
-                                        BHRI is built with the vision of creating a comprehensive healthcare ecosystem where patients receive complete care under one roof. From outpatient consultations to advanced critical care services, our hospital is equipped to handle a wide range of medical conditions with precision and efficiency.
-                                    </p>
-                                    <p>
-                                        We focus on maintaining the highest standards of safety, hygiene, and patient satisfaction. Our team of experienced doctors, nurses, and healthcare professionals work together to ensure every patient receives personalized attention and quality treatment.
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
+                            Get In Touch
+                            <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
+                                <ArrowRight size={13} />
+                            </span>
+                        </Link>
                     </div>
                 </div>
             </section>
 
-            {/* ===== STATS COUNTER ROW (Hospital Highlights) ===== */}
-            <section className="py-12 lg:py-16 bg-white border-y border-slate-100 relative">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8 text-center">
-                        {[
-                            { icon: Hospital, text: "Multi-speciality", count: "50+" },
-                            { icon: Stethoscope, text: "Experienced Doctors", count: "100+" },
-                            { icon: Microscope, text: "Advanced Diagnostics", count: "24/7" },
-                            { icon: Activity, text: "Emergency Services", count: "24x7" },
-                            { icon: Bed, text: "Well-equipped ICUs", count: "200+" },
-                            { icon: Pill, text: "In-house Pharmacy", count: "100%" }
-                        ].map((stat, idx) => (
-                            <motion.div 
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="flex flex-col items-center group"
+            {/* â•â•â•â•â•â•â• FACILITIES â€” Dark pill grid â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="bg-[#0a0a0a] py-24 lg:py-28 relative overflow-hidden">
+                <FloatOrb className="w-96 h-96 bg-blue-400/5 blur-3xl top-0 left-0" />
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                    <motion.div {...fadeUp()} className="mb-12">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Infrastructure
+                        </p>
+                        <h2 className="text-4xl lg:text-5xl font-extrabold">Facilities &amp; Amenities</h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {facilities.map((f, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.05)}
+                                className="flex items-center gap-3 bg-white/[0.04] border border-white/8 rounded-xl px-5 py-4 hover:bg-white/[0.08] hover:border-amber-500/25 transition-all group"
                             >
-                                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-4 border border-slate-100 text-green-600 group-hover:bg-green-600 group-hover:text-white group-hover:border-green-600 transition-all duration-300 shadow-sm">
-                                    <stat.icon size={26} />
-                                </div>
-                                <div className="text-2xl lg:text-3xl font-bold font-montserrat text-slate-900 mb-1">{stat.count}</div>
-                                <div className="text-[10px] lg:text-xs font-semibold text-slate-500 font-montserrat uppercase tracking-wider">{stat.text}</div>
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 group-hover:scale-150 transition-transform flex-shrink-0" />
+                                <span className="text-white/70 group-hover:text-white text-sm font-medium transition-colors">{f}</span>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Stats strip below */}
+                    <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        {stats.map((s, i) => (
+                            <motion.div key={i} {...fadeUp(i * 0.06)}
+                                className="bg-white/[0.04] border border-white/8 rounded-2xl px-6 py-7 hover:bg-white/[0.08] hover:border-amber-500/30 transition-all"
+                            >
+                                <p className="text-3xl lg:text-4xl font-extrabold text-white">{s.value}</p>
+                                <p className="text-white/45 text-xs mt-1.5 uppercase tracking-wider">{s.label}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ===== OBJECTIVES (Icon Cards) ===== */}
-            <section className="py-16 lg:py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <span className="text-green-600 font-bold text-sm uppercase tracking-wider font-montserrat">Our Mission</span>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2 font-montserrat">Core Objectives</h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-center">
-                        {[
-                            { icon: Users, title: "Accessible & Affordable", desc: "To provide accessible and affordable healthcare to all sections of society." },
-                            { icon: ShieldCheck, title: "Safety & Care", desc: "To maintain high standards of patient safety, hygiene, and care." },
-                            { icon: Activity, title: "Timely Diagnosis", desc: "To deliver timely and accurate diagnosis for effective treatment." },
-                            { icon: HeartPulse, title: "Ethical Practices", desc: "To ensure ethical, transparent, and patient-first medical practices." },
-                            { icon: Target, title: "Continuous Innovation", desc: "To continuously improve through advanced technology and innovation." }
-                        ].map((obj, idx) => (
-                            <motion.div 
-                                key={idx}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="bg-slate-50 p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl hover:bg-white hover:border-green-200 transition-all group"
-                            >
-                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 text-green-600 shadow-sm group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                                    <obj.icon size={28} />
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-3 font-montserrat">{obj.title}</h3>
-                                <p className="text-slate-600 text-sm leading-relaxed font-montserrat">{obj.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
+            {/* â•â•â•â•â•â•â• FAQ â€” Image left + Accordion right â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[640px]">
+                <div className="relative min-h-[400px] lg:min-h-0 hidden lg:block overflow-hidden">
+                    <Image src="/hospital_ot_hd.png" alt="" fill className="object-cover object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/60" />
                 </div>
-            </section>
-
-            {/* ===== INFRASTRUCTURE (Image + Text) ===== */}
-            <section className="py-16 lg:py-24 bg-slate-50 border-y border-slate-200">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="order-2 lg:order-1 relative h-[400px] lg:h-[500px] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white"
-                        >
-                            <Image 
-                                src="/carousel-2.png"
-                                alt="Hospital Infrastructure"
-                                fill
-                                className="object-cover"
-                                onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                    e.currentTarget.parentElement!.style.backgroundColor = '#e2e8f0';
-                                }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="order-1 lg:order-2"
-                        >
-                            <span className="text-green-600 font-bold text-sm uppercase tracking-wider font-montserrat">Facilities</span>
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2 mb-6 font-montserrat leading-tight">
-                                Modern Infrastructure
-                            </h2>
-                            <p className="text-slate-600 mb-8 leading-relaxed font-montserrat text-lg">
-                                BHRI is equipped with modern infrastructure designed to provide comfort, safety, and efficiency in healthcare delivery.
-                            </p>
-                            
-                            <ul className="space-y-4">
-                                {[
-                                    "Spacious and clean patient wards",
-                                    "Advanced ICU, NICU, and PICU units",
-                                    "Modular operation theatres",
-                                    "Digital diagnostic and imaging facilities",
-                                    "Comfortable waiting and consultation areas",
-                                    "24/7 pharmacy and emergency support"
-                                ].map((item, idx) => (
-                                    <li key={idx} className="flex items-start gap-4 p-3 bg-white rounded-xl shadow-sm border border-slate-100 hover:border-green-200 transition-colors">
-                                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <Check size={14} strokeWidth={3} />
-                                        </div>
-                                        <span className="text-slate-700 font-montserrat font-medium">{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ===== TEAM & PATIENT CARE & COMMUNITY (Split Layout) ===== */}
-            <section className="py-16 lg:py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        
-                        {/* Team */}
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                            className="bg-slate-50 p-8 lg:p-10 rounded-[2rem] shadow-sm border border-slate-100"
-                        >
-                            <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                                <Stethoscope size={28} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 font-montserrat">Our Medical Team</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed font-montserrat mb-4">
-                                Our hospital is supported by a team of highly qualified and experienced doctors across multiple specialties. Along with skilled nursing staff and trained technicians, we ensure that patients receive comprehensive and coordinated care.
-                            </p>
-                            <p className="text-slate-600 text-sm leading-relaxed font-montserrat font-medium">
-                                We believe that the strength of a hospital lies in its people, and at BHRI, our team is dedicated to serving with professionalism and compassion.
-                            </p>
-                        </motion.div>
-
-                        {/* Patient Care */}
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                            className="bg-slate-50 p-8 lg:p-10 rounded-[2rem] shadow-sm border border-slate-100"
-                        >
-                            <div className="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                                <HeartPulse size={28} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 font-montserrat">Patient-Centered Care</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed font-montserrat mb-6">
-                                At BHRI, patients are at the center of everything we do. We focus on:
-                            </p>
-                            <ul className="space-y-3 mb-6">
-                                {["Personalized treatment plans", "Clear communication", "Comfortable & safe environment", "Quick & efficient service"].map((i, k) => (
-                                    <li key={k} className="flex items-center gap-3 text-sm text-slate-700 font-montserrat font-medium">
-                                        <div className="w-2 h-2 bg-green-500 rounded-full" /> {i}
-                                    </li>
-                                ))}
-                            </ul>
-                            <p className="text-green-700 text-sm leading-relaxed font-montserrat font-semibold italic">
-                                Our aim is to make every patient feel cared for, respected, and supported.
-                            </p>
-                        </motion.div>
-
-                        {/* Community */}
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                            className="bg-slate-50 p-8 lg:p-10 rounded-[2rem] shadow-sm border border-slate-100"
-                        >
-                            <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                                <Globe size={28} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 font-montserrat">Community Commitment</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed font-montserrat mb-6">
-                                We extend our services beyond hospital walls by organizing:
-                            </p>
-                            <ul className="space-y-3 mb-6">
-                                {["Health awareness programs", "Free medical camps", "Preventive health initiatives", "Rural outreach services"].map((i, k) => (
-                                    <li key={k} className="flex items-center gap-3 text-sm text-slate-700 font-montserrat font-medium">
-                                        <div className="w-2 h-2 bg-purple-500 rounded-full" /> {i}
-                                    </li>
-                                ))}
-                            </ul>
-                            <p className="text-purple-700 text-sm leading-relaxed font-montserrat font-semibold italic">
-                                Our goal is to improve the overall health and well-being of the community.
-                            </p>
-                        </motion.div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* ===== WHY CHOOSE US (Grid) ===== */}
-            <section className="py-16 lg:py-24 bg-slate-900 text-white relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-600/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-                </div>
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-12 lg:mb-16">
-                        <span className="text-green-400 font-bold text-sm uppercase tracking-wider font-montserrat">Excellence</span>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-white mt-2 font-montserrat">Why Our Hospital Stands Out</h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                        {[
-                            { title: "Trusted Provider", text: "Trusted healthcare provider in Gaya." },
-                            { title: "Modern Facilities", text: "Modern infrastructure and advanced facilities." },
-                            { title: "Expert Team", text: "Dedicated and experienced medical team." },
-                            { title: "Transparent", text: "Affordable and transparent services." },
-                            { title: "Quality Focus", text: "Focus on quality, safety, and patient satisfaction." }
-                        ].map((item, idx) => (
-                            <motion.div 
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }}
-                                className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-3xl border border-slate-700 hover:border-green-500/50 transition-colors text-center"
-                            >
-                                <Award className="mx-auto text-green-400 mb-4" size={32} />
-                                <h4 className="font-bold font-montserrat text-lg mb-2">{item.title}</h4>
-                                <p className="text-sm text-slate-300 font-montserrat leading-relaxed">{item.text}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ===== CAROUSEL ===== */}
-            <section className="py-10 lg:py-12 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-6">
-                        <span className="text-green-600 font-bold text-sm uppercase tracking-wider font-montserrat">Gallery</span>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-1 font-montserrat">A Glimpse of Care</h2>
-                    </div>
-                    <div className="rounded-[2rem] overflow-hidden relative min-h-[320px] lg:min-h-[400px] shadow-2xl bg-slate-900 border-4 border-slate-100">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentSlide}
-                                initial={{ opacity: 0, scale: 1.02 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 1 }}
-                                className="absolute inset-0"
-                            >
-                                <Image
-                                    src={slides[currentSlide].image}
-                                    alt={slides[currentSlide].title}
-                                    fill
-                                    className="object-cover opacity-60 mix-blend-overlay"
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        e.currentTarget.parentElement!.style.backgroundColor = '#1e293b';
-                                    }}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
-
-                                <div className="relative z-10 h-full flex flex-col justify-end items-center p-6 lg:p-10 text-center pb-16">
-                                    <motion.div
-                                        initial={{ y: 30, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 0.3, duration: 0.8 }}
-                                    >
-                                        <div className="flex justify-center mb-4">
-                                            <div className="w-12 h-12 bg-green-600/90 backdrop-blur-md rounded-xl flex items-center justify-center shadow-xl border border-white/20">
-                                                {React.createElement(slides[currentSlide].icon, { size: 24, className: 'text-white' })}
-                                            </div>
-                                        </div>
-                                        <h3 className="text-2xl lg:text-4xl font-bold mb-3 font-montserrat text-white leading-tight drop-shadow-lg">
-                                            {slides[currentSlide].title}
-                                        </h3>
-                                        <p className="text-green-50 text-sm lg:text-base max-w-2xl mx-auto font-montserrat drop-shadow-md">
-                                            {slides[currentSlide].desc}
-                                        </p>
-                                    </motion.div>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-3">
-                            {slides.map((_, i) => (
-                                <button
+                <div className="bg-[#111] flex flex-col justify-center px-8 lg:px-14 py-20 relative overflow-hidden">
+                    <FloatOrb className="w-72 h-72 bg-amber-500/8 blur-3xl -top-10 -left-10" />
+                    <div className="relative z-10 max-w-2xl">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Quick Answers
+                        </p>
+                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-10 leading-tight">Hospital FAQs</h2>
+                        <div className="space-y-0">
+                            {faqs.map((faq, i) => (
+                                <FaqItem
                                     key={i}
-                                    onClick={() => setCurrentSlide(i)}
-                                    className={`h-1.5 transition-all duration-500 rounded-full ${i === currentSlide ? 'w-10 bg-green-500' : 'w-3 bg-white/40 hover:bg-white/70'}`}
+                                    q={faq.q}
+                                    a={faq.a}
+                                    isOpen={openFaq === i}
+                                    toggle={() => setOpenFaq(openFaq === i ? null : i)}
                                 />
                             ))}
                         </div>
@@ -425,29 +372,31 @@ export default function HospitalPage() {
                 </div>
             </section>
 
-            {/* ===== CALL TO ACTION ===== */}
-            <section className="py-16 lg:py-20 bg-slate-900 text-white relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-600/20 rounded-full blur-[120px]" />
-                    <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 mix-blend-overlay" />
-                </div>
-                <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <h2 className="text-3xl lg:text-4xl font-bold mb-6 font-montserrat leading-tight text-white">
-                            Experience healthcare that prioritizes your well-being.
-                        </h2>
-                        <p className="text-lg lg:text-xl text-slate-300 font-medium mb-10 font-montserrat">
-                            Visit BHRI and take a step towards better health.
+            {/* â•â•â•â•â•â•â• CTA â€” Final cinematic call â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+            <section className="relative min-h-[520px] flex items-center overflow-hidden">
+                <Image src="/hospital_hero_hd.png" alt="" fill className="object-cover object-center opacity-40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/95 via-[#0a0a0a]/75 to-[#0a0a0a]/40" />
+                <FloatOrb className="w-[600px] h-[600px] bg-amber-500/10 blur-3xl -top-40 right-0" />
+
+                <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20">
+                    <motion.div {...fadeUp()}>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400" /> Ready to Help
                         </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <button className="px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition-colors shadow-lg shadow-green-500/30 flex items-center justify-center gap-2 font-montserrat">
-                                <PhoneCall size={20} />
-                                Contact Us Today
-                            </button>
+                        <h2 className="text-4xl lg:text-7xl font-extrabold text-white leading-[0.95] mb-6 max-w-3xl">
+                            Backed by Care.<br />
+                            Built for You.
+                        </h2>
+                        <p className="text-white/45 text-base leading-relaxed mb-10 max-w-lg">
+                            Walk in, schedule a consultation, or call our 24Ã—7 helpline. Our specialists are ready to deliver the care you and your family deserve.
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <button onClick={openBooking} className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-amber-300 transition-all"><CalendarCheck size={16} /> Book Appointment</button>
+                            <a href="tel:+918603048174"
+                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                            >
+                                <Phone size={16} /> +91 8603048174
+                            </a>
                         </div>
                     </motion.div>
                 </div>
@@ -456,3 +405,4 @@ export default function HospitalPage() {
         </div>
     );
 }
+

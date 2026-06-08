@@ -239,6 +239,20 @@ body {
   animation: marquee 20s linear infinite;
 }
 
+/* Vertical auto-scroll (ticker) for Announcements / Events boxes */
+@keyframes vScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.animate-vscroll {
+  animation: vScroll 22s linear infinite;
+}
+
+.animate-vscroll:hover {
+  animation-play-state: paused;
+}
+
 @keyframes sparkle {
   0%, 100% {
     opacity: 0.75;
@@ -593,4 +607,4 @@ li strong,
 span strong {
   color: #e6960a !important; /* Buddha Golden Saffron for bold text */
 }
-
+
