@@ -54,8 +54,10 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
     fullName: "", gender: "", age: "", mobile: "", address: "", symptoms: "", aadhaar: "", email: "",
   });
 
-  // Date strip
-  const [dateStripStart, setDateStripStart] = useState(new Date().toISOString().split("T")[0]);
+  // Date strip — use local date (not UTC) to avoid IST timezone offset issues
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const [dateStripStart, setDateStripStart] = useState(todayStr);
 
   // Fetch departments
   async function fetchDepartments() {
@@ -132,6 +134,13 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selectedDoctorData = doctors.find(d => d.id === selectedDoctor);
 
+  const toLocalDateString = (d: Date) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
+
   const getNext7DaysFrom = (startDate: string) => {
     const days = [];
     const start = new Date(startDate + "T00:00:00");
@@ -139,7 +148,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
       const d = new Date(start);
       d.setDate(start.getDate() + i);
       days.push({
-        date: d.toISOString().split("T")[0],
+        date: toLocalDateString(d),
         dayName: d.toLocaleDateString("en-IN", { weekday: "short" }),
         dayNum: d.getDate(),
         monthShort: d.toLocaleDateString("en-IN", { month: "short" }),
@@ -351,8 +360,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 </div>
                 <div className="flex items-center gap-1 border border-gray-300 rounded-lg overflow-hidden">
                   <button onClick={() => {
-                    const d = new Date(dateStripStart); d.setDate(d.getDate() - 7);
-                    setDateStripStart(d.toISOString().split("T")[0]);
+                    const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() - 7);
+                    setDateStripStart(toLocalDateString(d));
                   }} className="p-2 hover:bg-gray-100 transition">
                     <ChevronLeft size={16} className="text-gray-600" />
                   </button>
@@ -361,8 +370,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                     className="text-sm font-medium text-gray-700 border-none outline-none px-1 py-1.5 w-[130px]"
                   />
                   <button onClick={() => {
-                    const d = new Date(dateStripStart); d.setDate(d.getDate() + 7);
-                    setDateStripStart(d.toISOString().split("T")[0]);
+                    const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() + 7);
+                    setDateStripStart(toLocalDateString(d));
                   }} className="p-2 hover:bg-gray-100 transition">
                     <ChevronRight size={16} className="text-gray-600" />
                   </button>
@@ -372,8 +381,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
               {/* Horizontal Date Strip */}
               <div className="flex items-center gap-0 mb-5">
                 <button onClick={() => {
-                  const d = new Date(dateStripStart); d.setDate(d.getDate() - 7);
-                  setDateStripStart(d.toISOString().split("T")[0]);
+                  const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() - 7);
+                  setDateStripStart(toLocalDateString(d));
                 }} className="p-1.5 hover:bg-gray-100 rounded transition flex-shrink-0">
                   <ChevronLeft size={18} className="text-gray-500" />
                 </button>
@@ -391,8 +400,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                   ))}
                 </div>
                 <button onClick={() => {
-                  const d = new Date(dateStripStart); d.setDate(d.getDate() + 7);
-                  setDateStripStart(d.toISOString().split("T")[0]);
+                  const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() + 7);
+                  setDateStripStart(toLocalDateString(d));
                 }} className="p-1.5 hover:bg-gray-100 rounded transition flex-shrink-0">
                   <ChevronRight size={18} className="text-gray-500" />
                 </button>

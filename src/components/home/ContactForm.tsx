@@ -42,7 +42,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact-form" className="py-14 md:py-20 bg-white">
+    <section className="py-14 md:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
 
@@ -51,7 +51,7 @@ export default function ContactForm() {
             className="rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-6"
             style={{ background: "linear-gradient(145deg, #3ecfb8 0%, #1ab4a0 40%, #0e9d8c 100%)" }}
           >
-            <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 flex-1">
               {/* Full name */}
               <input
                 type="text"
@@ -94,20 +94,19 @@ export default function ContactForm() {
                 required
                 className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
               />
-            </form>
 
-            {/* Button */}
-            <button
-              type="submit"
-              form="contact-form"
-              disabled={loading}
-              className="self-start inline-flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white text-sm font-bold px-6 py-3 rounded-full transition disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
-            >
-              {loading ? "Sending..." : "Contact Us"}
-              <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                <ArrowRight size={14} className="text-gray-900" />
-              </span>
-            </button>
+              {/* Button — inside the form so submit works correctly */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="self-start inline-flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white text-sm font-bold px-6 py-3 rounded-full transition disabled:opacity-60 disabled:cursor-not-allowed shadow-md mt-2"
+              >
+                {loading ? "Sending..." : "Contact Us"}
+                <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <ArrowRight size={14} className="text-gray-900" />
+                </span>
+              </button>
+            </form>
           </div>
 
           {/* ── RIGHT — Doctor image ── */}
