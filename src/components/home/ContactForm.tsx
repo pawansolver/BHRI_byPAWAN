@@ -117,16 +117,6 @@ export default function ContactForm() {
               alt="Doctor at BHRI"
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
             />
-
-            {/* Play button overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 rounded-full bg-[#0ea895] hover:bg-[#0d9585] flex items-center justify-center shadow-xl cursor-pointer transition-transform hover:scale-110">
-                {/* Triangle play icon */}
-                <svg width="18" height="20" viewBox="0 0 18 20" fill="white" className="ml-1">
-                  <path d="M0 0L18 10L0 20V0Z" />
-                </svg>
-              </div>
-            </div>
           </div>
 
         </div>

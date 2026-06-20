@@ -93,7 +93,7 @@ export default function SportsGymnasiumPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-rose-600 font-bold text-sm uppercase tracking-widest mb-3 block">Fitness Arenas</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Interactive Sports Arenas</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Interactive Sports Arenas</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Select any wellness sector to view specific gym brands, timing windows, and standard court dimensions configured within our green campus.
                         </p>
@@ -190,7 +190,7 @@ export default function SportsGymnasiumPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-rose-400 font-bold text-sm uppercase tracking-widest mb-3 block">Annual Tournaments</span>
-                            <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight font-montserrat" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 Inter-Batch Athletic Championships
                             </h2>
                             <p className="text-slate-400 text-sm leading-relaxed mb-8">

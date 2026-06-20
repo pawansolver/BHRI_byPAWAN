@@ -85,7 +85,7 @@ export default function ProgrammesPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-indigo-600 font-bold text-sm uppercase tracking-widest mb-3 block">Eligibility Matrix</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Intake &amp; Admission Guidelines</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Intake &amp; Admission Guidelines</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">

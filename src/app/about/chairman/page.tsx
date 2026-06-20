@@ -124,7 +124,7 @@ export default function ChairmanPage() {
                             </p>
                         </div>
 
-                        <h2 className="text-4xl lg:text-5xl font-extrabold leading-[1.05] tracking-tight mb-8 text-[#1a1a1a]">
+                        <h2 className="section-heading">
                             Message from<br />the Chairman
                         </h2>
 
@@ -161,7 +161,7 @@ export default function ChairmanPage() {
                 <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
                     <motion.div {...fadeUp()}>
                         <Quote size={52} className="mx-auto mb-8 text-amber-400/30 rotate-180" />
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.1] mb-8">
+                        <h2 className="section-heading-white">
                             &ldquo;Healthcare is not just a service — it is a responsibility towards humanity. At BHRI, we honor that responsibility every day.&rdquo;
                         </h2>
                         <div className="flex items-center justify-center gap-4 mt-8">
@@ -180,7 +180,7 @@ export default function ChairmanPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Core Focus
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white">Key Highlights</h2>
+                        <h2 className="section-heading-white">Key Highlights</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
@@ -222,7 +222,7 @@ export default function ChairmanPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Our Commitment
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-[0.95] mb-7">
+                        <h2 className="section-heading-white">
                             Building a<br />Healthier Bihar.
                         </h2>
                         <p className="text-white/50 text-base leading-relaxed mb-8">
@@ -263,7 +263,7 @@ export default function ChairmanPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Visit BHRI
                         </p>
-                        <h2 className="text-4xl lg:text-6xl font-extrabold text-white leading-[0.95] mb-6">
+                        <h2 className="section-heading-white">
                             Experience care<br />built on trust.
                         </h2>
                         <p className="text-white/45 text-base leading-relaxed mb-10">
@@ -272,7 +272,7 @@ export default function ChairmanPage() {
                         <div className="flex flex-wrap gap-4">
                             <button
                                 onClick={openBooking}
-                                className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-amber-300 transition-all"
+                                className="btn-inverse"
                             >
                                 Book Appointment <ChevronRight size={16} />
                             </button>

@@ -63,7 +63,7 @@ export default function StudentDetailsPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-blue-600 font-bold text-sm uppercase tracking-widest mb-3 block">Student Batches</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Institutional Admissions Directory</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Institutional Admissions Directory</h2>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

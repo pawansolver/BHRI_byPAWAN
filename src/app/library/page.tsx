@@ -159,7 +159,7 @@ export default function LibraryPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-indigo-600 font-bold text-sm uppercase tracking-widest mb-3 block">Library Sectors</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Core Learning Wings</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Core Learning Wings</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click on any of the library zones below to browse their specific equipment, reading capacities, and access timetables.
                         </p>
@@ -251,7 +251,7 @@ export default function LibraryPage() {
 
                     <div className="text-center mb-16">
                         <span className="text-indigo-600 font-bold text-sm uppercase tracking-widest mb-3 block">Catalog Finder</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Reference Book Catalog</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Reference Book Catalog</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Query our physical catalog immediately. Toggle by medical subjects to search shelf indexes and active lending availabilities.
                         </p>

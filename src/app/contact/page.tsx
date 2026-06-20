@@ -35,7 +35,7 @@ export default function ContactPage() {
                     
                     <div className="text-center mb-16">
                         <span className="text-blue-600 font-bold text-sm uppercase tracking-widest mb-3 block">Reach Out</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Location &amp; Highlights</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Location &amp; Highlights</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Locate Buddha Hospital &amp; Research Institute on Gaya-Dobhi Road. Browse campus captures and navigate using the interactive map interface below.
                         </p>

@@ -212,9 +212,9 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
     <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={resetAndClose} />
 
-      <div className="relative w-[95%] max-w-[900px] max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-[98%] sm:w-[95%] max-w-[900px] h-[95vh] sm:h-auto sm:max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#1a3a6b] to-[#2d5ba0] px-6 py-4 flex items-center justify-between flex-shrink-0">
+        <div className="bg-gradient-to-r from-[#1a3a6b] to-[#2d5ba0] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
               <Calendar size={20} className="text-white" />
@@ -230,7 +230,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
         </div>
 
         {/* Step Progress */}
-        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 flex-shrink-0">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100 bg-gray-50 flex-shrink-0">
           <div className="flex items-center justify-between max-w-[600px] mx-auto">
             {steps.map((s, i) => (
               <div key={s.num} className="flex items-center">
@@ -253,7 +253,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
 
           {/* STEP 1: Select Department */}
           {step === 1 && (
@@ -263,12 +263,12 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
               {departments.length === 0 ? (
                 <div className="text-center py-10 text-gray-400">Loading departments...</div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                   {departments.map((dept) => (
                     <button
                       key={dept.id}
                       onClick={() => setSelectedDept(dept.id)}
-                      className={`p-4 rounded-xl border-2 transition-all duration-200 text-left hover:shadow-md ${
+                      className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 text-left hover:shadow-md ${
                         selectedDept === dept.id
                           ? "border-green-500 bg-green-50 shadow-md"
                           : "border-gray-200 hover:border-[#1a3a6b]/30 bg-white"
@@ -358,16 +358,16 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                     Consultation Fee: <span className="font-bold text-green-700">₹{Number(selectedDeptData?.consultationFee || 0)}</span>
                   </p>
                 </div>
-                <div className="flex items-center gap-1 border border-gray-300 rounded-lg overflow-hidden">
+                <div className="flex items-center gap-0.5 sm:gap-1 border border-gray-300 rounded-lg overflow-hidden flex-shrink-0">
                   <button onClick={() => {
                     const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() - 7);
                     setDateStripStart(toLocalDateString(d));
-                  }} className="p-2 hover:bg-gray-100 transition">
+                  }} className="p-1.5 sm:p-2 hover:bg-gray-100 transition">
                     <ChevronLeft size={16} className="text-gray-600" />
                   </button>
                   <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)}
                     min={new Date().toISOString().split("T")[0]}
-                    className="text-sm font-medium text-gray-700 border-none outline-none px-1 py-1.5 w-[130px]"
+                    className="text-xs sm:text-sm font-medium text-gray-700 border-none outline-none px-1 py-1.5 w-[110px] sm:w-[130px]"
                   />
                   <button onClick={() => {
                     const d = new Date(dateStripStart + "T00:00:00"); d.setDate(d.getDate() + 7);
@@ -426,7 +426,7 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                     <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Available Slots</span>
                     <span className="text-xs bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">{slots.length} slots</span>
                   </div>
-                  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                     {slots.map((slot) => (
                       <button key={slot.id}
                         onClick={() => { setSelectedSlot(slot.id); setSelectedSlotTime(slot.startTime); }}
@@ -608,9 +608,9 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
 
         {/* Footer Navigation */}
         {step < 4 && (
-          <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between bg-gray-50 flex-shrink-0">
+          <div className="border-t border-gray-100 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between bg-gray-50 flex-shrink-0">
             <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step === 1}
-              className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition disabled:opacity-40 disabled:cursor-not-allowed">
+              className="flex items-center gap-1 px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition disabled:opacity-40 disabled:cursor-not-allowed">
               <ChevronLeft size={16} /> Back
             </button>
 
@@ -622,14 +622,14 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 (step === 2 && (!selectedDate || !selectedSlot)) ||
                 (step === 3 && (!formData.fullName || !formData.gender || !formData.age || !formData.mobile || !formData.address || !formData.symptoms))
               }
-              className="flex items-center gap-1 px-6 py-2.5 text-sm font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-md">
+              className="flex items-center gap-1 px-4 sm:px-6 py-2 sm:py-2.5 text-sm font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-md whitespace-nowrap">
               {loading ? "Please wait..." : step === 3 ? "Confirm Booking" : "Next"} <ChevronRight size={16} />
             </button>
           </div>
         )}
 
         {step === 4 && (
-          <div className="border-t border-gray-100 px-6 py-4 flex justify-center bg-gray-50 flex-shrink-0">
+          <div className="border-t border-gray-100 px-4 sm:px-6 py-3 sm:py-4 flex justify-center bg-gray-50 flex-shrink-0">
             <button onClick={resetAndClose} className="px-8 py-2.5 text-sm font-bold text-white bg-[#1a3a6b] rounded-lg hover:bg-[#0f2557] transition">
               Done — Close
             </button>

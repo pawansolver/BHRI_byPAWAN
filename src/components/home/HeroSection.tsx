@@ -52,7 +52,7 @@ export default function HeroSection() {
   }, [next]);
 
   return (
-    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] overflow-hidden">
+    <section className="relative w-full h-[650px] sm:h-[650px] md:h-[500px] lg:h-[550px] overflow-hidden">
 
       {/* ── Slide 0: Light theme static hero ── */}
       <div
@@ -72,8 +72,8 @@ export default function HeroSection() {
           </svg>
         </div>
 
-        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-10 sm:px-14 md:px-16 lg:px-10 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-10 pt-24 pb-20 sm:pt-20 lg:py-6">
-          
+        <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 sm:px-14 md:px-16 lg:px-10 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-10 pt-16 pb-32 sm:pt-20 sm:pb-24 lg:py-6">
+
           {/* Logo is now visible on mobile, positioned neatly */}
           <div className="flex-shrink-0 relative order-first lg:order-last mb-2 lg:mb-0">
             <div className="absolute -inset-2 lg:-inset-4 rounded-full border-2 border-dashed border-brandBlue/10 animate-[spin_40s_linear_infinite]" />
@@ -134,8 +134,8 @@ export default function HeroSection() {
               <div className="absolute -top-16 -right-16 w-[350px] h-[350px] rounded-full border-2 border-brandBlue/10" />
               <div className="absolute bottom-8 left-[8%] w-[150px] h-[150px] rounded-full bg-brandBlue/[0.05]" />
             </div>
-            
-            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-10 sm:px-14 md:px-16 lg:px-10 flex flex-col justify-center text-center md:text-left items-center md:items-start pt-16 md:pt-0">
+
+            <div className="relative z-10 h-full w-full max-w-[1440px] mx-auto px-6 sm:px-14 md:px-16 lg:px-10 flex flex-col justify-center text-center md:text-left items-center md:items-start pt-12 pb-24 md:py-0">
               <div className="max-w-xl">
                 <p className="text-brandBlue font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] mb-2 md:mb-3 flex items-center gap-2 justify-center md:justify-start">
                   <span className="w-2 h-2 rounded-full bg-brandSaffron inline-block" />
@@ -176,9 +176,8 @@ export default function HeroSection() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
-              i === current ? "w-6 sm:w-8 bg-brandBlue" : "w-2 sm:w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
-            }`}
+            className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${i === current ? "w-6 sm:w-8 bg-brandBlue" : "w-2 sm:w-3 bg-brandBlue/25 hover:bg-brandBlue/40"
+              }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

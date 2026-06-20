@@ -193,7 +193,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <Menu size={22} className="opacity-0" /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -204,7 +204,7 @@ export default function Navbar() {
         
         {/* Desktop Menu */}
         <div className="container-custom hidden lg:flex items-center justify-center">
-          {MENU.map((item) => (
+          {MENU.map((item, idx) => (
             <div
               key={item.label}
               className="relative"
@@ -258,7 +258,7 @@ export default function Navbar() {
                   </div>
                 ) : (
                   /* ── STANDARD DROPDOWN ── */
-                  <div className="absolute top-full left-0 min-w-[230px] bg-[#0a0a0a] border border-white/8 shadow-2xl z-50 rounded-b-xl overflow-hidden">
+                  <div className={`absolute top-full ${idx > MENU.length / 2 ? 'right-0' : 'left-0'} min-w-[230px] bg-[#0a0a0a] border border-white/8 shadow-2xl z-50 rounded-b-xl overflow-hidden transition-all duration-200 opacity-100 translate-y-0`}>
                     <div className="py-2">
                       {item.children.map((child, idx) => (
                         <Link
@@ -279,59 +279,84 @@ export default function Navbar() {
         </div>
 
         {/* ───── Mobile menu ───── */}
-        {/* Changed from absolute to block logic inside nav to push content down properly instead of overlapping */}
-        <div className={`lg:hidden w-full bg-[#1a3a6b] transition-all duration-300 ease-in-out ${
-          mobileOpen ? "max-h-[80vh] overflow-y-auto border-t border-white/10" : "max-h-0 overflow-hidden"
+        {/* ───── Mobile Sidebar Overlay ───── */}
+        <div 
+          className={`lg:hidden fixed inset-0 z-[60] bg-black/50 transition-opacity duration-300 ${
+            mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+
+        {/* ───── Mobile Sidebar ───── */}
+        <div className={`lg:hidden fixed top-0 left-0 h-screen w-[85%] max-w-[320px] bg-[#1a3a6b] shadow-2xl z-[70] transition-transform duration-300 ease-in-out flex flex-col ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}>
-          {MENU.map((item) => (
-            <div key={item.label} className="border-b border-white/10">
-              {item.children ? (
-                <>
-                  <button
-                    className="w-full flex items-center justify-between px-5 py-3.5 text-[14px] font-semibold text-white text-left focus:outline-none"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMobileSubmenu(mobileSubmenu === item.label ? null : item.label);
-                    }}
+          {/* Sidebar Header */}
+          <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#0f2557] flex-shrink-0">
+            <span className="font-extrabold text-white text-lg">Menu</span>
+            <button 
+              onClick={() => setMobileOpen(false)}
+              className="p-2 bg-white/10 rounded-md text-white hover:bg-white/20 transition-colors"
+              aria-label="Close menu"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Menu Items */}
+          <div className="flex-1 overflow-y-auto py-2">
+            {MENU.map((item) => (
+              <div key={item.label} className="border-b border-white/5">
+                {item.children ? (
+                  <>
+                    <button
+                      className="w-full flex items-center justify-between px-5 py-3.5 text-[14px] font-semibold text-white text-left focus:outline-none"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMobileSubmenu(mobileSubmenu === item.label ? null : item.label);
+                      }}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform duration-300 ${
+                          mobileSubmenu === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {mobileSubmenu === item.label && (
+                      <div className="bg-black/20">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className="block px-8 py-3 text-[13px] text-white/80 hover:text-white border-b border-white/5 last:border-0"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="block px-5 py-3.5 text-[14px] font-semibold text-white hover:bg-white/5 transition-colors"
+                    onClick={() => setMobileOpen(false)}
                   >
                     {item.label}
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform duration-300 ${
-                        mobileSubmenu === item.label ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  {mobileSubmenu === item.label && (
-                    <div className="bg-black/20">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          className="block px-8 py-3 text-[13px] text-white/80 hover:text-white border-b border-white/5 last:border-0"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="block px-5 py-3.5 text-[14px] font-semibold text-white"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )}
-            </div>
-          ))}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
 
-          <div className="flex flex-col gap-3 p-5 bg-black/10">
+          {/* Sidebar Footer Buttons */}
+          <div className="p-5 bg-[#0f2557] flex flex-col gap-3 flex-shrink-0 border-t border-white/10">
             <button 
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-green-600 hover:bg-green-700"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition"
               onClick={() => { setMobileOpen(false); openBooking(); }}
             >
               <Clock size={16} />
@@ -339,7 +364,7 @@ export default function Navbar() {
             </button>
             <a 
               href="/hospital/emergency" 
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-red-600 hover:bg-red-700"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold text-white bg-red-600 hover:bg-red-700 transition"
               onClick={() => setMobileOpen(false)}
             >
               <ShieldAlert size={16} />

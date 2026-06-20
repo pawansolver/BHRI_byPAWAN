@@ -76,7 +76,9 @@ export default function WhyChooseUs() {
 
   useEffect(() => {
     const handleResize = () => {
-      setVisibleCount(window.innerWidth >= 1024 ? VISIBLE_LG : VISIBLE_SM);
+      if (window.innerWidth >= 1024) setVisibleCount(VISIBLE_LG);
+      else if (window.innerWidth >= 640) setVisibleCount(2);
+      else setVisibleCount(1);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -139,7 +141,7 @@ export default function WhyChooseUs() {
           </button>
 
           {/* Cards */}
-          <div className={`grid gap-3 sm:gap-4 md:gap-5 ${visibleCount === VISIBLE_LG ? "grid-cols-4" : "grid-cols-2"}`}>
+          <div className={`grid gap-3 sm:gap-4 md:gap-5 ${visibleCount === VISIBLE_LG ? "grid-cols-4" : visibleCount === 2 ? "grid-cols-2" : "grid-cols-1 max-w-[280px] mx-auto"}`}>
             {getVisibleCards().map((item) => (
               <div
                 key={item.title}

@@ -135,7 +135,7 @@ export default function CareerPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-3 block">Why Choose BHRI?</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Fostering Growth &amp; Care</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Fostering Growth &amp; Care</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             We believe that supporting our medical, nursing, and administrative staff is essential to delivering compassionate, premium patient outcomes.
                         </p>
@@ -181,7 +181,7 @@ export default function CareerPage() {
 
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-3 block">Vacancies Board</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Active Openings</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Active Openings</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Use the quick department tabs below to filter our clinical, academic, nursing, or administrative vacancy logs immediately.
                         </p>
@@ -268,7 +268,7 @@ export default function CareerPage() {
 
                         <div className="text-center max-w-2xl mx-auto mb-12">
                             <span className="text-teal-400 font-bold text-xs uppercase tracking-widest mb-3 block">Future Opportunities</span>
-                            <h2 className="text-2xl lg:text-4xl font-bold font-montserrat" style={{ fontFamily: serifFont }}>Drop Your CV / Resume</h2>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>Drop Your CV / Resume</h2>
                             <p className="text-slate-400 text-xs mt-3 leading-relaxed">
                                 Don't see an exact matching profile open? Drop your resume in our global applicant directory. Our talent search team regularly screens this vault for custom clinical recruitments.
                             </p>

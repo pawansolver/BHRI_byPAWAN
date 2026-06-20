@@ -90,7 +90,7 @@ export default function NmcCbmeCurriculumPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">CBME Modules</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Curriculum Domains &amp; Logbooks</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Curriculum Domains &amp; Logbooks</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click on any of the regulatory domains below to explore competency criteria and mandatory skill-book lists.
                         </p>

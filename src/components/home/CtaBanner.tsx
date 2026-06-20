@@ -15,7 +15,7 @@ export default function CtaBanner() {
           Our team of expert doctors and staff is available 24x7 for emergency care.
           Book your OPD appointment or reach us anytime.
         </p>
-        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center">
           <SparkleButton href="/hospital/emergency">Emergency Helpline</SparkleButton>
           <SparkleButton onClick={openBooking}>Book OPD</SparkleButton>
         </div>

@@ -148,7 +148,7 @@ export default function HospitalPage() {
                     transition={{ duration: 0.9, delay: 0.5 }}
                     className="absolute bottom-12 right-6 lg:right-12 text-right z-20 max-w-md"
                 >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-5 leading-tight">
+                    <h2 className="section-heading-white">
                         Modern medicine,<br />delivered with care.
                     </h2>
                     <Link
@@ -248,7 +248,7 @@ export default function HospitalPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> What We Do
                         </p>
-                        <h2 className="text-4xl lg:text-6xl font-extrabold leading-tight max-w-3xl">
+                        <h2 className="section-heading">
                             Complete care,<br />from arrival to recovery.
                         </h2>
                     </motion.div>
@@ -289,7 +289,7 @@ export default function HospitalPage() {
                 <div className="bg-[#d6cdb8] flex items-center px-10 lg:px-16 py-20 relative overflow-hidden">
                     <FloatOrb className="w-96 h-96 bg-amber-200/30 blur-3xl -bottom-20 -right-10" />
                     <div className="relative z-10 max-w-lg">
-                        <h2 className="text-5xl lg:text-7xl font-extrabold text-[#1a1a1a] leading-[0.95] mb-6">
+                        <h2 className="section-heading">
                             Everyone.<br />Everywhere.
                         </h2>
                         <p className="text-[#1a1a1a]/65 text-base leading-relaxed mb-10 max-w-md">
@@ -316,7 +316,7 @@ export default function HospitalPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Infrastructure
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold">Facilities &amp; Amenities</h2>
+                        <h2 className="section-heading">Facilities &amp; Amenities</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -356,7 +356,7 @@ export default function HospitalPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Quick Answers
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-10 leading-tight">Hospital FAQs</h2>
+                        <h2 className="section-heading-white">Hospital FAQs</h2>
                         <div className="space-y-0">
                             {faqs.map((faq, i) => (
                                 <FaqItem
@@ -383,7 +383,7 @@ export default function HospitalPage() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Ready to Help
                         </p>
-                        <h2 className="text-4xl lg:text-7xl font-extrabold text-white leading-[0.95] mb-6 max-w-3xl">
+                        <h2 className="section-heading-white">
                             Backed by Care.<br />
                             Built for You.
                         </h2>
@@ -391,7 +391,7 @@ export default function HospitalPage() {
                             Walk in, schedule a consultation, or call our 24Ã—7 helpline. Our specialists are ready to deliver the care you and your family deserve.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <button onClick={openBooking} className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-amber-300 transition-all"><CalendarCheck size={16} /> Book Appointment</button>
+                            <button onClick={openBooking} className="btn-inverse"><CalendarCheck size={16} /> Book Appointment</button>
                             <a href="tel:+918603048174"
                                 className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
                             >

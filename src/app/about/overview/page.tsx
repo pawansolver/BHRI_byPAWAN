@@ -156,63 +156,65 @@ export default function AboutOverview() {
                     </h1>
                 </motion.div>
 
-                {/* Bottom-left feature list */}
-                <motion.div
-                    initial={{ opacity: 0, x: -24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.9, delay: 0.4 }}
-                    className="relative z-20 flex flex-col gap-4 px-6 lg:px-12 max-w-sm"
-                >
-                    {[
-                        { icon: Activity, text: "Multi-speciality hospital" },
-                        { icon: HeartPulse, text: "Compassionate patient care" },
-                        { icon: Award, text: "Medical education & research" },
-                    ].map((f, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-white/8 border border-white/15 flex items-center justify-center flex-shrink-0">
-                                <f.icon size={15} className="text-white" />
-                            </div>
-                            <p className="text-white/70 text-sm font-medium">{f.text}</p>
-                        </div>
-                    ))}
-                </motion.div>
-
-                {/* Bottom-right CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.5 }}
-                    className="absolute bottom-12 right-6 lg:right-12 z-20 text-right max-w-sm"
-                >
-                    <p className="text-2xl sm:text-3xl font-extrabold text-white mb-5 leading-tight">
-                        Bihar's trusted<br />healthcare partner.
-                    </p>
-                    <button
-                        onClick={openBooking}
-                        className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+                {/* Bottom content wrapper */}
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-10 mt-auto pt-48 md:pt-0">
+                    {/* Bottom-left feature list */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.9, delay: 0.4 }}
+                        className="flex flex-col gap-4 max-w-sm"
                     >
-                        Book Appointment
-                        <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
-                            <ChevronRight size={13} />
-                        </span>
-                    </button>
-                </motion.div>
+                        {[
+                            { icon: Activity, text: "Multi-speciality hospital" },
+                            { icon: HeartPulse, text: "Compassionate patient care" },
+                            { icon: Award, text: "Medical education & research" },
+                        ].map((f, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-full bg-white/8 border border-white/15 flex items-center justify-center flex-shrink-0">
+                                    <f.icon size={15} className="text-white" />
+                                </div>
+                                <p className="text-white/70 text-sm font-medium">{f.text}</p>
+                            </div>
+                        ))}
+                    </motion.div>
+
+                    {/* Bottom-right CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, delay: 0.5 }}
+                        className="text-left md:text-right max-w-sm"
+                    >
+                        <p className="text-2xl sm:text-3xl font-extrabold text-white mb-5 leading-tight">
+                            Bihar's trusted<br />healthcare partner.
+                        </p>
+                        <button
+                            onClick={openBooking}
+                            className="btn-primary"
+                        >
+                            Book Appointment
+                            <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
+                                <ChevronRight size={13} />
+                            </span>
+                        </button>
+                    </motion.div>
+                </div>
             </section>
 
             {/* ═══════ INTRO — Beige + image cards ═════════════════ */}
             <section className="relative bg-[#e9e6df] text-[#1a1a1a] py-20 lg:py-28 overflow-hidden">
                 <FloatOrb className="w-72 h-72 bg-amber-100/40 blur-3xl top-0 right-1/4" />
-                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-                    <motion.div {...fadeUp()} className="flex items-start gap-3 mb-10">
-                        <span className="text-2xl">✻</span>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#1a1a1a]/60 max-w-xs leading-relaxed">
-                            Buddha Hospital &amp; Research Institute<br />A legacy of healing and innovation.
-                        </p>
-                    </motion.div>
-
-                    <motion.h2 {...fadeUp(0.1)} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.02] tracking-tight max-w-5xl mb-12">
+                <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col items-center text-center">
+                    <motion.h2 {...fadeUp(0.1)} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight max-w-5xl text-amber-500 mb-5">
                         A Modern, Compassionate Hospital — for People and Practitioners.
                     </motion.h2>
+
+                    <motion.div {...fadeUp(0.2)} className="w-16 h-1.5 bg-amber-500 mb-6 rounded-full" />
+
+                    <motion.p {...fadeUp(0.3)} className="text-sm sm:text-base font-medium text-[#1a1a1a]/70 max-w-2xl leading-relaxed mb-12">
+                        Buddha Hospital &amp; Research Institute — A legacy of healing and innovation.
+                    </motion.p>
 
                     {/* 4 image cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
@@ -271,7 +273,7 @@ export default function AboutOverview() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center justify-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Foundation <span className="w-5 h-px bg-amber-400" />
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold">Vision &amp; Mission</h2>
+                        <h2 className="section-heading">Vision &amp; Mission</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -327,7 +329,7 @@ export default function AboutOverview() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> What We Offer
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold">Comprehensive Services</h2>
+                        <h2 className="section-heading">Comprehensive Services</h2>
                     </motion.div>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {services.map((svc, i) => (
@@ -352,7 +354,7 @@ export default function AboutOverview() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> What Drives Us
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold">Core Values</h2>
+                        <h2 className="section-heading">Core Values</h2>
                     </motion.div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                         {values.map((v, i) => (
@@ -395,7 +397,7 @@ export default function AboutOverview() {
                 <div className="bg-[#d6cdb8] flex items-center px-10 lg:px-16 py-20 relative overflow-hidden">
                     <FloatOrb className="w-96 h-96 bg-amber-200/30 blur-3xl -bottom-20 -right-10" />
                     <div className="relative z-10 max-w-lg">
-                        <h2 className="text-5xl lg:text-7xl font-extrabold text-[#1a1a1a] leading-[0.95] mb-6">
+                        <h2 className="section-heading">
                             Bihar.<br />Bodhgaya.<br />One Mission.
                         </h2>
                         <p className="text-[#1a1a1a]/65 text-base leading-relaxed mb-10 max-w-md">
@@ -425,7 +427,7 @@ export default function AboutOverview() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Quick Answers
                         </p>
-                        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-10 leading-tight">About BHRI FAQs</h2>
+                        <h2 className="section-heading-white">About BHRI FAQs</h2>
                         <div>
                             {faqs.map((faq, i) => (
                                 <FaqItem key={i} q={faq.q} a={faq.a} isOpen={openFaq === i} toggle={() => setOpenFaq(openFaq === i ? null : i)} />
@@ -446,7 +448,7 @@ export default function AboutOverview() {
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-5 flex items-center gap-2">
                             <span className="w-5 h-px bg-amber-400" /> Your Health, Our Priority
                         </p>
-                        <h2 className="text-4xl lg:text-7xl font-extrabold text-white leading-[0.95] mb-6 max-w-3xl">
+                        <h2 className="section-heading-white">
                             Trusted care,<br />every single day.
                         </h2>
                         <p className="text-white/45 text-base leading-relaxed mb-10 max-w-lg">
@@ -455,7 +457,7 @@ export default function AboutOverview() {
                         <div className="flex flex-wrap gap-4">
                             <button
                                 onClick={openBooking}
-                                className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-amber-300 transition-all"
+                                className="btn-inverse"
                             >
                                 <CalendarCheck size={16} /> Book Appointment
                             </button>

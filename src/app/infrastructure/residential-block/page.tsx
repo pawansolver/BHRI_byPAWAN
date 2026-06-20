@@ -132,7 +132,7 @@ export default function ResidentialBlockPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-3 block">Daily Routine</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>A Day in the Hostels</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>A Day in the Hostels</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click through the different hours of the day to visualize the premium daily routine of students within our secure residential quarters.
                         </p>
@@ -200,7 +200,7 @@ export default function ResidentialBlockPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-3 block">Room Specs</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Hostel Layout Options</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Hostel Layout Options</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Compare standard dimensions, hot water utilities, and facilities built within our hostel and resident complexes.
                         </p>
@@ -269,7 +269,7 @@ export default function ResidentialBlockPage() {
             {/* ADVISORY & SECURITY STRIP */}
             <section className="py-20 lg:py-24 bg-[#0a192f] text-white relative overflow-hidden">
                 <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-                    <h2 className="text-3xl lg:text-5xl font-bold mb-6 font-montserrat" style={{ fontFamily: serifFont }}>
+                    <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                         Anti-Ragging &amp; Absolute Safety
                     </h2>
                     <p className="text-slate-400 text-sm leading-relaxed mb-8">

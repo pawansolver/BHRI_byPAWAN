@@ -419,7 +419,7 @@ const AboutOverview = () => {
                 <div className="container-custom relative z-10">
                     <div className="text-center mb-20">
                         <span className="text-brandSaffron font-black text-xs uppercase tracking-[0.4em] mb-4 block">Advantages</span>
-                        <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">Why Choose BHRI?</h2>
+                        <h2 className="section-heading-white">Why Choose BHRI?</h2>
                         <div className="h-1.5 w-20 bg-brandSaffron mx-auto mt-8 rounded-full" />
                     </div>
 
@@ -522,7 +522,7 @@ const AboutOverview = () => {
                 <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
                 <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-brandBlue/10 rounded-full blur-3xl" />
                 <div className="container-custom relative z-10 text-center">
-                    <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter mb-10 leading-none">
+                    <h2 className="section-heading-white">
                         Your Health is <br /> Our Priority
                     </h2>
                     <p className="text-white text-xl font-bold mb-12 uppercase tracking-[0.2em]">

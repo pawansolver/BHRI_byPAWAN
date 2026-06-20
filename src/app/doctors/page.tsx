@@ -59,6 +59,10 @@ export default function FacultyDoctorsPage() {
     const [desigFilter, setDesigFilter] = useState("all");
     const [modal, setModal] = useState<Doctor | null>(null);
 
+    // Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 40;
+
     const [facultyList, setFacultyList] = useState<Doctor[]>([]);
     const [apiLoading, setApiLoading] = useState(true);
     const [apiError, setApiError] = useState(false);
@@ -136,10 +140,10 @@ export default function FacultyDoctorsPage() {
 
                     {/* Search */}
                     <div className="relative flex-1 min-w-0 w-full md:max-w-xs">
-                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9333ea]" />
                         <input
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
                             placeholder="Search name, department..."
                             className="w-full pl-9 pr-8 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400"
                         />
@@ -152,10 +156,10 @@ export default function FacultyDoctorsPage() {
 
                     {/* Department Dropdown */}
                     <div className="relative w-full md:max-w-xs">
-                        <Building2 size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Building2 size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9333ea]" />
                         <select
                             value={deptFilter}
-                            onChange={(e) => setDeptFilter(e.target.value)}
+                            onChange={(e) => { setDeptFilter(e.target.value); setCurrentPage(1); }}
                             className="w-full pl-8 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 cursor-pointer"
                         >
                             {allDepts.map((d) => <option key={d}>{d}</option>)}
@@ -167,7 +171,7 @@ export default function FacultyDoctorsPage() {
                         {DESIGNATION_FILTERS.map((f) => (
                             <button
                                 key={f.value}
-                                onClick={() => setDesigFilter(f.value)}
+                                onClick={() => { setDesigFilter(f.value); setCurrentPage(1); }}
                                 className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all ${desigFilter === f.value
                                     ? "bg-[#1a3a8f] text-white shadow-sm"
                                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -204,10 +208,11 @@ export default function FacultyDoctorsPage() {
                         <p className="font-semibold">No faculty found matching your filters.</p>
                     </div>
                 ) : (
-                    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <AnimatePresence mode="popLayout">
-                            {filtered.map((doc, idx) => {
-                                const isHOD = doc.designation.toLowerCase().includes("hod");
+                    <>
+                        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <AnimatePresence mode="popLayout">
+                                {filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((doc, idx) => {
+                                    const isHOD = doc.designation.toLowerCase().includes("hod");
                                 const colorClass = AVATAR_COLORS[idx % AVATAR_COLORS.length];
                                 return (
                                     <motion.div
@@ -217,19 +222,47 @@ export default function FacultyDoctorsPage() {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.25, delay: idx * 0.04 }}
-                                        className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col border border-slate-100 group"
+                                        className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-row p-4 gap-4 border border-slate-100 items-stretch group"
                                     >
-                                        {/* ── Photo Area ── */}
-                                        <div className="relative h-52 w-full bg-slate-100 overflow-hidden">
+                                        {/* ── Info Area (Left) ── */}
+                                        <div className="flex flex-col flex-1 justify-between">
+                                            <div>
+                                                <h3 className="font-bold text-[15px] text-slate-800 leading-tight mb-1 group-hover:text-[#9333ea] transition-colors">
+                                                    {doc.name}
+                                                </h3>
+                                                <p className="text-[12px] font-semibold text-slate-700 mb-0.5">
+                                                    {doc.designation}
+                                                </p>
+                                                <p className="text-[12px] text-slate-500 mb-2 line-clamp-1">
+                                                    {doc.department}
+                                                </p>
+                                                
+                                                <div className="flex items-center gap-1.5 text-slate-500">
+                                                    <Clock size={12} className="text-[#9333ea]" />
+                                                    <span className="text-[11px] font-medium">{doc.experience || "BHRI Bodhgaya"}</span>
+                                                </div>
+                                            </div>
+
+                                            {/* View Details Button */}
+                                            <button
+                                                onClick={() => setModal(doc)}
+                                                className="mt-4 px-4 py-2 rounded-lg bg-[#f3e8ff] hover:bg-[#e9d5ff] text-[#9333ea] text-[11px] font-bold tracking-wide transition-colors w-max"
+                                            >
+                                                View Profile
+                                            </button>
+                                        </div>
+
+                                        {/* ── Photo Area (Right) ── */}
+                                        <div className="w-24 h-32 md:w-28 md:h-36 shrink-0 rounded-xl overflow-hidden border-[1.5px] border-[#d8b4fe] relative bg-slate-50">
                                             {doc.photo ? (
                                                 <img
                                                     src={doc.photo}
                                                     alt={doc.name}
-                                                    className="w-full h-full object-contain bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
                                             ) : (
                                                 <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${colorClass}`}>
-                                                    <span className="text-5xl font-black text-white/90 tracking-tight" style={{ fontFamily: serifFont }}>
+                                                    <span className="text-3xl font-black text-white/90 tracking-tight" style={{ fontFamily: serifFont }}>
                                                         {getInitials(doc.name)}
                                                     </span>
                                                 </div>
@@ -237,72 +270,40 @@ export default function FacultyDoctorsPage() {
 
                                             {/* HOD Badge */}
                                             {isHOD && (
-                                                <div className="absolute top-3 left-3 bg-amber-400 text-amber-900 text-[10px] font-black px-2.5 py-1 rounded-full flex items-center gap-1 shadow">
-                                                    <Star size={9} className="fill-amber-900" /> HOD
+                                                <div className="absolute top-1 right-1 bg-amber-400 text-amber-900 text-[8px] font-black px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow">
+                                                    <Star size={7} className="fill-amber-900" /> HOD
                                                 </div>
                                             )}
-                                        </div>
-
-                                        {/* ── Info Area ── */}
-                                        <div className="p-5 flex flex-col flex-1 gap-3">
-
-                                            {/* Name */}
-                                            <h3 className="font-bold text-[15px] text-slate-900 leading-snug group-hover:text-[#1a3a8f] transition-colors" style={{ fontFamily: serifFont }}>
-                                                {doc.name}
-                                            </h3>
-
-                                            {/* Fields with Labels */}
-                                            <div className="flex flex-col gap-2.5 flex-1">
-
-                                                {/* Designation */}
-                                                <div className="flex items-start gap-2.5">
-                                                    <div className="w-6 h-6 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 mt-0.5">
-                                                        <Briefcase size={13} className="text-blue-600" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">Designation</p>
-                                                        <p className="text-[12px] font-semibold text-slate-700">{doc.designation}</p>
-                                                    </div>
-                                                </div>
-
-                                                {/* Department */}
-                                                <div className="flex items-start gap-2.5">
-                                                    <div className="w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
-                                                        <Building2 size={13} className="text-indigo-600" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">Department</p>
-                                                        <p className="text-[12px] font-semibold text-slate-700">{doc.department}</p>
-                                                    </div>
-                                                </div>
-
-                                                {/* Experience */}
-                                                <div className="flex items-start gap-2.5">
-                                                    <div className="w-6 h-6 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
-                                                        <Clock size={13} className="text-emerald-600" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">Experience</p>
-                                                        <p className="text-[12px] font-semibold text-slate-700">{doc.experience}</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            {/* View Details Button */}
-                                            <button
-                                                onClick={() => setModal(doc)}
-                                                className="mt-2 w-full py-2.5 rounded-xl bg-[#1a3a8f] hover:bg-[#0f2460] text-white text-xs font-bold tracking-wide transition-colors flex items-center justify-center gap-1.5 group/btn"
-                                            >
-                                                View Profile
-                                                <ChevronRight size={13} className="group-hover/btn:translate-x-1 transition-transform" />
-                                            </button>
                                         </div>
                                     </motion.div>
                                 );
                             })}
                         </AnimatePresence>
                     </motion.div>
+
+                    {/* Pagination Controls */}
+                    {filtered.length > itemsPerPage && (
+                        <div className="flex justify-center items-center gap-4 mt-12">
+                            <button
+                                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                                className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+                            >
+                                Previous
+                            </button>
+                            <span className="text-sm font-semibold text-slate-600">
+                                Page {currentPage} of {Math.ceil(filtered.length / itemsPerPage)}
+                            </span>
+                            <button
+                                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filtered.length / itemsPerPage)))}
+                                disabled={currentPage === Math.ceil(filtered.length / itemsPerPage)}
+                                className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
+                </>
                 )}
             </section>
 

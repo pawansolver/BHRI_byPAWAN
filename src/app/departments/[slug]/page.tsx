@@ -1285,7 +1285,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                             transition={{ duration: 0.8 }}
                         >
                             <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-4 block">About the Department</span>
-                            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-8 leading-tight" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 Scientific Care & <br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600">Educational Rigor</span>
                             </h2>
                             <div className="space-y-6 text-slate-600 leading-relaxed text-lg">
@@ -1319,7 +1319,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-20">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-3 block">Curriculum Syllabus</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Core Areas of Study</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Core Areas of Study</h2>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1358,7 +1358,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-100 text-teal-800 rounded-full text-[10px] font-bold uppercase tracking-wider mb-6 border border-slate-200">
                                 <FlaskConical size={12} className="animate-pulse" /> Advanced Practical Training
                             </div>
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 leading-tight" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 Practical & Experimental Training
                             </h2>
                             <p className="text-slate-600 mb-10 text-lg leading-relaxed">
@@ -1404,7 +1404,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-2 block">Our Labs</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Facilities & Infrastructure</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Facilities & Infrastructure</h2>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -1435,7 +1435,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                 <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-16">
                         <span className="text-teal-600 font-bold text-sm uppercase tracking-widest mb-2 block">Our Specialists</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Faculty & Teaching Approach</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Faculty & Teaching Approach</h2>
                         <p className="text-slate-500 max-w-3xl mx-auto mt-4 text-base lg:text-lg leading-relaxed">
                             {department.title} academics is led by senior specialist doctors, training students through standard case discussions, dynamic practical runs, and critical ward observations.
                         </p>
@@ -1494,7 +1494,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                             transition={{ duration: 0.8 }}
                         >
                             <span className="text-teal-400 font-bold text-sm uppercase tracking-widest mb-4 block">Diagnostic Backbone</span>
-                            <h2 className="text-3xl lg:text-5xl font-bold mb-8 leading-tight animate-pulse" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 {department.specialTitle}
                             </h2>
                             <p className="text-slate-400 text-lg leading-relaxed mb-10">
@@ -1627,7 +1627,7 @@ export default function DynamicDepartmentPage({ params }: { params: Promise<{ sl
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-4xl lg:text-6xl font-bold mb-8 leading-tight" style={{ fontFamily: serifFont }}>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                             Begin Your Career in {department.title}
                         </h2>
                         <p className="text-lg lg:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">

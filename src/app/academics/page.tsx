@@ -118,7 +118,7 @@ export default function AcademicsHubPage() {
                     
                     <div className="text-center mb-16">
                         <span className="text-indigo-600 font-bold text-sm uppercase tracking-widest mb-3 block">Academic Hub</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Explore Educational Portals</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Explore Educational Portals</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Select any section below to navigate its custom interactive features, schedules, regulatory checklists, and research archives.
                         </p>

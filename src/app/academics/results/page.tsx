@@ -61,7 +61,7 @@ export default function ResultsPage() {
                     
                     <div className="text-center mb-16">
                         <span className="text-yellow-600 font-bold text-sm uppercase tracking-widest mb-3 block">Wall of Merit</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>University Exam Toppers</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>University Exam Toppers</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             We take immense pride in celebrating our high-achieving medical scholars who topped the annual university clinical and practical board assessments.
                         </p>

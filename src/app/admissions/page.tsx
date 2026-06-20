@@ -208,7 +208,7 @@ export default function AdmissionsPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">Admission Process</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>NEET-UG Counselling Journey</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>NEET-UG Counselling Journey</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click through each counselling stage below to understand official timelines, Choice Locking regulations, and campus verification checklists.
                         </p>
@@ -295,7 +295,7 @@ export default function AdmissionsPage() {
 
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">Tuition Fees</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Institutional Fee Structure</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Institutional Fee Structure</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Select admission quota below to preview standard audited tuition, hostel lodging, and cautions deposits for first professional years.
                         </p>
@@ -363,7 +363,7 @@ export default function AdmissionsPage() {
 
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">Reporting Dossier</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Dossier Pack List Checklist</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Dossier Pack List Checklist</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Tick off each required original document below as you compile your physical file before reporting to our admissions desk.
                         </p>
@@ -402,7 +402,7 @@ export default function AdmissionsPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-emerald-400 font-bold text-sm uppercase tracking-widest mb-3 block">Admissions Desk</span>
-                            <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight font-montserrat" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 Admission Query Counselling Cell
                             </h2>
                             <p className="text-slate-400 text-sm leading-relaxed mb-8">

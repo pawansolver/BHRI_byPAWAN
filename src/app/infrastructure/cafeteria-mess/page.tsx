@@ -111,7 +111,7 @@ export default function CafeteriaMessPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-amber-600 font-bold text-sm uppercase tracking-widest mb-3 block">Food Schedule</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Dietician Curated Weekly Menu</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Dietician Curated Weekly Menu</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click through the calendar days to verify our nutritional weekly plans audited continuously by the hospital food advisory board.
                         </p>
@@ -198,7 +198,7 @@ export default function CafeteriaMessPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-amber-600 font-bold text-sm uppercase tracking-widest mb-3 block">Hygiene Standards</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Pristine Kitchen Safety Checklists</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Pristine Kitchen Safety Checklists</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             We execute highly regulated clean protocols to protect the digestive and metabolic health of medical scholars.
                         </p>

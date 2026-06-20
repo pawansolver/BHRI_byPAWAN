@@ -104,7 +104,7 @@ export default function AcademicComplexPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-amber-600 font-bold text-sm uppercase tracking-widest mb-3 block">Interactive Map</span>
-                        <h2 className="text-3xl lg:text-5xl font-bold text-slate-900" style={{ fontFamily: serifFont }}>Explore Academic Zones</h2>
+                        <h2 className="section-heading" style={{ fontFamily: serifFont }}>Explore Academic Zones</h2>
                         <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm">
                             Click on any of the academic departments or core facilities below to navigate its specific equipment lists and metrics.
                         </p>
@@ -202,7 +202,7 @@ export default function AcademicComplexPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-3 block">Skills Training Lab</span>
-                            <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight font-montserrat" style={{ fontFamily: serifFont }}>
+                            <h2 className="section-heading" style={{ fontFamily: serifFont }}>
                                 Virtual Clinical Skills Simulator
                             </h2>
                             <p className="text-slate-400 text-sm leading-relaxed mb-8">
