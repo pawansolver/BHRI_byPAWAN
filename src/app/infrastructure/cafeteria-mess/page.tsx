@@ -81,25 +81,25 @@ export default function CafeteriaMessPage() {
         <div className="bg-white min-h-screen relative overflow-hidden" style={{ fontFamily: sansFont }}>
             
             {/* HERO */}
-            <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+            <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-950 via-[#26150a] to-slate-950 mix-blend-multiply opacity-90 z-10" />
                     <Image src="/cafeteria_mess_hero.png" alt="Cafeteria & Mess" fill className="object-cover" priority />
                 </div>
                 
-                <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -mt-6">
+                <div className="relative z-20 text-center px-6 max-w-4xl mx-auto mt-10">
                     <span className="inline-flex items-center gap-2 py-1.5 px-4 bg-amber-500/10 backdrop-blur-md rounded-full font-bold tracking-widest text-[10px] uppercase border border-amber-500/30 text-amber-300 mb-6">
                         <Apple size={12} /> Hygienic Culinary Operations
                     </span>
                     <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 font-montserrat leading-tight" style={{ fontFamily: serifFont }}>
                         Cafeteria &amp; Mess
                     </h1>
-                    <p className="text-lg lg:text-xl text-blue-100 font-medium mb-10 leading-relaxed max-w-2xl mx-auto opacity-95">
+                    <p className="text-sm sm:text-lg lg:text-xl text-blue-100 font-medium mb-10 leading-relaxed max-w-2xl mx-auto opacity-95">
                         Pure steam-boiler cooking, certified water filtration loops, and dietician-curated menus running under rigid FSSAI compliance codes.
                     </p>
                     <button 
                         onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })}
-                        className="px-8 py-3.5 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-full shadow-lg shadow-amber-600/30 transition-all text-xs uppercase tracking-wider"
+                        className="px-6 py-3 sm:px-8 sm:py-3.5 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold rounded-full shadow-lg shadow-amber-600/30 transition-all text-[11px] sm:text-xs uppercase tracking-wider"
                     >
                         View Weekly Menu
                     </button>

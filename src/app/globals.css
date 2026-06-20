@@ -197,10 +197,9 @@ body {
 
   .btn-primary,
   .btn-inverse {
-    /* Mobile par padding thodi kam aur font size chhota */
-    padding: 10px 20px !important;
-    font-size: 14px !important;
-    /* Text chhota ho jayega */
+    /* Ultra compact size for mobile */
+    padding: 8px 16px !important;
+    font-size: 12px !important;
   }
 
   /* Icon ko bhi text ke hisaab se thoda chhota kar diya */
@@ -739,3 +738,7 @@ p, span, a, li, td, th, label {
     font-size: 1.3rem !important;
   }
 }
+
+/* Fix for mobile overscroll white space at bottom */
+html { background-color: #14532d; overscroll-behavior: none; }
+body { background-color: white; overscroll-behavior: none; }

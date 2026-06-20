@@ -38,49 +38,52 @@ export default function ChairmanPage() {
         <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
 
             {/* ═══════ HERO — Full bleed cinematic ═══════════════════ */}
-            <section className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+            <section className="relative min-h-[100dvh] pt-28 sm:pt-36 pb-12 sm:pb-20 flex flex-col justify-between overflow-hidden">
                 {/* bg image */}
                 <div className="absolute inset-0">
                     <Image src="/images/about-hospital.png" alt="Buddha Hospital & Research Institute" fill priority className="object-cover object-top" />
                     {/* Dark cinematic overlay — keeps BHRI branding visible but creates premium dark feel */}
-                    <div className="absolute inset-0 bg-[#0a0a0a]/70" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-[#0a0a0a]/75 sm:bg-[#0a0a0a]/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-transparent to-transparent" />
                 </div>
 
                 <FloatOrb className="w-96 h-96 bg-amber-500/10 blur-3xl top-1/4 right-[10%]" />
                 <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/3 right-[30%]" />
 
-                {/* Breadcrumb */}
-                <div className="absolute top-24 left-6 lg:left-12 z-20 flex items-center gap-2 text-white/40 text-xs">
-                    <Link href="/" className="hover:text-white/70 transition">Home</Link>
-                    <span>/</span>
-                    <Link href="/about/overview" className="hover:text-white/70 transition">About</Link>
-                    <span>/</span>
-                    <span className="text-amber-400">Chairman</span>
-                </div>
+                {/* Top content wrapper: Breadcrumb & Heading */}
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col gap-6 sm:gap-8">
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-white/40 text-xs">
+                        <Link href="/" className="hover:text-white/70 transition">Home</Link>
+                        <span>/</span>
+                        <Link href="/about/overview" className="hover:text-white/70 transition">About</Link>
+                        <span>/</span>
+                        <span className="text-amber-400">Chairman</span>
+                    </div>
 
-                {/* Hero text */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9 }}
-                    className="absolute top-36 left-6 lg:left-12 z-20 max-w-2xl"
-                >
-                    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
-                        <span className="w-5 h-px bg-amber-400 inline-block" /> Message from the Chairman
-                    </p>
-                    <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight">
-                        Leading<br />with Purpose.
-                    </h1>
-                </motion.div>
+                    {/* Hero text */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9 }}
+                        className="max-w-2xl"
+                    >
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-3 sm:mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400 inline-block" /> Message from the Chairman
+                        </p>
+                        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] sm:leading-[0.92] tracking-tight text-white">
+                            Leading<br />with Purpose.
+                        </h1>
+                    </motion.div>
+                </div>
 
                 {/* Bottom right quote */}
                 <motion.div
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.5 }}
-                    className="absolute bottom-16 right-6 lg:right-12 z-20 max-w-sm text-right"
+                    className="relative z-20 w-full px-6 lg:px-12 mt-12 sm:mt-auto text-left sm:text-right sm:self-end max-w-sm sm:max-w-md"
                 >
                     <p className="text-white/60 text-sm italic leading-relaxed">
                         &ldquo;Your health is our responsibility, and your trust is our greatest strength.&rdquo;
@@ -269,7 +272,7 @@ export default function ChairmanPage() {
                         <p className="text-white/45 text-base leading-relaxed mb-10">
                             Come visit Buddha Hospital &amp; Research Institute — a place where every patient is treated with the dignity, compassion, and clinical excellence they deserve.
                         </p>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-3 sm:gap-4">
                             <button
                                 onClick={openBooking}
                                 className="btn-inverse"
@@ -277,7 +280,7 @@ export default function ChairmanPage() {
                                 Book Appointment <ChevronRight size={16} />
                             </button>
                             <Link href="/contact#contact-form"
-                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-full border border-white/15 transition-all text-[12px] sm:text-sm"
                             >
                                 Contact Us
                             </Link>

@@ -89,8 +89,8 @@ export default function HospitalPage() {
     ];
 
     const faqs = [
-        { q: "What kind of hospital is BHRI?", a: "BHRI is a modern multi-speciality hospital and research institute providing comprehensive healthcare services from outpatient consultation to advanced critical care, surgery, and diagnostics â€” all under one roof in Bodhgaya, Bihar." },
-        { q: "Does BHRI offer 24/7 emergency services?", a: "Yes. Our emergency department operates 24Ã—7 with dedicated trauma care, ambulance support, and rapid response teams to handle critical medical situations at any hour." },
+        { q: "What kind of hospital is BHRI?", a: "BHRI is a modern multi-speciality hospital and research institute providing comprehensive healthcare services from outpatient consultation to advanced critical care, surgery, and diagnostics — all under one roof in Bodhgaya, Bihar." },
+        { q: "Does BHRI offer 24/7 emergency services?", a: "Yes. Our emergency department operates 24×7 with dedicated trauma care, ambulance support, and rapid response teams to handle critical medical situations at any hour." },
         { q: "What specialities are available?", a: "BHRI covers 20+ medical specialities including General Medicine, Surgery, Cardiology, Orthopaedics, Paediatrics, Obstetrics & Gynaecology, ENT, Ophthalmology, Psychiatry, Radiology, and many more." },
         { q: "Can patients book appointments online?", a: "Yes. Patients can book OPD appointments through our website, by phone, or directly at the hospital reception. Our online system shows available doctors and time slots in real time." },
         { q: "Are the facilities accessible to all patients?", a: "Yes. The hospital is fully wheelchair accessible with ramps, elevators, dedicated washrooms, and patient-assist services for elderly and differently-abled patients." },
@@ -100,8 +100,8 @@ export default function HospitalPage() {
     return (
         <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
 
-            {/* â•â•â•â•â•â•â• HERO â€” Full bleed cinematic â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-            <section className="relative min-h-screen flex items-end pb-16 overflow-hidden">
+            {/* ═══════ HERO — Full bleed cinematic ══════════════════════════ */}
+            <section className="relative min-h-[100dvh] pt-28 sm:pt-36 pb-12 sm:pb-16 flex flex-col justify-between overflow-hidden">
                 <div className="absolute inset-0">
                     <Image src="/hospital_hero_hd.png" alt="The Hospital" fill priority className="object-cover object-center" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/55 to-[#0a0a0a]/30" />
@@ -112,55 +112,60 @@ export default function HospitalPage() {
                 <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/4 right-[35%]" />
 
                 {/* Top heading */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9 }}
-                    className="absolute top-32 left-6 lg:left-12 text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight max-w-3xl z-20"
-                >
-                    Care You<br />Can Trust.
-                </motion.h1>
-
-                {/* Bottom-left feature cards */}
-                <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.9, delay: 0.4 }}
-                    className="relative z-20 flex flex-col gap-5 px-6 lg:px-12 max-w-md"
-                >
-                    {heroFeatures.map((f, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                            <div className="w-10 h-10 rounded-full bg-white/8 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <f.icon size={16} className="text-white" />
-                            </div>
-                            <div>
-                                <p className="text-white font-bold text-sm">{f.title}</p>
-                                <p className="text-white/45 text-xs leading-relaxed mt-0.5">{f.desc}</p>
-                            </div>
-                        </div>
-                    ))}
-                </motion.div>
-
-                {/* Bottom-right CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.5 }}
-                    className="absolute bottom-12 right-6 lg:right-12 text-right z-20 max-w-md"
-                >
-                    <h2 className="section-heading-white">
-                        Modern medicine,<br />delivered with care.
-                    </h2>
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col gap-6 sm:gap-8">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9 }}
+                        className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] sm:leading-[0.92] tracking-tight max-w-3xl text-white"
                     >
-                        Book Appointment
-                        <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
-                            <ArrowRight size={13} />
-                        </span>
-                    </Link>
-                </motion.div>
+                        Care You<br />Can Trust.
+                    </motion.h1>
+                </div>
+
+                {/* Bottom content wrapper */}
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-10 mt-12 sm:mt-auto">
+                    {/* Bottom-left feature cards */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.9, delay: 0.4 }}
+                        className="flex flex-col gap-5 max-w-md"
+                    >
+                        {heroFeatures.map((f, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                                <div className="w-10 h-10 rounded-full bg-white/8 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <f.icon size={16} className="text-white" />
+                                </div>
+                                <div>
+                                    <p className="text-white font-bold text-sm">{f.title}</p>
+                                    <p className="text-white/45 text-xs leading-relaxed mt-0.5">{f.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
+
+                    {/* Bottom-right CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, delay: 0.5 }}
+                        className="text-left md:text-right max-w-md mt-6 md:mt-0"
+                    >
+                        <h2 className="section-heading-white mb-6">
+                            Modern medicine,<br />delivered with care.
+                        </h2>
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+                        >
+                            Book Appointment
+                            <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
+                                <ArrowRight size={13} />
+                            </span>
+                        </Link>
+                    </motion.div>
+                </div>
             </section>
 
             {/* â•â•â•â•â•â•â• INTRO â€” Light Bold Headline â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
@@ -390,12 +395,13 @@ export default function HospitalPage() {
                         <p className="text-white/45 text-base leading-relaxed mb-10 max-w-lg">
                             Walk in, schedule a consultation, or call our 24Ã—7 helpline. Our specialists are ready to deliver the care you and your family deserve.
                         </p>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-3 sm:gap-4">
                             <button onClick={openBooking} className="btn-inverse"><CalendarCheck size={16} /> Book Appointment</button>
                             <a href="tel:+918603048174"
-                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                                className="inline-flex items-center gap-2 sm:gap-3 bg-white/8 hover:bg-white/15 text-white font-semibold px-4 py-2 sm:px-8 sm:py-3.5 rounded-full border border-white/15 transition-all text-[11px] sm:text-sm"
                             >
-                                <Phone size={16} /> +91 8603048174 / 9060646592
+                                <Phone size={12} className="flex-shrink-0 sm:w-3.5 sm:h-3.5" />
+                                <span className="whitespace-nowrap">+91 8603048174 / 9060646592</span>
                             </a>
                         </div>
                     </motion.div>

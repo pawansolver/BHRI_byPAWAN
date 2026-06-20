@@ -91,7 +91,7 @@ export default function DepartmentPage({ data }: { data: DeptData }) {
     <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
 
       {/* ═══════ HERO ═══════════════════════════════════════ */}
-      <section className="relative min-h-screen flex flex-col justify-between overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col justify-between overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
@@ -158,18 +158,19 @@ export default function DepartmentPage({ data }: { data: DeptData }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center gap-3 sm:gap-4"
           >
             <button
               onClick={openBooking}
-              className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-3.5 rounded-full text-sm hover:bg-teal-300 transition-all"
+              className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-6 py-3 sm:px-8 sm:py-3.5 rounded-full text-[12px] sm:text-sm hover:bg-teal-300 transition-all"
             >
               Book Consultation <ArrowRight size={15} />
             </button>
             <a href="tel:+918603048174"
-              className="inline-flex items-center gap-2 border border-white/20 text-white/80 px-6 py-3.5 rounded-full text-sm hover:border-white/50 hover:text-white transition-all"
+              className="inline-flex items-center gap-2 sm:gap-3 border border-white/20 text-white/80 px-4 py-2 sm:px-6 sm:py-3.5 rounded-full text-[11px] sm:text-sm hover:border-white/50 hover:text-white transition-all"
             >
-              <Phone size={14} /> +91 8603048174 / 9060646592
+              <Phone size={12} className="flex-shrink-0 sm:w-3.5 sm:h-3.5" />
+              <span className="whitespace-nowrap">+91 8603048174 / 9060646592</span>
             </a>
           </motion.div>
         </div>
@@ -380,17 +381,18 @@ export default function DepartmentPage({ data }: { data: DeptData }) {
             <p className="text-white/45 text-base mb-10 max-w-lg leading-relaxed">
               Our specialists at the Department of {data.name} are available for consultations, referrals, and emergency care.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={openBooking}
-                className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm hover:bg-teal-300 transition-all"
+                className="inline-flex items-center gap-2 bg-white text-black font-extrabold px-6 py-3 sm:px-8 sm:py-4 rounded-full text-[12px] sm:text-sm hover:bg-teal-300 transition-all"
               >
                 <CalendarCheck size={16} /> Book Appointment
               </button>
               <a href="tel:+918603048174"
-                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-white/8 hover:bg-white/15 text-white font-semibold px-4 py-2 sm:px-8 sm:py-3.5 rounded-full border border-white/15 transition-all text-[11px] sm:text-sm"
               >
-                <Phone size={16} /> +91 8603048174 / 9060646592
+                <Phone size={12} className="flex-shrink-0 sm:w-3.5 sm:h-3.5" />
+                <span className="whitespace-nowrap">+91 8603048174 / 9060646592</span>
               </a>
             </div>
           </motion.div>

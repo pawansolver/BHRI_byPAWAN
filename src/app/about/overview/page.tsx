@@ -84,8 +84,8 @@ export default function AboutOverview() {
 
     const stats = [
         { icon: Bed, value: 300, suffix: "+", label: "Operational Beds" },
-        { icon: UserCheck, value: 50, suffix: "+", label: "Expert Doctors" },
-        { icon: Building2, value: 20, suffix: "+", label: "Departments" },
+        { icon: UserCheck, value: 2000, suffix: "+", label: "Expert Doctors" },
+        { icon: Building2, value: 100, suffix: "+", label: "Departments" },
         { icon: Baby, value: 25, suffix: "+", label: "ICU / NICU Units" },
         { icon: Users, value: 5000, suffix: "+", label: "Monthly Patients" },
         { icon: FlaskConical, value: 12, suffix: "+", label: "Diagnostic Labs" },
@@ -122,42 +122,45 @@ export default function AboutOverview() {
         <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
 
             {/* ═══════ HERO ═════════════════════════════════════════ */}
-            <section className="relative min-h-screen flex items-end pb-16 overflow-hidden">
+            <section className="relative min-h-[100dvh] pt-28 sm:pt-36 pb-12 sm:pb-16 flex flex-col justify-between overflow-hidden">
                 <div className="absolute inset-0">
                     <Image src="/images/about-hospital.png" alt="Buddha Hospital & Research Institute" fill priority className="object-cover object-top" />
                     {/* Dark cinematic overlays */}
-                    <div className="absolute inset-0 bg-[#0a0a0a]/65" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-[#0a0a0a]/75 sm:bg-[#0a0a0a]/65" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-transparent to-transparent" />
                 </div>
 
                 <FloatOrb className="w-96 h-96 bg-amber-500/10 blur-3xl top-1/4 right-[12%]" />
                 <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/4 right-[30%]" />
 
-                {/* Breadcrumb */}
-                <div className="absolute top-24 left-6 lg:left-12 z-20 flex items-center gap-2 text-white/40 text-xs">
-                    <Link href="/" className="hover:text-white/70 transition">Home</Link>
-                    <span>/</span>
-                    <span className="text-amber-400">About Us</span>
+                {/* Top content wrapper: Breadcrumb & Heading */}
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col gap-6 sm:gap-8">
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-white/40 text-xs">
+                        <Link href="/" className="hover:text-white/70 transition">Home</Link>
+                        <span>/</span>
+                        <span className="text-amber-400">About Us</span>
+                    </div>
+
+                    {/* Main heading top-left */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9 }}
+                        className="max-w-3xl"
+                    >
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-3 sm:mb-4 flex items-center gap-2">
+                            <span className="w-5 h-px bg-amber-400 inline-block" /> BHRI — Bodhgaya, Bihar
+                        </p>
+                        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] sm:leading-[0.92] tracking-tight text-white">
+                            Healing with<br />Purpose.
+                        </h1>
+                    </motion.div>
                 </div>
 
-                {/* Main heading top-left */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9 }}
-                    className="absolute top-36 left-6 lg:left-12 z-20 max-w-3xl"
-                >
-                    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-400 mb-4 flex items-center gap-2">
-                        <span className="w-5 h-px bg-amber-400 inline-block" /> BHRI — Bodhgaya, Bihar
-                    </p>
-                    <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight">
-                        Healing with<br />Purpose.
-                    </h1>
-                </motion.div>
-
                 {/* Bottom content wrapper */}
-                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-10 mt-auto pt-48 md:pt-0">
+                <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-10 mt-12 sm:mt-auto">
                     {/* Bottom-left feature list */}
                     <motion.div
                         initial={{ opacity: 0, x: -24 }}
@@ -454,7 +457,7 @@ export default function AboutOverview() {
                         <p className="text-white/45 text-base leading-relaxed mb-10 max-w-lg">
                             Visit BHRI — where expert medicine meets compassionate care. Walk in or book online for OPD, diagnostics, or emergency services.
                         </p>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-3 sm:gap-4">
                             <button
                                 onClick={openBooking}
                                 className="btn-inverse"
@@ -462,9 +465,10 @@ export default function AboutOverview() {
                                 <CalendarCheck size={16} /> Book Appointment
                             </button>
                             <a href="tel:+918603048174"
-                                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                                className="inline-flex items-center gap-2 sm:gap-3 bg-white/8 hover:bg-white/15 text-white font-semibold px-4 py-2 sm:px-8 sm:py-3.5 rounded-full border border-white/15 transition-all text-[11px] sm:text-sm"
                             >
-                                <Phone size={16} /> +91 8603048174 / 9060646592
+                                <Phone size={12} className="flex-shrink-0 sm:w-3.5 sm:h-3.5" />
+                                <span className="whitespace-nowrap">+91 8603048174 / 9060646592</span>
                             </a>
                         </div>
                     </motion.div>

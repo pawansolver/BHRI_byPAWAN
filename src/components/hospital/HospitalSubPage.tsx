@@ -119,7 +119,7 @@ export default function HospitalSubPage({ data }: { data: HospitalSubData }) {
     <div className="bg-[#0a0a0a] text-white overflow-x-hidden">
 
       {/* ═══════ HERO ═══════════════════════════════ */}
-      <section className="relative min-h-screen flex items-end pb-16 overflow-hidden">
+      <section className="relative min-h-[100dvh] pt-28 sm:pt-36 pb-12 sm:pb-16 flex flex-col justify-between overflow-hidden">
         <div className="absolute inset-0">
           <Image src={data.heroImage} alt={data.name} fill priority className="object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/55 to-[#0a0a0a]/30" />
@@ -129,43 +129,49 @@ export default function HospitalSubPage({ data }: { data: HospitalSubData }) {
         <FloatOrb className={`w-80 h-80 ${accentBlurStrong} blur-3xl top-[30%] right-[15%]`} />
         <FloatOrb className="w-64 h-64 bg-blue-400/8 blur-3xl bottom-1/4 right-[35%]" />
 
-        {/* Breadcrumb */}
-        <div className="absolute top-24 left-6 lg:left-12 z-20 flex items-center gap-2 text-white/40 text-xs">
-          <Link href="/" className="hover:text-white/70 transition">Home</Link>
-          <span>/</span>
-          <Link href="/hospital/the-hospital" className="hover:text-white/70 transition">Hospital</Link>
-          <span>/</span>
-          <span className={accentText}>{data.name}</span>
+        {/* Top content wrapper: Breadcrumb & Heading */}
+        <div className="relative z-20 w-full px-6 lg:px-12 flex flex-col gap-6 sm:gap-8">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-white/40 text-xs">
+            <Link href="/" className="hover:text-white/70 transition">Home</Link>
+            <span>/</span>
+            <Link href="/hospital/the-hospital" className="hover:text-white/70 transition">Hospital</Link>
+            <span>/</span>
+            <span className={accentText}>{data.name}</span>
+          </div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] sm:leading-[0.92] tracking-tight max-w-3xl text-white"
+          >
+            {data.heroTitleLine1}<br />{data.heroTitleLine2}
+          </motion.h1>
         </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="absolute top-36 left-6 lg:left-12 text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.92] tracking-tight max-w-3xl z-20"
-        >
-          {data.heroTitleLine1}<br />{data.heroTitleLine2}
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.5 }}
-          className="absolute bottom-12 right-6 lg:right-12 text-right z-20 max-w-md"
-        >
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-5 leading-tight">
-            {data.ctaTagline}
-          </p>
-          <button
-            onClick={openBooking}
-            className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+        {/* Bottom content wrapper */}
+        <div className="relative z-20 w-full px-6 lg:px-12 flex justify-start md:justify-end mt-12 sm:mt-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.5 }}
+            className="text-left md:text-right max-w-md"
           >
-            Book Appointment
-            <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
-              <ArrowRight size={13} />
-            </span>
-          </button>
-        </motion.div>
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-5 leading-tight">
+              {data.ctaTagline}
+            </p>
+            <button
+              onClick={openBooking}
+              className="inline-flex items-center gap-3 bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/20 text-white font-bold px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition-all"
+            >
+              Book Appointment
+              <span className="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center">
+                <ArrowRight size={13} />
+              </span>
+            </button>
+          </motion.div>
+        </div>
       </section>
 
       {/* ═══════ INTRO — Beige with image cards ═══════ */}
@@ -379,17 +385,13 @@ export default function HospitalSubPage({ data }: { data: HospitalSubData }) {
             <p className="text-white/45 text-base leading-relaxed mb-10 max-w-lg">
               {data.ctaText}
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={openBooking}
-                className={`inline-flex items-center gap-2 bg-white text-black font-extrabold px-8 py-4 rounded-full text-sm ${accentHover} transition-all`}
-              >
-                <CalendarCheck size={16} /> Book Appointment
-              </button>
+            <div className="flex flex-wrap gap-3 sm:gap-4 mt-6">
+              <button onClick={openBooking} className="btn-inverse"><CalendarCheck size={16} /> Book Appointment</button>
               <a href="tel:+918603048174"
-                className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full border border-white/15 transition-all text-sm"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-white/8 hover:bg-white/15 text-white font-semibold px-4 py-2 sm:px-8 sm:py-3.5 rounded-full border border-white/15 transition-all text-[11px] sm:text-sm"
               >
-                <Phone size={16} /> +91 8603048174 / 9060646592
+                <Phone size={12} className="flex-shrink-0 sm:w-3.5 sm:h-3.5" />
+                <span className="whitespace-nowrap">+91 8603048174 / 9060646592</span>
               </a>
             </div>
           </motion.div>

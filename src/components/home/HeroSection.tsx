@@ -106,6 +106,21 @@ export default function HeroSection() {
               <SparkleButton href="#about-section">Explore More</SparkleButton>
               <SparkleButton href="#contact-form">Contact Us</SparkleButton>
             </div>
+            
+            {/* WhatsApp Link specifically in Hero */}
+            <div className="mt-6 flex justify-center lg:justify-start">
+              <a
+                href="https://wa.me/919973758931?text=Hello!%20I%20am%20interested%20in%20knowing%20more%20about%20BHRI%20Bodhgaya%27s%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-bold text-green-700 bg-green-50 px-5 py-2.5 rounded-full border border-green-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transition-all group"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-600 group-hover:scale-110 transition-transform">
+                  <path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.128.552 4.195 1.6 6.01L.226 23.593l5.69-1.492a11.967 11.967 0 0 0 6.115 1.666c6.645 0 12.03-5.385 12.03-12.03C24.061 5.385 18.676 0 12.031 0zm0 21.722a9.92 9.92 0 0 1-5.068-1.385l-.363-.215-3.77.988.995-3.676-.236-.375a9.927 9.927 0 0 1-1.527-5.347c0-5.502 4.478-9.98 9.97-9.98 5.5 0 9.98 4.478 9.98 9.98 0 5.502-4.48 9.98-9.98 9.98zm5.485-7.487c-.302-.152-1.785-.88-2.062-.98-.278-.1-.48-.152-.68.152-.202.302-.782.98-.958 1.18-.175.202-.35.228-.652.076-.302-.152-1.275-.47-2.428-1.5-.897-.803-1.503-1.796-1.68-2.098-.176-.302-.018-.465.132-.615.137-.137.302-.352.453-.528.15-.175.202-.302.302-.502.1-.202.05-.38-.025-.53-.076-.152-.68-1.642-.932-2.25-.246-.593-.497-.512-.68-.52-.176-.008-.38-.01-.582-.01-.202 0-.528.076-.805.378-.278.302-1.058 1.033-1.058 2.518 0 1.485 1.083 2.92 1.233 3.12.15.202 2.128 3.25 5.152 4.553 2.185.94 2.905.9 3.96.76.81-.106 2.062-.843 2.352-1.657.29-.812.29-1.508.202-1.657-.087-.152-.338-.228-.64-.38z"/>
+                </svg>
+                WhatsApp: +91 9973758931
+              </a>
+            </div>
           </div>
         </div>
       </div>
