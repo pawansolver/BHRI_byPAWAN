@@ -180,9 +180,9 @@ export default function AdmissionsPage() {
             </section>
 
             {/* SEAT METRICS STRIP */}
-            <section className="py-12 bg-slate-50 border-b border-slate-100">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-x divide-slate-200">
+            <section className="py-10 sm:py-12 bg-slate-50 border-b border-slate-100">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center divide-x divide-slate-200">
                         <div>
                             <h3 className="text-3xl font-extrabold text-slate-900">150 Seats</h3>
                             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-1">Total MBBS Intake</p>
@@ -204,8 +204,8 @@ export default function AdmissionsPage() {
             </section>
 
             {/* INTERACTIVE COUNSELLING STAGE TIMELINE */}
-            <section id="steps" className="py-24 bg-white relative">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <section id="steps" className="py-16 sm:py-24 bg-white relative">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">Admission Process</span>
                         <h2 className="section-heading" style={{ fontFamily: serifFont }}>NEET-UG Counselling Journey</h2>
@@ -245,7 +245,7 @@ export default function AdmissionsPage() {
                         </div>
 
                         {/* Interactive Showcase */}
-                        <div className="lg:col-span-8 bg-slate-50 border border-slate-100 rounded-[3rem] p-8 lg:p-12 shadow-sm relative overflow-hidden min-h-[500px]">
+                        <div className="lg:col-span-8 bg-slate-50 border border-slate-100 rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 lg:p-12 shadow-sm relative overflow-hidden min-h-[400px] sm:min-h-[500px]">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
 
                             <AnimatePresence mode="wait">
@@ -278,8 +278,8 @@ export default function AdmissionsPage() {
                                         </div>
                                     </div>
 
-                                    <div className="bg-rose-50 border border-rose-100 rounded-2xl p-4 text-xs text-rose-800 leading-relaxed flex gap-3">
-                                        <span className="font-extrabold text-[10px] bg-rose-200/50 text-rose-900 px-2 py-0.5 rounded-full h-fit shrink-0">CRITICAL CAUTION</span>
+                                    <div className="bg-rose-50 border border-rose-100 rounded-2xl p-4 text-xs text-rose-800 leading-relaxed flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+                                        <span className="font-extrabold text-[10px] bg-rose-200/50 text-rose-900 px-2 py-0.5 rounded-full h-fit shrink-0 self-start">CRITICAL CAUTION</span>
                                         <p>{activeStep.caution}</p>
                                     </div>
                                 </motion.div>
@@ -290,8 +290,8 @@ export default function AdmissionsPage() {
             </section>
 
             {/* INTERACTIVE FEE STRUCTURE CALCULATOR */}
-            <section className="py-24 bg-slate-50 border-y border-slate-100">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-100">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div className="text-center mb-16">
                         <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block">Tuition Fees</span>
@@ -301,7 +301,7 @@ export default function AdmissionsPage() {
                         </p>
                     </div>
 
-                    <div className="flex justify-center gap-4 mb-12">
+                    <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-10 sm:mb-12">
                         {[
                             { label: "State Government Quota", value: "state" },
                             { label: "Management Quota", value: "management" },
@@ -321,7 +321,7 @@ export default function AdmissionsPage() {
                     </div>
 
                     {/* Fee details sheet */}
-                    <div className="bg-white p-8 lg:p-12 rounded-[3rem] border border-slate-200/80 shadow-xl max-w-2xl mx-auto relative overflow-hidden">
+                    <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 shadow-xl max-w-2xl mx-auto relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl pointer-events-none" />
 
                         <div className="flex justify-between items-center border-b border-slate-200 pb-4 mb-6">
@@ -330,21 +330,21 @@ export default function AdmissionsPage() {
                         </div>
 
                         <div className="space-y-4 text-xs text-slate-600 mb-8">
-                            <div className="flex justify-between border-b border-slate-100 pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between border-b border-slate-100 pb-2 gap-1 sm:gap-0">
                                 <span>Annual Tuition Fee:</span>
-                                <span className="font-extrabold text-slate-950">{activeFee.tuition}</span>
+                                <span className="font-extrabold text-slate-950 sm:text-right">{activeFee.tuition}</span>
                             </div>
-                            <div className="flex justify-between border-b border-slate-100 pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between border-b border-slate-100 pb-2 gap-1 sm:gap-0">
                                 <span>Hostel Rooms &amp; Mess (AC/Double sharing):</span>
-                                <span className="font-extrabold text-slate-950">{activeFee.hostel}</span>
+                                <span className="font-extrabold text-slate-950 sm:text-right">{activeFee.hostel}</span>
                             </div>
-                            <div className="flex justify-between border-b border-slate-100 pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between border-b border-slate-100 pb-2 gap-1 sm:gap-0">
                                 <span>Development Fee (One-Time Audit):</span>
-                                <span className="font-extrabold text-slate-950">{activeFee.development}</span>
+                                <span className="font-extrabold text-slate-950 sm:text-right">{activeFee.development}</span>
                             </div>
-                            <div className="flex justify-between pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between pb-2 gap-1 sm:gap-0">
                                 <span>Caution Security Money (Refundable):</span>
-                                <span className="font-extrabold text-slate-950">{activeFee.caution}</span>
+                                <span className="font-extrabold text-slate-950 sm:text-right">{activeFee.caution}</span>
                             </div>
                         </div>
 
@@ -369,7 +369,7 @@ export default function AdmissionsPage() {
                         </p>
                     </div>
 
-                    <div className="max-w-3xl mx-auto bg-slate-50 border border-slate-100 rounded-[3rem] p-8 lg:p-12 shadow-sm">
+                    <div className="max-w-3xl mx-auto bg-slate-50 border border-slate-100 rounded-3xl sm:rounded-[3rem] p-5 sm:p-8 lg:p-12 shadow-sm">
                         <div className="space-y-3">
                             {documentsChecklist.map((doc, idx) => (
                                 <div
@@ -427,7 +427,7 @@ export default function AdmissionsPage() {
                                 <form onSubmit={handleFormSubmit} className="space-y-4 text-slate-100">
                                     <h3 className="text-lg font-bold mb-4 font-montserrat text-emerald-400">Request Callback</h3>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Full Name</label>
                                             <input
@@ -460,7 +460,7 @@ export default function AdmissionsPage() {
                                         />
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">NEET Roll No</label>
                                             <input

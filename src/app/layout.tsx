@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Buddha Hospital & Research Institute | BHRI Gaya",
   description:
     "Buddha Hospital & Research Institute (BHRI) Gaya — Leading healthcare and medical education in Bihar. सेवा परमो धर्म:",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
