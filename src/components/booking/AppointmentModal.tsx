@@ -160,6 +160,20 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
 
   const handleSubmitForm = async () => {
     if (!selectedDept || !selectedSlot || !selectedDate) return;
+
+    if (formData.mobile && formData.mobile.length < 10) {
+      alert("Mobile number must be between 10 and 12 digits.");
+      return;
+    }
+    if (formData.aadhaar && formData.aadhaar.length !== 12) {
+      alert("Aadhaar number must be exactly 12 digits.");
+      return;
+    }
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/appointments/book`, {
@@ -481,8 +495,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1">Mobile Number *</label>
-                  <input type="tel" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" placeholder="मोबाइल नंबर" maxLength={10} />
+                  <input type="tel" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '') })}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" placeholder="मोबाइल नंबर" maxLength={12} />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="text-sm font-medium text-gray-700 block mb-1">Address *</label>
@@ -496,8 +510,8 @@ export default function AppointmentModal({ isOpen, onClose }: AppointmentModalPr
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-400 block mb-1">Aadhaar Number</label>
-                  <input type="text" value={formData.aadhaar} onChange={(e) => setFormData({ ...formData, aadhaar: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" />
+                  <input type="text" value={formData.aadhaar} onChange={(e) => setFormData({ ...formData, aadhaar: e.target.value.replace(/\D/g, '') })}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm" maxLength={12} />
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-400 block mb-1">Email</label>

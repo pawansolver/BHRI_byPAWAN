@@ -8,7 +8,11 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    let value = e.target.value;
+    if (e.target.name === "phone") {
+      value = value.replace(/\D/g, ""); // Keep only digits
+    }
+    setForm({ ...form, [e.target.name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,7 +60,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 name="name"
-                placeholder="Full name"
+                placeholder="Full name *"
                 value={form.name}
                 onChange={handleChange}
                 required
@@ -67,7 +71,7 @@ export default function ContactForm() {
               <input
                 type="email"
                 name="email"
-                placeholder="Email address"
+                placeholder="Email address *"
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -78,9 +82,12 @@ export default function ContactForm() {
               <input
                 type="tel"
                 name="phone"
-                placeholder="Phone number"
+                placeholder="Phone number *"
                 value={form.phone}
                 onChange={handleChange}
+                required
+                minLength={10}
+                maxLength={12}
                 className="w-full px-5 py-3.5 rounded-xl bg-white/20 backdrop-blur-sm text-white placeholder-white/80 text-sm font-medium border border-white/10 outline-none focus:bg-white/30 transition"
               />
 
@@ -88,7 +95,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 name="message"
-                placeholder="Your message"
+                placeholder="Your message *"
                 value={form.message}
                 onChange={handleChange}
                 required
